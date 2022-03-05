@@ -7,14 +7,15 @@ const JournalEntries = [
 
   {
     id: 2,
-    title: 'Caught in the bamboo',
-    text: 'The first trek on the first leg of this trip and I almost manage to throw myself off a cliff! ',
+    title:
+      'How to lock yourself out of your fanny pack while being chained to it',
+    text: 'Who would have thought that I would learn how to pick a lock two weeks into my trip? Somehow on the night bus, I managed to unlock the small lock on my fanny pack, unintentionally change the code, and lock ALL MY VALUABLES (including my phone) INSIDE it, which also meant that I could not take it off. Thankfully, I still had my tablet and someone was kind enough to allow me to use their wifi to look up videos on how to pick these kinds of locks. It is surprisingly easy, which does not bode well for future hostel stays, but I was grateful for it in that moment.',
   },
 
   {
     id: 3,
     title: 'On the road to Mandalay',
-    text: 'Everything I touched was golden, every  thing I loved got broken, no more dragons left to slay',
+    text: 'There were only two hostels in the city, and somehow I managed to choose the one no one else on my flight was staying in. I shared a taxi with the others, but once we got downtown, I was on my own. I decided to start walking towards the other edge of town until I could figure out what to do, when suddenly a car pulled up next to me...',
   },
 ];
 
