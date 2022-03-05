@@ -1,23 +1,20 @@
-//import logo from './logo.svg';
-import './App.css';
+// import './App.css';
+import { useState } from 'react';
+import GlobalStyle from './globalStyles';
+import Header from './components/Header';
+import EntryList from './components/EntryList';
+import JournalEntries from './data/JournalEntries';
 
 function App() {
+  const [entryContent, setEntryContent] = useState(JournalEntries);
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <Header text="Travel App" />
+      <div className="AppContainer">
+        <EntryList content={entryContent} />
+      </div>
+    </>
   );
 }
 
