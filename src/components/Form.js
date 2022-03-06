@@ -50,9 +50,9 @@ function Form() {
     // }
   };
 
-  // if (date !== null && title !== '' && text !== '') {
-  //   setButtonDisabled(false);
-  // }
+  if (date !== null && title !== '' && text !== '') {
+    setButtonDisabled(false);
+  }
 
   return (
     <Card>
@@ -73,7 +73,7 @@ function Form() {
             className="postTitle"
             placeholder="Title (required)"
             value={title}
-            onChange={handleTitleChange}
+            onChange={e => setTitle(e.target.value)}
           />
           {messageTitle && <div className="message">{messageTitle}</div>}
         </label>
