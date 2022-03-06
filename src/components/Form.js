@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+import styled from 'styled-components';
 import Card from './shared/Card';
 import Button from './shared/Button';
 
@@ -8,11 +9,9 @@ function Form({ handleAdd }) {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  const [messageDate, setMessageDate] = useState('Date req');
-  const [messageTitle, setMessageTitle] = useState('Title req');
-  const [messageText, setMessageText] = useState(
-    'Please write a journal entry'
-  );
+  const [messageDate, setMessageDate] = useState('(required)');
+  const [messageTitle, setMessageTitle] = useState('(required)');
+  const [messageText, setMessageText] = useState('(required)');
 
   const handleDateChange = e => {
     setDate(e.target.value);
@@ -61,7 +60,8 @@ function Form({ handleAdd }) {
     <Card>
       <form id="form" onSubmit={handleSubmit}>
         <label>
-          Please enter a date:
+          Please enter a date{' '}
+          {messageDate && <Span className="message">{messageDate}</Span>}:
           <input
             type="date"
             className="postDate"
@@ -71,18 +71,18 @@ function Form({ handleAdd }) {
           />
         </label>
         <label>
-          Title:
+          Title <Span className="message">{messageTitle}</Span>:
           <input
             type="text"
             className="postTitle"
-            placeholder="Title (required)"
+            placeholder="Title"
             value={title}
             required
             onChange={handleTitleChange} //{e => setTitle(e.target.value)}
           />
         </label>
         <label>
-          Journal Entry:
+          Journal Entry <Span className="message">{messageText}</Span>:
           <textarea
             type="text"
             className="journalEntry"
@@ -91,9 +91,6 @@ function Form({ handleAdd }) {
             required
             onChange={handleTextChange}
           />
-          {messageDate && <div className="message">{messageDate}</div>}
-          {messageTitle && <div className="message">{messageTitle}</div>}
-          {messageText && <div className="message">{messageText}</div>}
         </label>
         <Button type="submit" isDisabled={buttonDisabled}>
           Submit
@@ -101,6 +98,14 @@ function Form({ handleAdd }) {
       </form>
     </Card>
   );
+}
+
+const StyledSpan = styled.span`
+  color: red;
+`;
+
+function Span({ children }) {
+  return <StyledSpan>{children}</StyledSpan>;
 }
 
 export default Form;
