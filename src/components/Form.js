@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Card from './shared/Card';
 import Button from './shared/Button';
 
-function Form() {
+function Form({ handleAdd }) {
   const [date, setDate] = useState(null);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
@@ -37,16 +37,16 @@ function Form() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (date === null || text === '' || title === '') {
-      setMessage('Please fill out all input fields!');
-    } else {
-      const newEntry = {
-        date,
-        title,
-        text,
-      };
-      console.log(newEntry);
-    }
+    const newEntry = {
+      date,
+      title,
+      text,
+    };
+    handleAdd(newEntry);
+    document.getElementById('form').reset();
+    setTitle('');
+    setText('');
+    setButtonDisabled(true);
   };
 
   function enableButton() {
@@ -57,7 +57,7 @@ function Form() {
 
   return (
     <Card>
-      <form onSubmit={handleSubmit}>
+      <form id="form" onSubmit={handleSubmit}>
         <label>
           Please enter a date:
           <input
