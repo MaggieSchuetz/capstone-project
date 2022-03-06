@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-  color: #fff;
+  color: hotpink;
   border: 0;
   border-radius: 8px;
   color: #fff;
