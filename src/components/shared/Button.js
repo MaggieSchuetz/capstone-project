@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-  color: hotpink;
+  background-color: hotpink;
   border: 0;
   border-radius: 8px;
-  color: #fff;
+  color: black;
   width: 100px;
   height: 40px;
   display: flex;
@@ -13,10 +13,10 @@ const StyledButton = styled.button`
   align-items: center;
 
   &:hover {
-    color: grey;
+    background-color: purple;
   }
   &:disabled {
-    color: grey;
+    background-color: grey;
   }
 `;
 

@@ -8,7 +8,7 @@ function Form() {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  //const [messageDate, setMessageDate] = useState('');
+  const [message, setMessage] = useState('');
   const [messageTitle, setMessageTitle] = useState('');
   const [messageText, setMessageText] = useState(
     'Please write a journal entry'
@@ -16,53 +16,55 @@ function Form() {
 
   const handleDateChange = e => {
     setDate(e.target.value);
-    console.log(date);
-    // if (date === null) {
-    //   setButtonDisabled(true);
-    // } else {
-    //   setButtonDisabled(false);
-    //   console.log(date);
-    // }
+    enableButton();
   };
 
   const handleTitleChange = e => {
     setTitle(e.target.value);
-    console.log(title);
-    // if (title === '') {
-    //   setButtonDisabled(true);
-    // } else if (title.trim().length > 40) {
-    //   setButtonDisabled(true);
-    //   setMessageTitle('This title is too long');
-    // } else {
-    //   setButtonDisabled(false);
-    //   setMessageTitle(null);
-    // }
+    if (title.length > 40) {
+      setMessageTitle('This title is too long');
+    } else {
+      setMessageTitle(null);
+    }
+    enableButton();
   };
 
   const handleTextChange = e => {
     setText(e.target.value);
-    console.log(text);
-    // if (text === '') {
-    //   setButtonDisabled(true);
-    // } else {
-    //   setButtonDisabled(false);
     setMessageText(null);
-    // }
+    enableButton();
   };
 
-  if (date !== null && title !== '' && text !== '') {
-    setButtonDisabled(false);
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (date === null || text === '' || title === '') {
+      setMessage('Please fill out all input fields!');
+    } else {
+      const newEntry = {
+        date,
+        title,
+        text,
+      };
+      console.log(newEntry);
+    }
+  };
+
+  function enableButton() {
+    if (date !== null && title !== '' && text !== '') {
+      setButtonDisabled(false);
+    } else setButtonDisabled(true);
   }
 
   return (
     <Card>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           Please enter a date:
           <input
             type="date"
             className="postDate"
             //value={date}
+            required
             onChange={handleDateChange}
           />
         </label>
@@ -73,7 +75,8 @@ function Form() {
             className="postTitle"
             placeholder="Title (required)"
             value={title}
-            onChange={e => setTitle(e.target.value)}
+            required
+            onChange={handleTitleChange} //{e => setTitle(e.target.value)}
           />
           {messageTitle && <div className="message">{messageTitle}</div>}
         </label>
@@ -84,6 +87,7 @@ function Form() {
             className="journalEntry"
             placeholder="Write about your adventure!"
             value={text}
+            required
             onChange={handleTextChange}
           />
           {messageText && <div className="message">{messageText}</div>}
