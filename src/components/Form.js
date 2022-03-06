@@ -8,15 +8,15 @@ function Form({ handleAdd }) {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  const [message, setMessage] = useState('');
-  const [messageTitle, setMessageTitle] = useState('');
+  const [messageDate, setMessageDate] = useState('Date req');
+  const [messageTitle, setMessageTitle] = useState('Title req');
   const [messageText, setMessageText] = useState(
     'Please write a journal entry'
   );
 
   const handleDateChange = e => {
     setDate(e.target.value);
-    enableButton();
+    setMessageDate('');
   };
 
   const handleTitleChange = e => {
@@ -26,13 +26,11 @@ function Form({ handleAdd }) {
     } else {
       setMessageTitle(null);
     }
-    enableButton();
   };
 
   const handleTextChange = e => {
     setText(e.target.value);
     setMessageText(null);
-    enableButton();
   };
 
   const handleSubmit = e => {
@@ -54,6 +52,10 @@ function Form({ handleAdd }) {
       setButtonDisabled(false);
     } else setButtonDisabled(true);
   }
+
+  useEffect(() => {
+    enableButton();
+  }, [date, title, text]);
 
   return (
     <Card>
@@ -78,7 +80,6 @@ function Form({ handleAdd }) {
             required
             onChange={handleTitleChange} //{e => setTitle(e.target.value)}
           />
-          {messageTitle && <div className="message">{messageTitle}</div>}
         </label>
         <label>
           Journal Entry:
@@ -90,6 +91,8 @@ function Form({ handleAdd }) {
             required
             onChange={handleTextChange}
           />
+          {messageDate && <div className="message">{messageDate}</div>}
+          {messageTitle && <div className="message">{messageTitle}</div>}
           {messageText && <div className="message">{messageText}</div>}
         </label>
         <Button type="submit" isDisabled={buttonDisabled}>
