@@ -9,27 +9,21 @@ function Form({ handleAdd }) {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  const [messageDate, setMessageDate] = useState('(required)');
-  const [messageTitle, setMessageTitle] = useState('(required)');
-  const [messageText, setMessageText] = useState('(required)');
+  // const [messageDate, setMessageDate] = useState('(required)');
+  const [messageTitle, setMessageTitle] = useState('');
+  // const [messageText, setMessageText] = useState('(required)');
+  const [message, setMessage] = useState('Please fill out all fields!');
 
   const handleDateChange = e => {
     setDate(e.target.value);
-    setMessageDate('');
   };
 
   const handleTitleChange = e => {
     setTitle(e.target.value);
-    if (title.length > 40) {
-      setMessageTitle('This title is too long');
-    } else {
-      setMessageTitle(null);
-    }
   };
 
   const handleTextChange = e => {
     setText(e.target.value);
-    setMessageText(null);
   };
 
   const handleSubmit = e => {
@@ -47,9 +41,16 @@ function Form({ handleAdd }) {
   };
 
   function enableButton() {
-    if (date !== null && title !== '' && text !== '') {
+    if (title.length > 40) {
+      setButtonDisabled(true);
+      setMessageTitle('This title is too long');
+    } else if (date !== null && title !== '' && text !== '') {
       setButtonDisabled(false);
-    } else setButtonDisabled(true);
+      setMessage('');
+      setMessageTitle('');
+    } else {
+      setButtonDisabled(true);
+    }
   }
 
   useEffect(() => {
@@ -57,11 +58,10 @@ function Form({ handleAdd }) {
   }, [date, title, text]);
 
   return (
-    <Card>
+    <Card className="forForm">
       <form id="form" onSubmit={handleSubmit}>
         <label>
-          Please enter a date{' '}
-          {messageDate && <Span className="message">{messageDate}</Span>}:
+          Date:
           <input
             type="date"
             className="postDate"
@@ -71,7 +71,7 @@ function Form({ handleAdd }) {
           />
         </label>
         <label>
-          Title <Span className="message">{messageTitle}</Span>:
+          Title:
           <input
             type="text"
             className="postTitle"
@@ -82,7 +82,7 @@ function Form({ handleAdd }) {
           />
         </label>
         <label>
-          Journal Entry <Span className="message">{messageText}</Span>:
+          Journal Entry:
           <textarea
             type="text"
             className="journalEntry"
@@ -95,6 +95,12 @@ function Form({ handleAdd }) {
         <Button type="submit" isDisabled={buttonDisabled}>
           Submit
         </Button>
+        {messageTitle && (
+          <Span Span className="message">
+            {messageTitle}
+          </Span>
+        )}
+        {message && <Span className="message">{message}</Span>}
       </form>
     </Card>
   );
@@ -102,6 +108,10 @@ function Form({ handleAdd }) {
 
 const StyledSpan = styled.span`
   color: red;
+
+  &.hidden {
+    display: none;
+  }
 `;
 
 function Span({ children }) {
