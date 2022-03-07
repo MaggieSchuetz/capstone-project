@@ -79,7 +79,7 @@ function Form({ handleAdd }) {
 
   return (
     <Card className="forForm">
-      <FormContainer id="form" onSubmit={handleSubmit}>
+      <form id="form" onSubmit={handleSubmit}>
         <Label>
           <h2>Date:</h2>
           <input
@@ -117,7 +117,7 @@ function Form({ handleAdd }) {
         </Button>
         {messageTitle && <P className="message">{messageTitle}</P>}
         {message && <P className="message">{message}</P>}
-      </FormContainer>
+      </form>
     </Card>
   );
 }
