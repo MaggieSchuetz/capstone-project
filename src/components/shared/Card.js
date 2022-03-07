@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledCard = styled.div`
+const StyledCard = styled.section`
   background-color: #fff;
   color: #333;
   border: 1px solid black;

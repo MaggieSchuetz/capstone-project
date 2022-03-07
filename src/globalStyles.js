@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+
   * {box-sizing:border-box}
   
   body {
@@ -10,7 +11,13 @@ const GlobalStyle = createGlobalStyle`
     background-repeat: no-repeat;
     //background-image: linear-gradient(#fdbc2d,  #6fc3c6 , #097679);
     font-family: Open-Sans, Helvetica, Sans-Serif;
+    text-align: center
   }
+
+  h1 {
+  //add later
+  }
+
 `;
 
 export default GlobalStyle;

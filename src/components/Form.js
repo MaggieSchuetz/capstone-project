@@ -41,15 +41,35 @@ function Form({ handleAdd }) {
   };
 
   function enableButton() {
-    if (title.length > 40) {
+    if (
+      (title.length > 40 && date === null) ||
+      (title.length > 40 && text === '')
+    ) {
+      setMessage('Please fill out all fields!');
+      setMessageTitle('This title is too long');
+      setButtonDisabled(true);
+    } else if (
+      (title.length > 40 && date !== null) ||
+      (title.length > 40 && text !== '')
+    ) {
       setButtonDisabled(true);
       setMessageTitle('This title is too long');
+      setMessage('');
+    } else if (
+      (title.length < 40 && date === null) ||
+      (title.length < 40 && title === '') ||
+      (title.length < 40 && text === '')
+    ) {
+      setMessage('Please fill out all fields!');
+      setMessageTitle('');
+      setButtonDisabled(true);
     } else if (date !== null && title !== '' && text !== '') {
       setButtonDisabled(false);
       setMessage('');
       setMessageTitle('');
     } else {
       setButtonDisabled(true);
+      setMessage('Please fill out all fields!');
     }
   }
 
@@ -59,9 +79,9 @@ function Form({ handleAdd }) {
 
   return (
     <Card className="forForm">
-      <form id="form" onSubmit={handleSubmit}>
-        <label>
-          Date:
+      <FormContainer id="form" onSubmit={handleSubmit}>
+        <Label>
+          <h2>Date:</h2>
           <input
             type="date"
             className="postDate"
@@ -69,9 +89,9 @@ function Form({ handleAdd }) {
             required
             onChange={handleDateChange}
           />
-        </label>
-        <label>
-          Title:
+        </Label>
+        <Label>
+          <h2>Title:</h2>
           <input
             type="text"
             className="postTitle"
@@ -80,9 +100,9 @@ function Form({ handleAdd }) {
             required
             onChange={handleTitleChange} //{e => setTitle(e.target.value)}
           />
-        </label>
-        <label>
-          Journal Entry:
+        </Label>
+        <Label>
+          <h2>Journal Entry:</h2>
           <textarea
             type="text"
             className="journalEntry"
@@ -91,31 +111,43 @@ function Form({ handleAdd }) {
             required
             onChange={handleTextChange}
           />
-        </label>
+        </Label>
         <Button type="submit" isDisabled={buttonDisabled}>
           Submit
         </Button>
-        {messageTitle && (
-          <Span Span className="message">
-            {messageTitle}
-          </Span>
-        )}
-        {message && <Span className="message">{message}</Span>}
-      </form>
+        {messageTitle && <P className="message">{messageTitle}</P>}
+        {message && <P className="message">{message}</P>}
+      </FormContainer>
     </Card>
   );
 }
 
-const StyledSpan = styled.span`
+const StyledP = styled.p`
   color: red;
-
-  &.hidden {
-    display: none;
-  }
 `;
 
-function Span({ children }) {
-  return <StyledSpan>{children}</StyledSpan>;
+function P({ children }) {
+  return <StyledP>{children}</StyledP>;
+}
+
+const StyledFormContainer = styled.form`
+  display: grid;
+  justify-content: center;
+  align-content: center;
+`;
+
+function FormContainer({ children }) {
+  return <StyledFormContainer>{children}</StyledFormContainer>;
+}
+
+const StyledLabel = styled.label`
+  display: grid;
+  justify-content: center;
+  align-content: center;
+`;
+
+function Label({ children }) {
+  return <StyledLabel>{children}</StyledLabel>;
 }
 
 export default Form;
