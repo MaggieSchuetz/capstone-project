@@ -79,7 +79,7 @@ function Form({ handleAdd }) {
 
   return (
     <Card className="forForm">
-      <form id="form" onSubmit={handleSubmit}>
+      <FormContainer id="form" onSubmit={handleSubmit}>
         <Label>
           <h2>Date:</h2>
           <input
@@ -117,7 +117,7 @@ function Form({ handleAdd }) {
         </Button>
         {messageTitle && <P className="message">{messageTitle}</P>}
         {message && <P className="message">{message}</P>}
-      </form>
+      </FormContainer>
     </Card>
   );
 }
@@ -136,8 +136,12 @@ const StyledFormContainer = styled.form`
   align-content: center;
 `;
 
-function FormContainer({ children }) {
-  return <StyledFormContainer>{children}</StyledFormContainer>;
+function FormContainer({ children, id, onSubmit }) {
+  return (
+    <StyledFormContainer id={id} onSubmit={onSubmit}>
+      {children}
+    </StyledFormContainer>
+  );
 }
 
 const StyledLabel = styled.label`

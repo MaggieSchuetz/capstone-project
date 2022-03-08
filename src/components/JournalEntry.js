@@ -6,7 +6,7 @@ function JournalEntry({ item }) {
   return (
     <Card>
       <div className="text-display">
-        <StyledDate>{item.date}</StyledDate>
+        <Date>{item.date}</Date>
         <h2>{item.title}</h2>
         <p>{item.text}</p>
       </div>
