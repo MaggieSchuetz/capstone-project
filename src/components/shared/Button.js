@@ -8,15 +8,14 @@ const StyledButton = styled.button`
   color: black;
   width: 100px;
   height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 10px;
 
   &:hover {
     background-color: purple;
   }
   &:disabled {
     background-color: grey;
+    cursor: not-allowed;
   }
 `;
 

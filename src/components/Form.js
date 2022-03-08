@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
-import Card from './shared/Card';
 import Button from './shared/Button';
 
 function Form({ handleAdd }) {
@@ -9,9 +8,7 @@ function Form({ handleAdd }) {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  // const [messageDate, setMessageDate] = useState('(required)');
   const [messageTitle, setMessageTitle] = useState('');
-  // const [messageText, setMessageText] = useState('(required)');
   const [message, setMessage] = useState('Please fill out all fields!');
 
   const handleDateChange = e => {
@@ -28,13 +25,15 @@ function Form({ handleAdd }) {
 
   const handleSubmit = e => {
     e.preventDefault();
+    const form = e.target;
+    const { date, title, text } = form.elements;
     const newEntry = {
-      date,
-      title,
-      text,
+      date: date.value,
+      title: title.value,
+      text: text.value,
     };
     handleAdd(newEntry);
-    document.getElementById('form').reset();
+    form.reset();
     setTitle('');
     setText('');
     setButtonDisabled(true);
@@ -78,80 +77,92 @@ function Form({ handleAdd }) {
   }, [date, title, text]);
 
   return (
-    <Card className="forForm">
-      <FormContainer id="form" onSubmit={handleSubmit}>
-        <Label>
-          <h2>Date:</h2>
-          <input
-            type="date"
-            className="postDate"
-            //value={date}
-            required
-            onChange={handleDateChange}
-          />
-        </Label>
-        <Label>
-          <h2>Title:</h2>
-          <input
-            type="text"
-            className="postTitle"
-            placeholder="Title"
-            value={title}
-            required
-            onChange={handleTitleChange} //{e => setTitle(e.target.value)}
-          />
-        </Label>
-        <Label>
-          <h2>Journal Entry:</h2>
-          <textarea
-            type="text"
-            className="journalEntry"
-            placeholder="Write about your adventure!"
-            value={text}
-            required
-            onChange={handleTextChange}
-          />
-        </Label>
-        <Button type="submit" isDisabled={buttonDisabled}>
-          Submit
-        </Button>
-        {messageTitle && <P className="message">{messageTitle}</P>}
-        {message && <P className="message">{message}</P>}
-      </FormContainer>
-    </Card>
+    <FormContainer onSubmit={handleSubmit}>
+      <Label htmlFor="date" id="label-date">
+        Date:
+      </Label>
+      <Input
+        aria-labelledby="label-date"
+        id="date"
+        name="date"
+        type="date"
+        className="postDate"
+        //value={date}
+        required
+        onChange={handleDateChange}
+      />
+      <Label htmlFor="title" id="label-title">
+        Title:
+      </Label>
+      <Input
+        aria-labelledby="label-title"
+        id="title"
+        name="title"
+        type="text"
+        className="postTitle"
+        placeholder="Title"
+        value={title}
+        required
+        onChange={handleTitleChange} //{e => setTitle(e.target.value)}
+      />
+      <Label htmlFor="text" id="label-text">
+        Journal Entry:
+      </Label>
+      <Textarea
+        aria-labelledby="label-text"
+        id="text"
+        name="text"
+        type="text"
+        className="journalEntry"
+        placeholder="Write about your adventure!"
+        value={text}
+        required
+        onChange={handleTextChange}
+      />
+      <Button type="submit" isDisabled={buttonDisabled}>
+        Submit
+      </Button>
+      {messageTitle && <P className="message">{messageTitle}</P>}
+      {message && <P className="message">{message}</P>}
+    </FormContainer>
   );
 }
 
-const StyledP = styled.p`
-  color: red;
+const P = styled.p`
+  color: palevioletred;
 `;
 
-function P({ children }) {
-  return <StyledP>{children}</StyledP>;
-}
-
-const StyledFormContainer = styled.form`
-  display: grid;
+const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-content: center;
+  align-items: center;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 40px 50px;
+  margin: 20px;
 `;
 
-function FormContainer({ children, id, onSubmit }) {
-  return (
-    <StyledFormContainer id={id} onSubmit={onSubmit}>
-      {children}
-    </StyledFormContainer>
-  );
-}
-
-const StyledLabel = styled.label`
-  display: grid;
-  justify-content: center;
-  align-content: center;
+const Label = styled.label`
+  text-align: left;
+  padding: 10px;
 `;
 
-function Label({ children }) {
-  return <StyledLabel>{children}</StyledLabel>;
-}
+const Input = styled.input`
+  width: 60vw;
+  font-family: Open-Sans, Helvetica, Sans-Serif;
+  font-size: 12pt;
+  color: grey;
+`;
+
+const Textarea = styled.textarea`
+  width: 60vw;
+  height: 40vh;
+  font-family: Open-Sans, Helvetica, Sans-Serif;
+  font-size: 12pt;
+  color: grey;
+`;
 
 export default Form;
