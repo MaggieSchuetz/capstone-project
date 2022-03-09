@@ -22,9 +22,7 @@ const StyledHeader = styled.div`
 function Header({ text }) {
   return (
     <>
-      <div className="HeaderContainer">
-        <StyledHeader>{text}</StyledHeader>
-      </div>
+      <StyledHeader>{text}</StyledHeader>
     </>
   );
 }
