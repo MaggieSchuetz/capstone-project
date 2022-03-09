@@ -14,11 +14,14 @@ const StyledButton = styled.button`
     background-color: grey;
     cursor: not-allowed;
   }
+  &.delete {
+    color: palevioletred;
+  }
 `;
 
-function Button({ children, type, isDisabled }) {
+function Button({ children, type, isDisabled, className }) {
   return (
-    <StyledButton type={type} disabled={isDisabled}>
+    <StyledButton type={type} disabled={isDisabled} className={className}>
       {children}
     </StyledButton>
   );

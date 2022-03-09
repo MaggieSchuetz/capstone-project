@@ -9,13 +9,15 @@ function JournalEntry({ item, handleDelete }) {
       <Date>{item.date}</Date>
       <h2>{item.title}</h2>
       <p>{item.text}</p>
-      <button
+      <DeleteButton
+        className="delete"
+        aria-label="deleteJournalEntry"
         onClick={() => {
           handleDelete(item.id);
         }}
       >
-        <FaTrashAlt />
-      </button>
+        <FaTrashAlt size={20} />
+      </DeleteButton>
     </Card>
   );
 }
@@ -27,4 +29,12 @@ const Date = styled.p`
   right: 20px;
 `;
 
+const DeleteButton = styled.button`
+  color: black;
+  background-color: inherit;
+  border: none;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+`;
 export default JournalEntry;
