@@ -10,9 +10,6 @@ const StyledButton = styled.button`
   height: 40px;
   margin: 10px;
 
-  &:hover {
-    background-color: purple;
-  }
   &:disabled {
     background-color: grey;
     cursor: not-allowed;

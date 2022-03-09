@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from './shared/Button';
 
@@ -72,30 +71,26 @@ function Form({ handleAdd }) {
     }
   }
 
-  useEffect(() => {
-    enableButton();
-  }, [date, title, text]);
+  useEffect(
+    () => {
+      enableButton();
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [date, title, text]
+  );
 
   return (
     <FormContainer onSubmit={handleSubmit}>
-      <Label htmlFor="date" id="label-date">
-        Date:
-      </Label>
+      <Label htmlFor="date">Date:</Label>
       <Input
-        aria-labelledby="label-date"
         id="date"
         name="date"
         type="date"
         className="postDate"
-        //value={date}
         required
         onChange={handleDateChange}
       />
-      <Label htmlFor="title" id="label-title">
-        Title:
-      </Label>
+      <Label htmlFor="title">Title:</Label>
       <Input
-        aria-labelledby="label-title"
         id="title"
         name="title"
         type="text"
@@ -105,11 +100,8 @@ function Form({ handleAdd }) {
         required
         onChange={handleTitleChange} //{e => setTitle(e.target.value)}
       />
-      <Label htmlFor="text" id="label-text">
-        Journal Entry:
-      </Label>
+      <Label htmlFor="text">Journal Entry:</Label>
       <Textarea
-        aria-labelledby="label-text"
         id="text"
         name="text"
         type="text"
@@ -151,18 +143,20 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  width: 60vw;
+  width: 70vw;
   font-family: Open-Sans, Helvetica, Sans-Serif;
   font-size: 12pt;
   color: grey;
+  padding: 5px;
 `;
 
 const Textarea = styled.textarea`
-  width: 60vw;
+  width: 70vw;
   height: 40vh;
   font-family: Open-Sans, Helvetica, Sans-Serif;
   font-size: 12pt;
   color: grey;
+  padding: 5px;
 `;
 
 export default Form;
