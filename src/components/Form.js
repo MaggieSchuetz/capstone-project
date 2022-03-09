@@ -85,7 +85,6 @@ function Form({ handleAdd }) {
         id="date"
         name="date"
         type="date"
-        className="postDate"
         required
         onChange={handleDateChange}
       />
@@ -94,7 +93,6 @@ function Form({ handleAdd }) {
         id="title"
         name="title"
         type="text"
-        className="postTitle"
         placeholder="Title"
         value={title}
         required
@@ -105,7 +103,6 @@ function Form({ handleAdd }) {
         id="text"
         name="text"
         type="text"
-        className="journalEntry"
         placeholder="Write about your adventure!"
         value={text}
         required
