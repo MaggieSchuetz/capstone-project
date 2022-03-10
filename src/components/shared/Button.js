@@ -16,7 +16,6 @@ const StyledButton = styled.button`
   }
   &.delete {
     height: fit-content;
-
     width: fit-content;
     color: black;
     background-color: inherit;

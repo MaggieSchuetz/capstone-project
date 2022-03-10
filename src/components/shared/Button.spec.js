@@ -11,7 +11,7 @@ describe('Button', () => {
 });
 
 describe('disabledButton', () => {
-  it('renders a disabled default button', () => {
+  it('renders a delete  button', () => {
     render(<Button className="delete">Delete</Button>);
 
     const deleteButton = screen.getByRole('button');
@@ -19,8 +19,8 @@ describe('disabledButton', () => {
   });
 });
 
-describe('deletedButton', () => {
-  it('renders a delete  button', () => {
+describe('disabled Button', () => {
+  it('renders a disabled default button', () => {
     render(
       <Button type="submit" isDisabled>
         Submit

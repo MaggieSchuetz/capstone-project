@@ -87,10 +87,7 @@ function Form({ handleAdd, entryEdit, updateContent }) {
   );
   useEffect(() => {
     if (entryEdit.edit === true) {
-      const newDate = new Date(entryEdit.item.date);
-      newDate.setMinutes(newDate.getMinutes() - newDate.getTimezoneOffset());
-      const newDateStr = newDate.toISOString().substring(0, 10);
-      setDate(newDateStr);
+      setDate(entryEdit.item.date);
       setTitle(entryEdit.item.title);
       setText(entryEdit.item.text);
       setButtonDisabled(false);
