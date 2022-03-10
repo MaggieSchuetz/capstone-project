@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from './shared/Button';
 
-function Form({ handleAdd, entryEdit }) {
+function Form({ handleAdd, entryEdit, updateContent }) {
   const [date, setDate] = useState('');
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
@@ -31,11 +31,19 @@ function Form({ handleAdd, entryEdit }) {
       title: title.value,
       text: text.value,
     };
-    handleAdd(newEntry);
-    setDate('');
-    setTitle('');
-    setText('');
-    setButtonDisabled(true);
+    if (entryEdit.edit === true) {
+      updateContent(entryEdit.item.id, newEntry);
+      setDate('');
+      setTitle('');
+      setText('');
+      setButtonDisabled(true);
+    } else {
+      handleAdd(newEntry);
+      setDate('');
+      setTitle('');
+      setText('');
+      setButtonDisabled(true);
+    }
   };
 
   function enableButton() {

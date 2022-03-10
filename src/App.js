@@ -31,12 +31,24 @@ function App() {
     });
   };
 
+  const updateContent = (id, updItem) => {
+    setEntryContent(
+      entryContent.map(item =>
+        item.id === id ? { ...item, ...updItem } : item
+      )
+    );
+  };
+
   return (
     <>
       <GlobalStyle />
       <Header text="Travel App" />
       <div className="AppContainer">
-        <Form handleAdd={addJournalEntry} entryEdit={entryEdit} />
+        <Form
+          handleAdd={addJournalEntry}
+          entryEdit={entryEdit}
+          updateContent={updateContent}
+        />
         <EntryList
           content={entryContent}
           handleDelete={deleteEntry}
