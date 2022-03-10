@@ -10,17 +10,18 @@ function JournalEntry({ item, handleDelete, editEntry }) {
       <Date>{item.date}</Date>
       <h2>{item.title}</h2>
       <p>{item.text}</p>
-      <Button
+      <IconButton
         type="button"
+        alt="delete"
         className="delete"
         aria-label="deleteJournalEntry"
         onClick={() => {
           handleDelete(item.id);
         }}
       >
-        <FaTrashAlt size={20} />
-      </Button>
-      <Button
+        <FaTrashAlt size={20} alt="delete" />
+      </IconButton>
+      <IconButton
         type="button"
         className="edit"
         aria-label="editJournalEntry"
@@ -28,8 +29,8 @@ function JournalEntry({ item, handleDelete, editEntry }) {
           editEntry(item);
         }}
       >
-        <FaEdit size={20} />
-      </Button>
+        <FaEdit size={20} alt="edit" />
+      </IconButton>
     </Card>
   );
 }
@@ -39,6 +40,21 @@ const Date = styled.p`
   position: absolute;
   top: 10px;
   right: 20px;
+`;
+
+const IconButton = styled.button`
+  height: fit-content;
+  width: fit-content;
+  color: black;
+  background-color: inherit;
+  border: none;
+  position: absolute;
+  bottom: 0px;
+  right: 10px;
+
+  &.edit {
+    right: 50px;
+  }
 `;
 
 export default JournalEntry;
