@@ -12,6 +12,15 @@ describe('Button', () => {
 
 describe('disabledButton', () => {
   it('renders a disabled default button', () => {
+    render(<Button className="delete">Delete</Button>);
+
+    const deleteButton = screen.getByRole('button');
+    expect(deleteButton).toHaveClass('delete');
+  });
+});
+
+describe('deletedButton', () => {
+  it('renders a delete  button', () => {
     render(
       <Button type="submit" isDisabled>
         Submit

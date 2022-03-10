@@ -18,3 +18,8 @@ Disabled.args = {
   type: 'default',
   isDisabled: true,
 };
+
+export const Delete = Template.bind({});
+Disabled.args = {
+  type: 'delete',
+};

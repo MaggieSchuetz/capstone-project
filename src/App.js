@@ -2,7 +2,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import GlobalStyle from './globalStyles';
-import styled from 'styled-components';
 import Header from './components/Header';
 import EntryList from './components/EntryList';
 import JournalEntries from './data/JournalEntries';
@@ -14,20 +13,21 @@ function App() {
     newEntry.id = uuidv4();
     setEntryContent([newEntry, ...entryContent]);
   };
-
+  const deleteEntry = id => {
+    if (window.confirm('Are you sure you want to delete this journal entry?')) {
+      setEntryContent(entryContent.filter(item => item.id !== id));
+    }
+  };
   return (
-    <AppContainer>
+    <>
       <GlobalStyle />
-      <Header text="Travel Journal" />
+      <Header text="Travel App" />
       <div className="AppContainer">
         <Form handleAdd={addJournalEntry} />
-        <EntryList content={entryContent} />
+        <EntryList content={entryContent} handleDelete={deleteEntry} />
       </div>
-    </AppContainer>
+    </>
   );
 }
 
-const AppContainer = styled.div`
-  height: 100vh;
-`;
 export default App;
