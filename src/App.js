@@ -18,13 +18,30 @@ function App() {
       setEntryContent(entryContent.filter(item => item.id !== id));
     }
   };
+
+  const [entryEdit, setEntryEdit] = useState({
+    item: {},
+    edit: false,
+  });
+
+  const editEntry = item => {
+    setEntryEdit({
+      item,
+      edit: true,
+    });
+  };
+
   return (
     <>
       <GlobalStyle />
       <Header text="Travel App" />
       <div className="AppContainer">
-        <Form handleAdd={addJournalEntry} />
-        <EntryList content={entryContent} handleDelete={deleteEntry} />
+        <Form handleAdd={addJournalEntry} entryEdit={entryEdit} />
+        <EntryList
+          content={entryContent}
+          handleDelete={deleteEntry}
+          editEntry={editEntry}
+        />
       </div>
     </>
   );

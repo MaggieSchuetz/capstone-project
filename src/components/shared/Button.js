@@ -15,13 +15,37 @@ const StyledButton = styled.button`
     cursor: not-allowed;
   }
   &.delete {
-    color: palevioletred;
+    height: fit-content;
+
+    width: fit-content;
+    color: black;
+    background-color: inherit;
+    border: none;
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+  }
+
+  &.edit {
+    height: fit-content;
+    width: fit-content;
+    color: black;
+    background-color: inherit;
+    border: none;
+    position: absolute;
+    bottom: 0px;
+    right: 50px;
   }
 `;
 
-function Button({ children, type, isDisabled, className }) {
+function Button({ children, type, isDisabled, className, onClick }) {
   return (
-    <StyledButton type={type} disabled={isDisabled} className={className}>
+    <StyledButton
+      type={type}
+      disabled={isDisabled}
+      className={className}
+      onClick={onClick}
+    >
       {children}
     </StyledButton>
   );

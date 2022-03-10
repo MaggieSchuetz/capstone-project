@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from './shared/Button';
 
-function Form({ handleAdd }) {
-  const [date, setDate] = useState(null);
+function Form({ handleAdd, entryEdit }) {
+  const [date, setDate] = useState('');
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -32,7 +32,7 @@ function Form({ handleAdd }) {
       text: text.value,
     };
     handleAdd(newEntry);
-    form.reset();
+    setDate('');
     setTitle('');
     setText('');
     setButtonDisabled(true);
@@ -77,6 +77,18 @@ function Form({ handleAdd }) {
     }, // eslint-disable-next-line react-hooks/exhaustive-deps
     [date, title, text]
   );
+  useEffect(() => {
+    if (entryEdit.edit === true) {
+      const newDate = new Date(entryEdit.item.date);
+      newDate.setMinutes(newDate.getMinutes() - newDate.getTimezoneOffset());
+      const newDateStr = newDate.toISOString().substring(0, 10);
+      setDate(newDateStr);
+      setTitle(entryEdit.item.title);
+      setText(entryEdit.item.text);
+      setButtonDisabled(false);
+      setMessage('');
+    }
+  }, [entryEdit]);
 
   return (
     <FormContainer onSubmit={handleSubmit}>
@@ -87,6 +99,7 @@ function Form({ handleAdd }) {
         type="date"
         required
         onChange={handleDateChange}
+        value={date}
       />
       <Label htmlFor="title">Title:</Label>
       <Input

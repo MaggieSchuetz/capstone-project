@@ -1,15 +1,16 @@
 import React from 'react';
 import Card from './shared/Card';
 import styled from 'styled-components';
-import { FaTrashAlt } from 'react-icons/fa';
+import { FaTrashAlt, FaEdit } from 'react-icons/fa';
+import Button from './shared/Button';
 
-function JournalEntry({ item, handleDelete }) {
+function JournalEntry({ item, handleDelete, editEntry }) {
   return (
     <Card>
       <Date>{item.date}</Date>
       <h2>{item.title}</h2>
       <p>{item.text}</p>
-      <DeleteButton
+      <Button
         type="button"
         className="delete"
         aria-label="deleteJournalEntry"
@@ -18,7 +19,17 @@ function JournalEntry({ item, handleDelete }) {
         }}
       >
         <FaTrashAlt size={20} />
-      </DeleteButton>
+      </Button>
+      <Button
+        type="button"
+        className="edit"
+        aria-label="editJournalEntry"
+        onClick={() => {
+          editEntry(item);
+        }}
+      >
+        <FaEdit size={20} />
+      </Button>
     </Card>
   );
 }
@@ -30,12 +41,4 @@ const Date = styled.p`
   right: 20px;
 `;
 
-const DeleteButton = styled.button`
-  color: black;
-  background-color: inherit;
-  border: none;
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-`;
 export default JournalEntry;
