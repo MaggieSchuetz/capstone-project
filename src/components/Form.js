@@ -40,23 +40,23 @@ function Form({ handleAdd }) {
 
   function enableButton() {
     if (
-      (title.length > 40 && date === null) ||
-      (title.length > 40 && text === '')
+      (title.length === 80 && date === null) ||
+      (title.length === 80 && text === '')
     ) {
       setMessage('Please fill out all fields!');
-      setMessageTitle('This title is too long');
+      setMessageTitle('Your title can be no longer than this');
       setButtonDisabled(true);
     } else if (
-      (title.length > 40 && date !== null) ||
-      (title.length > 40 && text !== '')
+      (title.length === 80 && date !== null) ||
+      (title.length === 80 && text !== '')
     ) {
       setButtonDisabled(true);
       setMessageTitle('This title is too long');
       setMessage('');
     } else if (
-      (title.length < 40 && date === null) ||
-      (title.length < 40 && title === '') ||
-      (title.length < 40 && text === '')
+      (title.length < 80 && date === null) ||
+      (title.length < 80 && title === '') ||
+      (title.length < 80 && text === '')
     ) {
       setMessage('Please fill out all fields!');
       setMessageTitle('');
@@ -95,6 +95,7 @@ function Form({ handleAdd }) {
         type="text"
         placeholder="Title"
         value={title}
+        maxLength="80"
         required
         onChange={handleTitleChange} //{e => setTitle(e.target.value)}
       />

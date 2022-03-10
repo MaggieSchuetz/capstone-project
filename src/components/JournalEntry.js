@@ -10,6 +10,7 @@ function JournalEntry({ item, handleDelete }) {
       <h2>{item.title}</h2>
       <p>{item.text}</p>
       <DeleteButton
+        type="button"
         className="delete"
         aria-label="deleteJournalEntry"
         onClick={() => {
