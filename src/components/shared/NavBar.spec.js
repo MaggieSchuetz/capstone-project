@@ -1,8 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
 import { MemoryRouter } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
-import { Router } from 'react-router-dom';
 import NavBar from './NavBar.js';
 
 describe('NavBar', () => {
