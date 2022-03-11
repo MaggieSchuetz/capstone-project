@@ -11,11 +11,19 @@ import Form from './components/Form';
 import NavBar from './components/shared/NavBar';
 
 function App() {
+  const [entryEdit, setEntryEdit] = useState({
+    item: {},
+    edit: false,
+  });
+
   const [entryContent, setEntryContent] = useState(JournalEntries);
   const addJournalEntry = newEntry => {
     newEntry.id = uuidv4();
     setEntryContent([newEntry, ...entryContent]);
-
+    setEntryEdit({
+      item: {},
+      edit: true,
+    });
     navigate('/journalentries');
   };
   const deleteEntry = id => {
@@ -25,11 +33,6 @@ function App() {
   };
 
   const navigate = useNavigate();
-
-  const [entryEdit, setEntryEdit] = useState({
-    item: {},
-    edit: false,
-  });
 
   const editEntry = item => {
     setEntryEdit({
@@ -63,6 +66,7 @@ function App() {
                   handleAdd={addJournalEntry}
                   entryEdit={entryEdit}
                   updateContent={updateContent}
+                  setEntryEdit={setEntryEdit}
                 />
               </>
             }
