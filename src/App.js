@@ -8,6 +8,7 @@ import Header from './components/Header';
 import EntryList from './components/EntryList';
 import JournalEntries from './data/JournalEntries';
 import Form from './components/Form';
+import NavBar from './components/shared/NavBar';
 
 function App() {
   const [entryContent, setEntryContent] = useState(JournalEntries);
@@ -80,6 +81,7 @@ function App() {
             }
           />
         </Routes>
+        <NavBar />
       </div>
     </>
   );
