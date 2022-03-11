@@ -1,7 +1,9 @@
 // import './App.css';
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
-import GlobalStyle from './globalStyles';
+import { Route, Routes } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+
 import Header from './components/Header';
 import EntryList from './components/EntryList';
 import JournalEntries from './data/JournalEntries';
@@ -12,12 +14,16 @@ function App() {
   const addJournalEntry = newEntry => {
     newEntry.id = uuidv4();
     setEntryContent([newEntry, ...entryContent]);
+
+    navigate('/journalentries');
   };
   const deleteEntry = id => {
     if (window.confirm('Are you sure you want to delete this journal entry?')) {
       setEntryContent(entryContent.filter(item => item.id !== id));
     }
   };
+
+  const navigate = useNavigate();
 
   const [entryEdit, setEntryEdit] = useState({
     item: {},
@@ -29,6 +35,7 @@ function App() {
       item,
       edit: true,
     });
+    navigate('/newentry');
   };
 
   const updateContent = (id, updItem) => {
@@ -37,23 +44,42 @@ function App() {
         item.id === id ? { ...item, ...updItem } : item
       )
     );
+
+    navigate('/journalentries');
   };
 
   return (
     <>
-      <GlobalStyle />
       <Header text="Travel App" />
       <div className="AppContainer">
-        <Form
-          handleAdd={addJournalEntry}
-          entryEdit={entryEdit}
-          updateContent={updateContent}
-        />
-        <EntryList
-          content={entryContent}
-          handleDelete={deleteEntry}
-          editEntry={editEntry}
-        />
+        <Routes>
+          <Route
+            exact
+            path="/newentry"
+            element={
+              <>
+                <Form
+                  handleAdd={addJournalEntry}
+                  entryEdit={entryEdit}
+                  updateContent={updateContent}
+                />
+              </>
+            }
+          />
+          <Route
+            exact
+            path="/journalentries"
+            element={
+              <>
+                <EntryList
+                  content={entryContent}
+                  handleDelete={deleteEntry}
+                  editEntry={editEntry}
+                />
+              </>
+            }
+          />
+        </Routes>
       </div>
     </>
   );

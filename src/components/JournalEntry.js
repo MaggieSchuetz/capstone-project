@@ -27,6 +27,7 @@ function JournalEntry({ item, handleDelete, editEntry }) {
         aria-label="editJournalEntry"
         onClick={() => {
           editEntry(item);
+          console.log(item);
         }}
       >
         <FaEdit size={20} alt="edit" />
