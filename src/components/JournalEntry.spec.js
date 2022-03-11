@@ -43,7 +43,7 @@ describe('JournalEntry_delete', () => {
 });
 
 describe('JournalEntry_editButton', () => {
-  it('renders a card with a delete button', () => {
+  it('renders a card with a edit button', () => {
     render(<JournalEntry item={item}>{item.text}</JournalEntry>);
     const editButton = screen.getByLabelText('editJournalEntry');
 
@@ -52,7 +52,7 @@ describe('JournalEntry_editButton', () => {
 });
 
 describe('JournalEntry_edit', () => {
-  it('deletes an item when deleteButton is clicked', () => {
+  it('edits an item when editButton is clicked', () => {
     const editEntry = jest.fn();
     render(
       <JournalEntry editEntry={editEntry} item={item}>
