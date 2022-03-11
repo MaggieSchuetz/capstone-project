@@ -1,7 +1,7 @@
 import React from 'react';
 import JournalEntry from './JournalEntry';
 
-function EntryList({ content, handleDelete, editEntry }) {
+function EntryList({ content, handleDelete, editJournalEntry }) {
   if (!content || content.length === 0) {
     return <p>You don't have any journal entries yet.</p>;
   }
@@ -12,7 +12,7 @@ function EntryList({ content, handleDelete, editEntry }) {
           key={item.id}
           item={item}
           handleDelete={handleDelete}
-          editEntry={editEntry}
+          editJournalEntry={editJournalEntry}
         />
       ))}
     </div>

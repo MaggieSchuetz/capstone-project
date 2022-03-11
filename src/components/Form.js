@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from './shared/Button';
 
-function Form({ handleAdd, entryEdit, updateContent }) {
+function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
   const [date, setDate] = useState('');
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
@@ -37,6 +37,9 @@ function Form({ handleAdd, entryEdit, updateContent }) {
       setTitle('');
       setText('');
       setButtonDisabled(true);
+      setEntryEdit({
+        edit: false,
+      });
     } else {
       handleAdd(newEntry);
       setDate('');
