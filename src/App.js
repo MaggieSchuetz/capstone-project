@@ -34,7 +34,7 @@ function App() {
 
   const navigate = useNavigate();
 
-  const editEntry = item => {
+  const editJournalEntry = item => {
     setEntryEdit({
       item,
       edit: true,
@@ -79,7 +79,7 @@ function App() {
                 <EntryList
                   content={entryContent}
                   handleDelete={deleteEntry}
-                  editEntry={editEntry}
+                  editJournalEntry={editJournalEntry}
                 />
               </>
             }

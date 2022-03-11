@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FaTrashAlt, FaEdit } from 'react-icons/fa';
 // import Button from './shared/Button';
 
-function JournalEntry({ item, handleDelete, editEntry }) {
+function JournalEntry({ item, handleDelete, editJournalEntry }) {
   return (
     <Card>
       <Date>{item.date}</Date>
@@ -26,7 +26,7 @@ function JournalEntry({ item, handleDelete, editEntry }) {
         className="edit"
         aria-label="editJournalEntry"
         onClick={() => {
-          editEntry(item);
+          editJournalEntry(item);
         }}
       >
         <FaEdit size={20} alt="edit" />
