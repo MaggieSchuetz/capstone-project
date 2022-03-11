@@ -14,12 +14,17 @@ Default.args = {
 };
 
 export const Disabled = Template.bind({});
-Disabled.args = {
+Default.args = {
   type: 'default',
   isDisabled: true,
 };
 
 export const Delete = Template.bind({});
-Disabled.args = {
+Default.args = {
   type: 'delete',
+};
+
+export const Edit = Template.bind({});
+Default.args = {
+  type: 'edit',
 };

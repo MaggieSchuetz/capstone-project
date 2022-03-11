@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from './shared/Button';
 
-function Form({ handleAdd }) {
-  const [date, setDate] = useState(null);
+function Form({ handleAdd, entryEdit, updateContent }) {
+  const [date, setDate] = useState('');
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -31,32 +31,40 @@ function Form({ handleAdd }) {
       title: title.value,
       text: text.value,
     };
-    handleAdd(newEntry);
-    form.reset();
-    setTitle('');
-    setText('');
-    setButtonDisabled(true);
+    if (entryEdit.edit === true) {
+      updateContent(entryEdit.item.id, newEntry);
+      setDate('');
+      setTitle('');
+      setText('');
+      setButtonDisabled(true);
+    } else {
+      handleAdd(newEntry);
+      setDate('');
+      setTitle('');
+      setText('');
+      setButtonDisabled(true);
+    }
   };
 
   function enableButton() {
     if (
-      (title.length > 40 && date === null) ||
-      (title.length > 40 && text === '')
+      (title.length === 80 && date === null) ||
+      (title.length === 80 && text === '')
     ) {
       setMessage('Please fill out all fields!');
-      setMessageTitle('This title is too long');
+      setMessageTitle('Your title can be no longer than this');
       setButtonDisabled(true);
     } else if (
-      (title.length > 40 && date !== null) ||
-      (title.length > 40 && text !== '')
+      (title.length === 80 && date !== null) ||
+      (title.length === 80 && text !== '')
     ) {
       setButtonDisabled(true);
       setMessageTitle('This title is too long');
       setMessage('');
     } else if (
-      (title.length < 40 && date === null) ||
-      (title.length < 40 && title === '') ||
-      (title.length < 40 && text === '')
+      (title.length < 80 && date === null) ||
+      (title.length < 80 && title === '') ||
+      (title.length < 80 && text === '')
     ) {
       setMessage('Please fill out all fields!');
       setMessageTitle('');
@@ -77,6 +85,15 @@ function Form({ handleAdd }) {
     }, // eslint-disable-next-line react-hooks/exhaustive-deps
     [date, title, text]
   );
+  useEffect(() => {
+    if (entryEdit.edit === true) {
+      setDate(entryEdit.item.date);
+      setTitle(entryEdit.item.title);
+      setText(entryEdit.item.text);
+      setButtonDisabled(false);
+      setMessage('');
+    }
+  }, [entryEdit]);
 
   return (
     <FormContainer onSubmit={handleSubmit}>
@@ -87,6 +104,7 @@ function Form({ handleAdd }) {
         type="date"
         required
         onChange={handleDateChange}
+        value={date}
       />
       <Label htmlFor="title">Title:</Label>
       <Input
@@ -95,6 +113,7 @@ function Form({ handleAdd }) {
         type="text"
         placeholder="Title"
         value={title}
+        maxLength="80"
         required
         onChange={handleTitleChange} //{e => setTitle(e.target.value)}
       />

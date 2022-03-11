@@ -4,7 +4,12 @@ import Form from './Form.js';
 
 describe('Form', () => {
   it('renders all three input fields and a submit button', () => {
-    render(<Form />);
+    const entryEdit = {
+      item: {},
+      edit: false,
+    };
+    render(<Form entryEdit={entryEdit} />);
+
     const date = screen.getByLabelText('Date:', { exact: false });
     const title = screen.getByLabelText('Title:');
     const journalEntry = screen.getByLabelText('Journal Entry:');
@@ -20,9 +25,11 @@ describe('Form', () => {
 describe('Form_functionality', () => {
   it('generates a new journal entry on submit', () => {
     const handleAdd = jest.fn();
-    const changeEvent = jest.fn();
-
-    render(<Form handleAdd={handleAdd} />);
+    const entryEdit = {
+      item: {},
+      edit: false,
+    };
+    render(<Form handleAdd={handleAdd} entryEdit={entryEdit} />);
 
     const date = screen.getByLabelText('Date:');
     const title = screen.getByLabelText('Title:');

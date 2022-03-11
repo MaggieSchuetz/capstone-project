@@ -41,3 +41,28 @@ describe('JournalEntry_delete', () => {
     expect(handleDelete).toHaveBeenCalledWith(id);
   });
 });
+
+describe('JournalEntry_editButton', () => {
+  it('renders a card with a edit button', () => {
+    render(<JournalEntry item={item}>{item.text}</JournalEntry>);
+    const editButton = screen.getByLabelText('editJournalEntry');
+
+    expect(editButton).toBeInTheDocument();
+  });
+});
+
+describe('JournalEntry_edit', () => {
+  it('edits an item when editButton is clicked', () => {
+    const editEntry = jest.fn();
+    render(
+      <JournalEntry editEntry={editEntry} item={item}>
+        {item.text}
+      </JournalEntry>
+    );
+
+    const editButton = screen.getByLabelText('editJournalEntry');
+
+    userEvent.click(editButton);
+    expect(editEntry).toHaveBeenCalledWith(item);
+  });
+});
