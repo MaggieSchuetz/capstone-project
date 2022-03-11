@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Route, Routes } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { AiOutlineRead } from 'react-icons/ai';
 import { IoAddCircleOutline } from 'react-icons/io5';
@@ -10,18 +10,13 @@ const StyledNavBar = styled.nav`
   justify-content: space-around;
   padding: 10px;
   margin: 0;
-  text-align: center;
-  color: palevioletred;
   position: sticky;
   bottom: 0;
   height: 60px;
   background-color: cadetblue;
-  background-size: cover;
-  background-position-y: 55%;
   font-family: 'Fredericka the Great', Verdana, Arial, Helvetica, sans-serif,
     bold;
   font-size: 25pt;
-  color: blanchedalmond;
 `;
 
 const StyledNavLink = styled(NavLink)`
