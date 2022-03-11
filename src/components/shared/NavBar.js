@@ -21,7 +21,7 @@ const StyledNavBar = styled.nav`
 
 const StyledNavLink = styled(NavLink)`
   background-color: inherit;
-  color: grey;
+  color: black;
 
   &.active {
     color: blanchedalmond;
