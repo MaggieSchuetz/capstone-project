@@ -1,8 +1,8 @@
-// import './App.css';
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useNavigate } from 'react-router';
+import styled from 'styled-components';
 
 import Header from './components/Header';
 import EntryList from './components/EntryList';
@@ -53,42 +53,44 @@ function App() {
   };
 
   return (
-    <>
+    <AppContainer>
       <Header text="Travel App" />
-      <div className="AppContainer">
-        <Routes>
-          <Route
-            exact
-            path="/newentry"
-            element={
-              <>
-                <Form
-                  handleAdd={addJournalEntry}
-                  entryEdit={entryEdit}
-                  updateContent={updateContent}
-                  setEntryEdit={setEntryEdit}
-                />
-              </>
-            }
-          />
-          <Route
-            exact
-            path="/journalentries"
-            element={
-              <>
-                <EntryList
-                  content={entryContent}
-                  handleDelete={deleteEntry}
-                  editJournalEntry={editJournalEntry}
-                />
-              </>
-            }
-          />
-        </Routes>
-        <NavBar />
-      </div>
-    </>
+      <Routes>
+        <Route
+          exact
+          path="/newentry"
+          element={
+            <>
+              <Form
+                handleAdd={addJournalEntry}
+                entryEdit={entryEdit}
+                updateContent={updateContent}
+                setEntryEdit={setEntryEdit}
+              />
+            </>
+          }
+        />
+        <Route
+          exact
+          path="/journalentries"
+          element={
+            <>
+              <EntryList
+                content={entryContent}
+                handleDelete={deleteEntry}
+                editJournalEntry={editJournalEntry}
+              />
+            </>
+          }
+        />
+      </Routes>
+      <NavBar />
+    </AppContainer>
   );
 }
 
 export default App;
+
+const AppContainer = styled.div`
+  height: 100vh;
+`;
