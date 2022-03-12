@@ -1,12 +1,13 @@
 import React from 'react';
 import JournalEntry from './JournalEntry';
+import styled from 'styled-components';
 
 function EntryList({ content, handleDelete, editJournalEntry }) {
   if (!content || content.length === 0) {
     return <p>You don't have any journal entries yet.</p>;
   }
   return (
-    <div>
+    <ListContainer>
       {content.map(item => (
         <JournalEntry
           key={item.id}
@@ -15,8 +16,12 @@ function EntryList({ content, handleDelete, editJournalEntry }) {
           editJournalEntry={editJournalEntry}
         />
       ))}
-    </div>
+    </ListContainer>
   );
 }
+
+const ListContainer = styled.div`
+  height: 100vh;
+`;
 
 export default EntryList;
