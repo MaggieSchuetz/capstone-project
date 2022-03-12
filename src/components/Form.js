@@ -46,6 +46,9 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
       setTitle('');
       setText('');
       setButtonDisabled(true);
+      setEntryEdit({
+        edit: false,
+      });
     }
   };
 
