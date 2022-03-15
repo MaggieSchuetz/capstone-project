@@ -185,6 +185,10 @@ const Input = styled.input`
   background-color: white;
   border: none;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const Textarea = styled.textarea`
@@ -197,6 +201,10 @@ const Textarea = styled.textarea`
   background-color: white;
   border: 0;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const Container = styled.div`
