@@ -92,5 +92,5 @@ function App() {
 export default App;
 
 const AppContainer = styled.div`
-  height: 100vh;
+  /* height: 100vh; */
 `;

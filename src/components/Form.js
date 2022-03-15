@@ -103,36 +103,42 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
 
   return (
     <FormContainer onSubmit={handleSubmit}>
-      <Label htmlFor="date">Date:</Label>
-      <Input
-        id="date"
-        name="date"
-        type="date"
-        required
-        onChange={handleDateChange}
-        value={date}
-      />
-      <Label htmlFor="title">Title:</Label>
-      <Input
-        id="title"
-        name="title"
-        type="text"
-        placeholder="Title"
-        value={title}
-        maxLength="80"
-        required
-        onChange={handleTitleChange} //{e => setTitle(e.target.value)}
-      />
-      <Label htmlFor="text">Journal Entry:</Label>
-      <Textarea
-        id="text"
-        name="text"
-        type="text"
-        placeholder="Write about your adventure!"
-        value={text}
-        required
-        onChange={handleTextChange}
-      />
+      <Container>
+        <Label htmlFor="date">Date:</Label>
+        <Input
+          id="date"
+          name="date"
+          type="date"
+          required
+          onChange={handleDateChange}
+          value={date}
+        />
+      </Container>
+      <Container>
+        <Label htmlFor="title">Title:</Label>
+        <Input
+          id="title"
+          name="title"
+          type="text"
+          placeholder="Title"
+          value={title}
+          maxLength="80"
+          required
+          onChange={handleTitleChange} //{e => setTitle(e.target.value)}
+        />
+      </Container>
+      <Container>
+        <Label htmlFor="text">Journal Entry:</Label>
+        <Textarea
+          id="text"
+          name="text"
+          type="text"
+          placeholder="Write about your adventure!"
+          value={text}
+          required
+          onChange={handleTextChange}
+        />
+      </Container>
       <Button type="submit" isDisabled={buttonDisabled}>
         Submit
       </Button>
@@ -161,8 +167,13 @@ const FormContainer = styled.form`
 `;
 
 const Label = styled.label`
+  color: darkslategray;
   text-align: left;
   padding: 10px;
+  position: absolute;
+  top: -8px;
+  left: 3px;
+  text-shadow: 1px 1px 2px lightgray;
 `;
 
 const Input = styled.input`
@@ -170,18 +181,30 @@ const Input = styled.input`
   font-family: Open-Sans, Helvetica, Sans-Serif;
   font-size: 12pt;
   color: grey;
-  padding: 5px;
+  padding: 20px 5px 5px 5px;
   background-color: white;
+  border: none;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 `;
 
 const Textarea = styled.textarea`
   width: 70vw;
-  height: 40vh;
+  height: 50vh;
   font-family: Open-Sans, Helvetica, Sans-Serif;
   font-size: 12pt;
   color: grey;
-  padding: 5px;
+  padding: 20px 5px 5px 5px;
   background-color: white;
+  border: 0;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+`;
+
+const Container = styled.div`
+  position: relative;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: var(--bg-color-section);
+  box-shadow: 1px 1px 4px var(--color-boxshadow);
 `;
 
 export default Form;

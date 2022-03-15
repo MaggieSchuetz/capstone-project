@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StyledCard = styled.section`
   background-color: snow;
-  color: #333;
+  color: darkslategray;
   /* border: 1px solid black; */
   border-radius: 15px;
   padding: 40px 30px;
