@@ -30,18 +30,10 @@ const StyledNavLink = styled(NavLink)`
 function NavBar() {
   return (
     <StyledNavBar>
-      <StyledNavLink
-        to="/newentry"
-        className={isActive => 'nav-link' + (isActive ? ' active' : '')}
-        aria-label="newEntry"
-      >
+      <StyledNavLink to="/newentry" aria-label="newEntry">
         <IoAddCircleOutline alt="New Entry" />
       </StyledNavLink>
-      <StyledNavLink
-        to="/journalentries"
-        className={isActive => 'nav-link' + (isActive ? ' active' : '')}
-        aria-label="readJournal"
-      >
+      <StyledNavLink to="/journalentries" aria-label="readJournal">
         <AiOutlineRead alt="Read Journal" />
       </StyledNavLink>
     </StyledNavBar>

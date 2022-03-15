@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from './shared/Card';
 import styled from 'styled-components';
-import { FaTrashAlt, FaEdit } from 'react-icons/fa';
+import { FaTrashAlt as DeleteIcon, FaEdit as EditIcon } from 'react-icons/fa';
 // import Button from './shared/Button';
 
 function JournalEntry({ item, handleDelete, editJournalEntry }) {
@@ -19,7 +19,7 @@ function JournalEntry({ item, handleDelete, editJournalEntry }) {
           handleDelete(item.id);
         }}
       >
-        <FaTrashAlt size={20} alt="delete" />
+        <DeleteIcon size={20} alt="delete" />
       </IconButton>
       <IconButton
         type="button"
@@ -29,7 +29,7 @@ function JournalEntry({ item, handleDelete, editJournalEntry }) {
           editJournalEntry(item);
         }}
       >
-        <FaEdit size={22} alt="edit" />
+        <EditIcon size={22} alt="edit" />
       </IconButton>
     </Card>
   );

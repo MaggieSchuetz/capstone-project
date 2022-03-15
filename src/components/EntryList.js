@@ -21,7 +21,7 @@ function EntryList({ content, handleDelete, editJournalEntry }) {
 }
 
 const ListContainer = styled.div`
-  /* height: 100vh; */
+  height: 100vh;
 `;
 
 export default EntryList;

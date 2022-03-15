@@ -124,7 +124,7 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
           value={title}
           maxLength="80"
           required
-          onChange={handleTitleChange} //{e => setTitle(e.target.value)}
+          onChange={handleTitleChange}
         />
       </Container>
       <Container>
@@ -159,7 +159,6 @@ const FormContainer = styled.form`
   align-items: center;
   background-color: snow;
   color: #333;
-  /* border: 1px solid black; */
   border-radius: 15px;
   padding: 40px 40px;
   margin: 20px;
@@ -187,7 +186,8 @@ const Input = styled.input`
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 
   &:focus {
-    outline: none;
+    outline: 0.2px lightgrey;
+    box-shadow: 0 2px 4px 0 darkslategray, 0 3px 10px 0 cadetblue;
   }
 `;
 
@@ -203,7 +203,8 @@ const Textarea = styled.textarea`
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 
   &:focus {
-    outline: none;
+    outline: 0.2px lightgrey;
+    box-shadow: 0 2px 4px 0 darkslategray, 0 3px 10px 0 cadetblue;
   }
 `;
 
