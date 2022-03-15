@@ -2,16 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-  background-color: hotpink;
+  background-color: palevioletred;
   border: 0;
   border-radius: 8px;
   color: black;
   width: 100px;
   height: 40px;
   margin: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
   &:disabled {
-    background-color: grey;
+    background-color: lightgrey;
     cursor: not-allowed;
   }
   &.delete {

@@ -54,7 +54,7 @@ function App() {
 
   return (
     <AppContainer>
-      <Header text="Travel App" />
+      <Header text="Travel Log" />
       <Routes>
         <Route
           exact

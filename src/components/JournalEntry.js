@@ -29,14 +29,14 @@ function JournalEntry({ item, handleDelete, editJournalEntry }) {
           editJournalEntry(item);
         }}
       >
-        <FaEdit size={20} alt="edit" />
+        <FaEdit size={22} alt="edit" />
       </IconButton>
     </Card>
   );
 }
 
 const Date = styled.p`
-  color: grey;
+  color: gray;
   position: absolute;
   top: 10px;
   right: 20px;
@@ -45,15 +45,16 @@ const Date = styled.p`
 const IconButton = styled.button`
   height: fit-content;
   width: fit-content;
-  color: black;
+  color: palevioletred;
   background-color: inherit;
   border: none;
   position: absolute;
-  bottom: 0px;
-  right: 10px;
+  bottom: 15px;
+  right: 20px;
 
   &.edit {
-    right: 50px;
+    right: 55px;
+    color: cadetblue;
   }
 `;
 

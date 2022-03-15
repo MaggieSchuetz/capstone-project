@@ -24,29 +24,27 @@ const StyledNavLink = styled(NavLink)`
   color: black;
 
   &.active {
-    color: blanchedalmond;
+    color: snow;
   }
 `;
 function NavBar() {
   return (
-    <>
-      <StyledNavBar>
-        <StyledNavLink
-          to="/newentry"
-          className={isActive => 'nav-link' + (isActive ? ' active' : '')}
-          aria-label="newEntry"
-        >
-          <IoAddCircleOutline alt="New Entry" />
-        </StyledNavLink>
-        <StyledNavLink
-          to="/journalentries"
-          className={isActive => 'nav-link' + (isActive ? ' active' : '')}
-          aria-label="readJournal"
-        >
-          <AiOutlineRead alt="Read Journal" />
-        </StyledNavLink>
-      </StyledNavBar>
-    </>
+    <StyledNavBar>
+      <StyledNavLink
+        to="/newentry"
+        className={isActive => 'nav-link' + (isActive ? ' active' : '')}
+        aria-label="newEntry"
+      >
+        <IoAddCircleOutline alt="New Entry" />
+      </StyledNavLink>
+      <StyledNavLink
+        to="/journalentries"
+        className={isActive => 'nav-link' + (isActive ? ' active' : '')}
+        aria-label="readJournal"
+      >
+        <AiOutlineRead alt="Read Journal" />
+      </StyledNavLink>
+    </StyledNavBar>
   );
 }
 
