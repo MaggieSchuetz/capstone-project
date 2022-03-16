@@ -30,12 +30,11 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const form = e.target;
-    const { date, title, text, tags } = form.elements;
+
     const newEntry = {
-      date: date.value,
-      title: title.value,
-      text: text.value,
+      date: date,
+      title: title,
+      text: text,
       tags: tags,
     };
     if (entryEdit.edit === true) {
@@ -156,7 +155,7 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
           type="text"
           placeholder="Jungle, monkeys,..."
           value={tags}
-          maxLength="80"
+          maxLength="40"
           onChange={handleTagChange}
         />
       </Container>
@@ -232,9 +231,6 @@ const Textarea = styled.textarea`
 const Container = styled.div`
   position: relative;
   padding: 10px;
-  border-radius: 4px;
-  background-color: var(--bg-color-section);
-  box-shadow: 1px 1px 4px var(--color-boxshadow);
 `;
 
 export default Form;
