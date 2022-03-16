@@ -104,6 +104,7 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
       setDate(entryEdit.item.date);
       setTitle(entryEdit.item.title);
       setText(entryEdit.item.text);
+      setTags(entryEdit.item.tags);
       setButtonDisabled(false);
       setMessage('');
     }
