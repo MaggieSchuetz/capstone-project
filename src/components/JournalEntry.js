@@ -10,6 +10,11 @@ function JournalEntry({ item, handleDelete, editJournalEntry }) {
       <Date>{item.date}</Date>
       <h2>{item.title}</h2>
       <p>{item.text}</p>
+      <Ul>
+        {item.tags.map((tag, index) => (
+          <li key={index}>{tag}</li>
+        ))}
+      </Ul>
       <IconButton
         type="button"
         alt="delete"
@@ -55,6 +60,23 @@ const IconButton = styled.button`
   &.edit {
     right: 55px;
     color: cadetblue;
+  }
+`;
+
+const Ul = styled.ul`
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+
+  > * {
+    margin: 10px;
+    background-color: cadetblue;
+    color: snow;
+    padding: 5px 10px;
+    border-radius: 10px;
+    height: fit-content;
   }
 `;
 
