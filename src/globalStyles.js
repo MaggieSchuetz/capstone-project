@@ -10,10 +10,19 @@ const GlobalStyle = createGlobalStyle`
     height: 100vh;
     font-family: Open-Sans, Helvetica, Sans-Serif;
     text-align: center;
+    background-color: azure;
   }
 
   h1 {
-  //add later
+    font-family: 'Fredericka the Great', Verdana, Arial, Helvetica, sans-serif,
+    bold;
+  }
+
+  h2 {
+    font-family: 'Fredericka the Great', Verdana, Arial, Helvetica, sans-serif,
+    bold;
+    font-size: 15pt;
+    color: darkslategray;
   }
 
 `;

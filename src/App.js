@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 
@@ -54,8 +54,9 @@ function App() {
 
   return (
     <AppContainer>
-      <Header text="Travel App" />
+      <Header text="Travel Log" />
       <Routes>
+        <Route path="*" element={<Navigate to="/newEntry" replace />} />
         <Route
           exact
           path="/newentry"
@@ -84,13 +85,11 @@ function App() {
           }
         />
       </Routes>
-      <NavBar />
+      <NavBar setEntryEdit={setEntryEdit} />
     </AppContainer>
   );
 }
 
 export default App;
 
-const AppContainer = styled.div`
-  height: 100vh;
-`;
+const AppContainer = styled.div``;
