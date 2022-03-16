@@ -85,7 +85,7 @@ function App() {
           }
         />
       </Routes>
-      <NavBar />
+      <NavBar setEntryEdit={setEntryEdit} />
     </AppContainer>
   );
 }

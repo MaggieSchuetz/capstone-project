@@ -10,9 +10,10 @@ const StyledNavBar = styled.nav`
   justify-content: space-around;
   padding: 10px;
   margin: 0;
-  position: sticky;
+  position: fixed;
   bottom: 0;
   height: 60px;
+  width: 100vw;
   background-color: cadetblue;
   font-family: 'Fredericka the Great', Verdana, Arial, Helvetica, sans-serif,
     bold;
@@ -27,11 +28,17 @@ const StyledNavLink = styled(NavLink)`
     color: snow;
   }
 `;
-function NavBar() {
+function NavBar({ setEntryEdit }) {
+  const handleClick = e => {
+    setEntryEdit({
+      edit: false,
+    });
+  };
+
   return (
     <StyledNavBar>
       <StyledNavLink to="/newentry" aria-label="newEntry">
-        <IoAddCircleOutline alt="New Entry" />
+        <IoAddCircleOutline alt="New Entry" onClick={handleClick} />
       </StyledNavLink>
       <StyledNavLink to="/journalentries" aria-label="readJournal">
         <AiOutlineRead alt="Read Journal" />
