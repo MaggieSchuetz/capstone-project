@@ -12,7 +12,9 @@ function JournalEntry({ item, handleDelete, editJournalEntry }) {
       <p>{item.text}</p>
       <Ul>
         {item.tags.map((tag, index) => (
-          <li key={index}>{tag}</li>
+          <li className="tag" aria-label="tag" key={index}>
+            {tag}
+          </li>
         ))}
       </Ul>
       <IconButton

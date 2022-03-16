@@ -13,5 +13,6 @@ Default.args = {
     date: '2022-03-07',
     title: 'Working on Storybook',
     text: 'Writing tests',
+    tags: 'tag1',
   },
 };
