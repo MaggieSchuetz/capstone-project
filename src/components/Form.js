@@ -54,21 +54,21 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
 
   function enableButton() {
     if (
-      (title.length === 80 && date === null) ||
+      (title.length === 80 && date === '') ||
       (title.length === 80 && text === '')
     ) {
       setMessage('Please fill out all fields!');
       setMessageTitle('Your title can be no longer than this');
       setButtonDisabled(true);
     } else if (
-      (title.length === 80 && date !== null) ||
+      (title.length === 80 && date !== '') ||
       (title.length === 80 && text !== '')
     ) {
       setButtonDisabled(true);
-      setMessageTitle('This title is too long');
+      setMessageTitle('Your title can be no longer than this');
       setMessage('');
     } else if (
-      (title.length < 80 && date === null) ||
+      (title.length < 80 && date === '') ||
       (title.length < 80 && title === '') ||
       (title.length < 80 && text === '')
     ) {
