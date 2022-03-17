@@ -8,6 +8,7 @@ import Header from './components/Header';
 import EntryList from './components/EntryList';
 import JournalEntries from './data/JournalEntries';
 import Form from './components/Form';
+import SearchForm from './components/SearchForm';
 import NavBar from './components/shared/NavBar';
 
 function App() {
@@ -73,10 +74,23 @@ function App() {
         />
         <Route
           exact
-          path="/journalentries"
+          path="/journalEntries"
           element={
             <>
               <EntryList
+                content={entryContent}
+                handleDelete={deleteEntry}
+                editJournalEntry={editJournalEntry}
+              />
+            </>
+          }
+        />
+        <Route
+          exact
+          path="/searchTags"
+          element={
+            <>
+              <SearchForm
                 content={entryContent}
                 handleDelete={deleteEntry}
                 editJournalEntry={editJournalEntry}
