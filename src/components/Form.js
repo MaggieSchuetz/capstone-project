@@ -24,8 +24,7 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
   };
 
   const handleTagChange = e => {
-    setTags(e.target.value.split(','));
-    console.log(tags);
+    setTags(e.target.value.toLowerCase().split(','));
   };
 
   const handleSubmit = e => {
@@ -154,7 +153,7 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
           id="tags"
           name="tags"
           type="text"
-          placeholder="Jungle, monkeys,..."
+          placeholder="e.g. jungle, monkeys,..."
           value={tags}
           maxLength="40"
           onChange={handleTagChange}

@@ -5,30 +5,39 @@ import JournalEntry from './JournalEntry';
 
 function SearchForm({ content, handleDelete, editJournalEntry }) {
   const [search, setSearch] = useState('');
-  const [filteredEntries, setFilteredEntries] = useState([]);
+  const [message, setMessage] = useState(
+    'Enter a tag you would like to search for'
+  );
 
   const handleTagChange = e => {
     setSearch(e.target.value);
   };
 
+  const handleSubmit = e => {
+    e.preventDefault();
+  };
+  // const itemTags = content.map(item => item.tags.join());
+  // const { Searcher } = require('fast-fuzzy');
+  // const searcher = new Searcher(itemTags, { ignoreCase: true });
+  // const filteredResults = searcher.search(search);
+
   return (
     <>
-      <FormContainer>
+      <FormContainer onSubmit={handleSubmit}>
         <Container>
           <Label htmlFor="tags">Search Tags:</Label>
           <Input
             id="search"
             name="search"
             type="text"
-            placeholder="Jungle, monkeys,..."
+            placeholder="e.g. jungle, monkeys,..."
             value={search}
             maxLength="40"
             onChange={handleTagChange}
           />
         </Container>
-        <p>Enter a tag you would like to search for</p>
       </FormContainer>
-
+      <p>{message}</p>
       <ListContainer>
         {content
           .filter(item => item.tags.includes(search.toLowerCase()))

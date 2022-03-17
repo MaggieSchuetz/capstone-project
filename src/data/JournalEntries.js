@@ -4,7 +4,7 @@ const JournalEntries = [
     date: '2015-12-03',
     title: 'Trekking in Bukit Lawang',
     text: "After a restless night (due to the paper-thin mattress that seemed to be crawling  with bugs), it was, for once, not difficult to get out of  bed early. We drenched ourselves in DEET and double-checked whether we had everything we'd need for three days in the jungle. After about an hour, we saw a baby orangutan swinging high above our heads! It was an amazing experience.",
-    tags: ['jungle', 'orangutans', 'white hotpants'],
+    tags: ['Jungle', 'orangutans', 'white hotpants'],
   },
 
   {
