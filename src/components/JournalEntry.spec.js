@@ -7,6 +7,7 @@ const item = {
   date: '2022-03-07',
   title: 'Title',
   text: 'Journal Entry',
+  tags: ['tag1', 'tag2'],
 };
 describe('JournalEntry', () => {
   it('renders a default JournalEntry from an item that contains date, title and text', () => {
@@ -53,9 +54,9 @@ describe('JournalEntry_editButton', () => {
 
 describe('JournalEntry_edit', () => {
   it('edits an item when editButton is clicked', () => {
-    const editEntry = jest.fn();
+    const editJournalEntry = jest.fn();
     render(
-      <JournalEntry editEntry={editEntry} item={item}>
+      <JournalEntry editJournalEntry={editJournalEntry} item={item}>
         {item.text}
       </JournalEntry>
     );
@@ -63,6 +64,15 @@ describe('JournalEntry_edit', () => {
     const editButton = screen.getByLabelText('editJournalEntry');
 
     userEvent.click(editButton);
-    expect(editEntry).toHaveBeenCalledWith(item);
+    expect(editJournalEntry).toHaveBeenCalledWith(item);
+  });
+});
+
+describe('JournalEntry_tags', () => {
+  it('renders tags in the journal entry', () => {
+    render(<JournalEntry item={item}>{item.text}</JournalEntry>);
+    const tag = screen.getByText('tag1');
+
+    expect(tag).toBeInTheDocument();
   });
 });

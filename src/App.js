@@ -20,10 +20,10 @@ function App() {
   const addJournalEntry = newEntry => {
     newEntry.id = uuidv4();
     setEntryContent([newEntry, ...entryContent]);
-    setEntryEdit({
-      item: {},
-      edit: true,
-    });
+    // setEntryEdit({
+    //   item: {},
+    //   edit: true,
+    // });
     navigate('/journalentries');
   };
   const deleteEntry = id => {

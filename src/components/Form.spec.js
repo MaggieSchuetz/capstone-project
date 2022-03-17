@@ -14,11 +14,13 @@ describe('Form', () => {
     const title = screen.getByLabelText('Title:');
     const journalEntry = screen.getByLabelText('Journal Entry:');
     const button = screen.getByRole('button');
+    const tags = screen.getByLabelText('Tags:');
 
     expect(date).toBeInTheDocument();
     expect(title).toBeInTheDocument();
     expect(journalEntry).toBeInTheDocument();
     expect(button).toBeInTheDocument();
+    expect(tags).toBeInTheDocument();
   });
 });
 
@@ -29,7 +31,14 @@ describe('Form_functionality', () => {
       item: {},
       edit: false,
     };
-    render(<Form handleAdd={handleAdd} entryEdit={entryEdit} />);
+    const setEntryEdit = jest.fn();
+    render(
+      <Form
+        handleAdd={handleAdd}
+        entryEdit={entryEdit}
+        setEntryEdit={setEntryEdit}
+      />
+    );
 
     const date = screen.getByLabelText('Date:');
     const title = screen.getByLabelText('Title:');
@@ -48,6 +57,7 @@ describe('Form_functionality', () => {
       date: '2015-03-12',
       title: 'Trekking in Bukit Lawang',
       text: "After a restless night (due to the paper-thin mattress that seemed to be crawling  with bugs), it was, for once, not difficult to get out of  bed early. We drenched ourselves in DEET and double-checked whether we had everything we'd need for three days in the jungle. After about an hour, we saw a baby orangutan swinging high above our heads! It was an amazing experience.",
+      tags: [],
     });
   });
 });

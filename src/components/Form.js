@@ -9,6 +9,7 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [messageTitle, setMessageTitle] = useState('');
   const [message, setMessage] = useState('Please fill out all fields!');
+  const [tags, setTags] = useState([]);
 
   const handleDateChange = e => {
     setDate(e.target.value);
@@ -22,20 +23,26 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
     setText(e.target.value);
   };
 
+  const handleTagChange = e => {
+    setTags(e.target.value.split(','));
+    console.log(tags);
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
-    const form = e.target;
-    const { date, title, text } = form.elements;
+
     const newEntry = {
-      date: date.value,
-      title: title.value,
-      text: text.value,
+      date: date,
+      title: title,
+      text: text,
+      tags: tags,
     };
     if (entryEdit.edit === true) {
       updateContent(entryEdit.item.id, newEntry);
       setDate('');
       setTitle('');
       setText('');
+      setTags([]);
       setButtonDisabled(true);
       setEntryEdit({
         edit: false,
@@ -45,6 +52,7 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
       setDate('');
       setTitle('');
       setText('');
+      setTags([]);
       setButtonDisabled(true);
       setEntryEdit({
         edit: false,
@@ -57,7 +65,7 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
       (title.length === 80 && date === '') ||
       (title.length === 80 && text === '')
     ) {
-      setMessage('Please fill out all fields!');
+      setMessage('Please fill out all necessary fields!');
       setMessageTitle('Your title can be no longer than this');
       setButtonDisabled(true);
     } else if (
@@ -72,7 +80,7 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
       (title.length < 80 && title === '') ||
       (title.length < 80 && text === '')
     ) {
-      setMessage('Please fill out all fields!');
+      setMessage('Please fill out all necessary fields!');
       setMessageTitle('');
       setButtonDisabled(true);
     } else if (date !== null && title !== '' && text !== '') {
@@ -81,7 +89,7 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
       setMessageTitle('');
     } else {
       setButtonDisabled(true);
-      setMessage('Please fill out all fields!');
+      setMessage('Please fill out all necessary fields!');
     }
   }
 
@@ -96,6 +104,7 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
       setDate(entryEdit.item.date);
       setTitle(entryEdit.item.title);
       setText(entryEdit.item.text);
+      setTags(entryEdit.item.tags);
       setButtonDisabled(false);
       setMessage('');
     }
@@ -137,6 +146,18 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
           value={text}
           required
           onChange={handleTextChange}
+        />
+      </Container>
+      <Container>
+        <Label htmlFor="tags">Tags:</Label>
+        <Input
+          id="tags"
+          name="tags"
+          type="text"
+          placeholder="Jungle, monkeys,..."
+          value={tags}
+          maxLength="40"
+          onChange={handleTagChange}
         />
       </Container>
       <Button type="submit" isDisabled={buttonDisabled}>
@@ -211,9 +232,6 @@ const Textarea = styled.textarea`
 const Container = styled.div`
   position: relative;
   padding: 10px;
-  border-radius: 4px;
-  background-color: var(--bg-color-section);
-  box-shadow: 1px 1px 4px var(--color-boxshadow);
 `;
 
 export default Form;
