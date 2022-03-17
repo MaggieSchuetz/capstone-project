@@ -4,17 +4,24 @@ import Button from './shared/Button';
 import JournalEntry from './JournalEntry';
 
 function SearchForm({ content, handleDelete, editJournalEntry }) {
-  const [tags, setTags] = useState([]);
+  const [search, setSearch] = useState('');
+  const [filteredEntries, setFilteredEntries] = useState([]);
 
   const handleTagChange = e => {
-    setTags(e.target.value.split(','));
-    console.log(tags);
+    setSearch(e.target.value);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    setTags([]);
+    if (search.length > 0) {
+      setFilteredEntries(
+        content.filter(item =>
+          item.tags.map(tag => tag.toLowerCase().includes(search.toLowerCase()))
+        )
+      );
+      console.log(filteredEntries);
+    }
+    setSearch('');
   };
 
   return (
@@ -27,7 +34,7 @@ function SearchForm({ content, handleDelete, editJournalEntry }) {
             name="tags"
             type="text"
             placeholder="Jungle, monkeys,..."
-            value={tags}
+            value={search}
             maxLength="40"
             onChange={handleTagChange}
           />
