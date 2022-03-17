@@ -11,27 +11,14 @@ function SearchForm({ content, handleDelete, editJournalEntry }) {
     setSearch(e.target.value);
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (search.length > 0) {
-      setFilteredEntries(
-        content.filter(item =>
-          item.tags.map(tag => tag.toLowerCase().includes(search.toLowerCase()))
-        )
-      );
-      console.log(filteredEntries);
-    }
-    setSearch('');
-  };
-
   return (
     <>
-      <FormContainer onSubmit={handleSubmit}>
+      <FormContainer>
         <Container>
-          <Label htmlFor="tags">Tags:</Label>
+          <Label htmlFor="tags">Search Tags:</Label>
           <Input
-            id="tags"
-            name="tags"
+            id="search"
+            name="search"
             type="text"
             placeholder="Jungle, monkeys,..."
             value={search}
@@ -39,18 +26,20 @@ function SearchForm({ content, handleDelete, editJournalEntry }) {
             onChange={handleTagChange}
           />
         </Container>
-        <Button type="submit">Search</Button>
+        <p>Enter a tag you would like to search for</p>
       </FormContainer>
-      <p>Enter a tag you would like to search for</p>
+
       <ListContainer>
-        {content.map(item => (
-          <JournalEntry
-            key={item.id}
-            item={item}
-            handleDelete={handleDelete}
-            editJournalEntry={editJournalEntry}
-          />
-        ))}
+        {content
+          .filter(item => item.tags.includes(search.toLowerCase()))
+          .map(item => (
+            <JournalEntry
+              key={item.id}
+              item={item}
+              handleDelete={handleDelete}
+              editJournalEntry={editJournalEntry}
+            />
+          ))}
       </ListContainer>
     </>
   );
