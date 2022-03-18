@@ -11,3 +11,11 @@ export default {
 const Template = args => <Form {...args} />;
 
 export const Default = Template.bind({});
+Default.args = {
+  item: {
+    date: '2022-03-07',
+    title: 'Working on Storybook',
+    text: 'Writing tests',
+    tags: 'tag1',
+  },
+};

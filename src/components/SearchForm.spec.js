@@ -2,11 +2,6 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SearchForm from './SearchForm.js';
 
-const entryEdit = {
-  item: {},
-  edit: false,
-};
-
 const content = [
   {
     id: 1,
@@ -22,7 +17,7 @@ const content = [
     title:
       'How to lock yourself out of your fanny pack while being chained to it',
     text: 'Who would have thought that I would learn how to pick a lock two weeks into my trip? Somehow on the night bus, I managed to unlock the small lock on my fanny pack, unintentionally change the code, and lock ALL MY VALUABLES (including my phone) INSIDE it, which also meant that I could not take it off. Thankfully, I still had my tablet and someone was kind enough to allow me to use their wifi to look up videos on how to pick these kinds of locks. It is surprisingly easy, which does not bode well for future hostel stays, but I was grateful for it in that moment.',
-    tags: ['tag1', 'tag2'],
+    tags: ['tag5', 'tag2'],
   },
 
   {
@@ -36,7 +31,7 @@ const content = [
 
 describe('SearchForm', () => {
   it('renders the search form', () => {
-    render(<SearchForm entryEdit={entryEdit} content={content} />);
+    render(<SearchForm content={content} />);
     const searchField = screen.getByLabelText('Search Tags:');
 
     expect(searchField).toBeInTheDocument();
@@ -45,18 +40,19 @@ describe('SearchForm', () => {
 
 describe('SearchForm_match', () => {
   it('renders journal entries with tags that match the search', () => {
-    render(<SearchForm entryEdit={entryEdit} content={content} />);
+    const onChange = jest.fn();
+    render(<SearchForm content={content} onChange={onChange} />);
     const searchField = screen.getByLabelText('Search Tags:');
     userEvent.type(searchField, 'tag1');
 
-    const journalEntry = screen.getByText('tag1');
+    const journalEntry = screen.getByText('Trekking in Bukit Lawang');
     expect(journalEntry).toBeInTheDocument();
   });
 });
 
 describe('SearchForm_noMatch', () => {
-  it('renders a message that no tags match their search', () => {
-    render(<SearchForm entryEdit={entryEdit} content={content} />);
+  it('renders a message that no tags match the search', () => {
+    render(<SearchForm content={content} />);
     const searchField = screen.getByLabelText('Search Tags:');
     userEvent.type(searchField, 'asdfgh');
     const message = screen.getByText(
