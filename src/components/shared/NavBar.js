@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { AiOutlineRead } from 'react-icons/ai';
+import { AiOutlineRead, AiOutlineSearch } from 'react-icons/ai';
 import { IoAddCircleOutline } from 'react-icons/io5';
 import styled from 'styled-components';
 
@@ -37,11 +37,14 @@ function NavBar({ setEntryEdit }) {
 
   return (
     <StyledNavBar>
-      <StyledNavLink to="/newentry" aria-label="newEntry">
-        <IoAddCircleOutline alt="New Entry" onClick={handleClick} />
+      <StyledNavLink to="/searchtags" aria-label="searchTags">
+        <AiOutlineSearch alt="Search by tags" />
       </StyledNavLink>
       <StyledNavLink to="/journalentries" aria-label="readJournal">
         <AiOutlineRead alt="Read Journal" />
+      </StyledNavLink>
+      <StyledNavLink to="/newentry" aria-label="newEntry">
+        <IoAddCircleOutline alt="New Entry" onClick={handleClick} />
       </StyledNavLink>
     </StyledNavBar>
   );
