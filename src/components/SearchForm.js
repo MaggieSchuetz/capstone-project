@@ -4,9 +4,6 @@ import JournalEntry from './JournalEntry';
 
 function SearchForm({ content, handleDelete, editJournalEntry }) {
   const [search, setSearch] = useState('');
-  const [message, setMessage] = useState(
-    'Enter a tag you would like to search for'
-  );
 
   const filteredContent = content.filter(item =>
     item.tags.join().toLowerCase().includes(search.toLowerCase())
@@ -101,7 +98,7 @@ const Container = styled.div`
 `;
 
 const ListContainer = styled.div`
-  /* height: 100vh; */
+  padding-bottom: 60px;
 `;
 
 export default SearchForm;
