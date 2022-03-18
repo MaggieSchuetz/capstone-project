@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from './shared/Button';
+import axios from 'axios';
 
 function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
   const [date, setDate] = useState('');
@@ -10,6 +11,7 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
   const [messageTitle, setMessageTitle] = useState('');
   const [message, setMessage] = useState('Please fill out all fields!');
   const [tags, setTags] = useState([]);
+  const [imageSelected, setImageSelected] = useState();
 
   const handleDateChange = e => {
     setDate(e.target.value);
@@ -25,6 +27,22 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
 
   const handleTagChange = e => {
     setTags(e.target.value.toLowerCase().split(','));
+  };
+
+  const uploadImage = () => {
+    const formData = new FormData();
+    formData.append('file', imageSelected);
+    formData.append('upload_preset', 'rupkxbut');
+
+    axios
+      .post(
+        'https://api.cloudinary.com/v1_1/maggie-schuetz/image/upload',
+        formData
+      )
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => console.error(err));
   };
 
   const handleSubmit = e => {
@@ -159,7 +177,19 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
           onChange={handleTagChange}
         />
       </Container>
-      <Button type="submit" isDisabled={buttonDisabled}>
+      <Container>
+        <Label htmlFor="photoUpload">Upload a Photo:</Label>
+        <Input
+          id="photoUpload"
+          name="photoUpload"
+          type="file"
+          multiple
+          onChange={e => {
+            setImageSelected(e.target.files[0]);
+          }}
+        />
+      </Container>
+      <Button type="submit" isDisabled={buttonDisabled} onClick={uploadImage}>
         Submit
       </Button>
       {messageTitle && <P className="message">{messageTitle}</P>}
