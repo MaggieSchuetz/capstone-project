@@ -11,7 +11,7 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
   const [messageTitle, setMessageTitle] = useState('');
   const [message, setMessage] = useState('Please fill out all fields!');
   const [tags, setTags] = useState([]);
-  const [imageSelected, setImageSelected] = useState();
+  const [images, setImages] = useState([]);
 
   const handleDateChange = e => {
     setDate(e.target.value);
@@ -23,30 +23,39 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
 
   const handleTextChange = e => {
     setText(e.target.value);
+    console.log(images);
   };
 
   const handleTagChange = e => {
     setTags(e.target.value.toLowerCase().split(','));
   };
 
-  const uploadImage = () => {
-    const formData = new FormData();
-    formData.append('file', imageSelected);
-    formData.append('upload_preset', 'rupkxbut');
+  const uploadImages = images => {
+    console.log('upload', images);
+    const toUpload = images.map(image => {
+      const formData = new FormData();
+      formData.append('file', image);
+      formData.append('upload_preset', 'rupkxbut');
+      formData.append('title', { title });
+      return axios
+        .post(
+          'https://api.cloudinary.com/v1_1/maggie-schuetz/image/upload',
+          formData
+        )
+        .then(response => {
+          console.log(response);
+          const data = response.data;
+          console.log(data);
+        });
+    });
 
-    axios
-      .post(
-        'https://api.cloudinary.com/v1_1/maggie-schuetz/image/upload',
-        formData
-      )
-      .then(response => {
-        console.log(response);
-      })
-      .catch(err => console.error(err));
+    axios.all(toUpload).then(console.log('something'));
   };
 
   const handleSubmit = e => {
     e.preventDefault();
+    e.stopPropagation();
+    uploadImages(images);
 
     const newEntry = {
       date: date,
@@ -185,11 +194,11 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
           type="file"
           multiple
           onChange={e => {
-            setImageSelected(e.target.files[0]);
+            setImages([...e.target.files]);
           }}
         />
       </Container>
-      <Button type="submit" isDisabled={buttonDisabled} onClick={uploadImage}>
+      <Button type="submit" isDisabled={buttonDisabled}>
         Submit
       </Button>
       {messageTitle && <P className="message">{messageTitle}</P>}
