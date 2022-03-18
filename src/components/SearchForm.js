@@ -21,7 +21,7 @@ function SearchForm({ content, handleDelete, editJournalEntry }) {
     <>
       <FormContainer onSubmit={handleSubmit}>
         <Container>
-          <Label htmlFor="tags">Search Tags:</Label>
+          <Label htmlFor="search">Search Tags:</Label>
           <Input
             id="search"
             name="search"
