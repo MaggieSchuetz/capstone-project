@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Button from './shared/Button';
 import JournalEntry from './JournalEntry';
 
 function SearchForm({ content, handleDelete, editJournalEntry }) {
   const [search, setSearch] = useState('');
   const [message, setMessage] = useState(
     'Enter a tag you would like to search for'
+  );
+
+  const filteredContent = content.filter(item =>
+    item.tags.join().toLowerCase().includes(search.toLowerCase())
   );
 
   const handleTagChange = e => {
@@ -16,10 +19,6 @@ function SearchForm({ content, handleDelete, editJournalEntry }) {
   const handleSubmit = e => {
     e.preventDefault();
   };
-  // const itemTags = content.map(item => item.tags.join());
-  // const { Searcher } = require('fast-fuzzy');
-  // const searcher = new Searcher(itemTags, { ignoreCase: true });
-  // const filteredResults = searcher.search(search);
 
   return (
     <>
@@ -36,12 +35,11 @@ function SearchForm({ content, handleDelete, editJournalEntry }) {
             onChange={handleTagChange}
           />
         </Container>
+        <p>Start typing to search for tags</p>
       </FormContainer>
-      <p>{message}</p>
-      <ListContainer>
-        {content
-          .filter(item => item.tags.includes(search.toLowerCase()))
-          .map(item => (
+      {filteredContent.length !== content.length && (
+        <ListContainer>
+          {filteredContent.map(item => (
             <JournalEntry
               key={item.id}
               item={item}
@@ -49,7 +47,11 @@ function SearchForm({ content, handleDelete, editJournalEntry }) {
               editJournalEntry={editJournalEntry}
             />
           ))}
-      </ListContainer>
+        </ListContainer>
+      )}
+      {filteredContent.length === 0 && (
+        <p>Sorry, there are no tags that match your search.</p>
+      )}
     </>
   );
 }
