@@ -36,10 +36,10 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
       const formData = new FormData();
       formData.append('file', image);
       formData.append('upload_preset', 'rupkxbut');
-      formData.append('title', { title });
+      formData.append('folder', title);
       return axios
         .post(
-          'https://api.cloudinary.com/v1_1/maggie-schuetz/image/upload',
+          `https://api.cloudinary.com/v1_1/maggie-schuetz/image/upload`,
           formData
         )
         .then(response => {
