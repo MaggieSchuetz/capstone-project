@@ -2,7 +2,6 @@ import React from 'react';
 import Card from './shared/Card';
 import styled from 'styled-components';
 import { FaTrashAlt as DeleteIcon, FaEdit as EditIcon } from 'react-icons/fa';
-// import Button from './shared/Button';
 
 function JournalEntry({ item, handleDelete, editJournalEntry }) {
   return (

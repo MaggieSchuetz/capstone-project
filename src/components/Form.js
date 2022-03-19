@@ -3,7 +3,13 @@ import styled from 'styled-components';
 import Button from './shared/Button';
 import axios from 'axios';
 
-function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
+function Form({
+  handleAdd,
+  entryEdit,
+  setEntryEdit,
+  updateContent,
+  handlePhotoAdd,
+}) {
   const [date, setDate] = useState('');
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
@@ -12,6 +18,7 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
   const [message, setMessage] = useState('Please fill out all fields!');
   const [tags, setTags] = useState([]);
   const [images, setImages] = useState([]);
+  const [dataUrl, setDataUrl] = useState([]);
 
   const handleDateChange = e => {
     setDate(e.target.value);
@@ -36,17 +43,22 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
       const formData = new FormData();
       formData.append('file', image);
       formData.append('upload_preset', 'rupkxbut');
+      formData.append('tags', title);
       formData.append('folder', title);
       return axios
         .post(
-          `https://api.cloudinary.com/v1_1/maggie-schuetz/image/upload`,
+          'https://api.cloudinary.com/v1_1/maggie-schuetz/image/upload',
           formData
         )
         .then(response => {
-          console.log(response);
-          const data = response.data;
-          console.log(data);
+          console.log(response.data.url);
+          setDataUrl([response.data.url, ...dataUrl]);
         });
+      // .then(response => {
+      //   console.log(response);
+      //   const dataUrl = response.data.url;
+      //   console.log(dataUrl);
+      // });
     });
 
     axios.all(toUpload).then(console.log('something'));
@@ -55,7 +67,9 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
   const handleSubmit = e => {
     e.preventDefault();
     e.stopPropagation();
-    uploadImages(images);
+    if (images.length !== 0) {
+      uploadImages(images);
+    }
 
     const newEntry = {
       date: date,
@@ -65,6 +79,7 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
     };
     if (entryEdit.edit === true) {
       updateContent(entryEdit.item.id, newEntry);
+      handlePhotoAdd(dataUrl);
       setDate('');
       setTitle('');
       setText('');
@@ -75,6 +90,7 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
       });
     } else {
       handleAdd(newEntry);
+      handlePhotoAdd(dataUrl);
       setDate('');
       setTitle('');
       setText('');
