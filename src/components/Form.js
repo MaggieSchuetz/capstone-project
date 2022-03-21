@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from './shared/Button';
 import axios from 'axios';
+import Gallery from './Gallery';
 
 function Form({
   handleAdd,
@@ -20,6 +21,9 @@ function Form({
   const [images, setImages] = useState([]);
   const [dataUrls, setDataUrls] = useState([]);
   console.log(dataUrls);
+  const thisDataUrl = dataUrls;
+  console.log(thisDataUrl);
+
   const handleDateChange = e => {
     setDate(e.target.value);
   };
@@ -82,10 +86,9 @@ function Form({
       tags: tags,
     };
     if (entryEdit.edit === true) {
-      const thisDataUrl = dataUrls;
       updateContent(entryEdit.item.id, newEntry);
-      // handlePhotoAdd(thisDataUrl);
-      console.log(thisDataUrl);
+      handlePhotoAdd(thisDataUrl);
+
       setDate('');
       setTitle('');
       setText('');
@@ -96,7 +99,7 @@ function Form({
       });
     } else {
       handleAdd(newEntry);
-      // handlePhotoAdd(dataUrl);
+      handlePhotoAdd(thisDataUrl);
       setDate('');
       setTitle('');
       setText('');
