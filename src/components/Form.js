@@ -48,14 +48,15 @@ function Form({
       formData.append('upload_preset', 'rupkxbut');
       formData.append('tags', title);
       formData.append('folder', title);
+      formData.append('title', title);
       return axios
         .post(
           'https://api.cloudinary.com/v1_1/maggie-schuetz/image/upload',
           formData
         )
         .then(response => {
-          console.log(response.data.url);
-          setDataUrls(prevDataUrls => [response.data.url, ...prevDataUrls]);
+          console.log(response.data);
+          setDataUrls(prevDataUrls => [response.data, ...prevDataUrls]);
           // onUpload(response.data.url);
         });
       // .then(response => {

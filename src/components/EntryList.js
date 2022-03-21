@@ -20,9 +20,9 @@ function EntryList({
           item={item}
           handleDelete={handleDelete}
           editJournalEntry={editJournalEntry}
+          galleryContent={galleryContent}
         />
       ))}
-      <Gallery galleryContent={galleryContent} />
     </ListContainer>
   );
 }
