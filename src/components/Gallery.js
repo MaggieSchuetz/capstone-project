@@ -7,8 +7,8 @@ function Gallery({ galleryContent }) {
   }
   return (
     <ListContainer>
-      {galleryContent.map(image => (
-        <img alt="" key={image} src={image} />
+      {galleryContent.map((image, index) => (
+        <img alt="" key={index} src={image} />
       ))}
     </ListContainer>
   );

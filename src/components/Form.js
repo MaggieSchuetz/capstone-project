@@ -18,8 +18,8 @@ function Form({
   const [message, setMessage] = useState('Please fill out all fields!');
   const [tags, setTags] = useState([]);
   const [images, setImages] = useState([]);
-  const [dataUrl, setDataUrl] = useState([]);
-
+  const [dataUrls, setDataUrls] = useState([]);
+  console.log(dataUrls);
   const handleDateChange = e => {
     setDate(e.target.value);
   };
@@ -30,7 +30,6 @@ function Form({
 
   const handleTextChange = e => {
     setText(e.target.value);
-    console.log(images);
   };
 
   const handleTagChange = e => {
@@ -52,7 +51,8 @@ function Form({
         )
         .then(response => {
           console.log(response.data.url);
-          setDataUrl([response.data.url, ...dataUrl]);
+          setDataUrls(prevDataUrls => [response.data.url, ...prevDataUrls]);
+          // onUpload(response.data.url);
         });
       // .then(response => {
       //   console.log(response);
@@ -64,12 +64,16 @@ function Form({
     axios.all(toUpload).then(console.log('something'));
   };
 
+  // const onUpload = ({ url }) => {
+  //   setDataUrl(url, ...dataUrl);
+  // };
+
   const handleSubmit = e => {
     e.preventDefault();
     e.stopPropagation();
-    if (images.length !== 0) {
-      uploadImages(images);
-    }
+    // if (images.length !== 0) {
+    //   uploadImages(images);
+    // }
 
     const newEntry = {
       date: date,
@@ -78,8 +82,10 @@ function Form({
       tags: tags,
     };
     if (entryEdit.edit === true) {
+      const thisDataUrl = dataUrls;
       updateContent(entryEdit.item.id, newEntry);
-      handlePhotoAdd(dataUrl);
+      // handlePhotoAdd(thisDataUrl);
+      console.log(thisDataUrl);
       setDate('');
       setTitle('');
       setText('');
@@ -90,7 +96,7 @@ function Form({
       });
     } else {
       handleAdd(newEntry);
-      handlePhotoAdd(dataUrl);
+      // handlePhotoAdd(dataUrl);
       setDate('');
       setTitle('');
       setText('');
@@ -214,6 +220,9 @@ function Form({
           }}
         />
       </Container>
+      <Button type="button" onClick={() => uploadImages(images)}>
+        Upload
+      </Button>
       <Button type="submit" isDisabled={buttonDisabled}>
         Submit
       </Button>

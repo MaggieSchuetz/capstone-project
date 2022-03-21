@@ -23,16 +23,12 @@ function App() {
   const addJournalEntry = newEntry => {
     newEntry.id = uuidv4();
     setEntryContent([newEntry, ...entryContent]);
-    // setEntryEdit({
-    //   item: {},
-    //   edit: true,
-    // });
     navigate('/journalentries');
   };
   const [galleryContent, setGalleryContent] = useState(GalleryEntries);
   const handlePhotoAdd = newGallery => {
     newGallery.id = uuidv4();
-    setGalleryContent([newGallery, ...galleryContent]);
+    setGalleryContent([...newGallery, ...galleryContent]);
   };
 
   const deleteEntry = id => {
@@ -57,7 +53,6 @@ function App() {
         item.id === id ? { ...item, ...updItem } : item
       )
     );
-
     navigate('/journalentries');
   };
 
@@ -90,6 +85,7 @@ function App() {
                 content={entryContent}
                 handleDelete={deleteEntry}
                 editJournalEntry={editJournalEntry}
+                galleryContent={galleryContent}
               />
             </>
           }
