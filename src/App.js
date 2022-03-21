@@ -99,6 +99,7 @@ function App() {
                 content={entryContent}
                 handleDelete={deleteEntry}
                 editJournalEntry={editJournalEntry}
+                galleryContent={galleryContent}
               />
             </>
           }

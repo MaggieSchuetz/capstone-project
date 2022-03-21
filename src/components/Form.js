@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from './shared/Button';
 import axios from 'axios';
-import Gallery from './Gallery';
 
 function Form({
   handleAdd,

@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import JournalEntry from './JournalEntry';
 
-function SearchForm({ content, handleDelete, editJournalEntry }) {
+function SearchForm({
+  content,
+  handleDelete,
+  editJournalEntry,
+  galleryContent,
+}) {
   const [search, setSearch] = useState('');
 
   const filteredContent = content.filter(item =>
@@ -42,6 +47,7 @@ function SearchForm({ content, handleDelete, editJournalEntry }) {
               item={item}
               handleDelete={handleDelete}
               editJournalEntry={editJournalEntry}
+              galleryContent={galleryContent}
             />
           ))}
         </ListContainer>
