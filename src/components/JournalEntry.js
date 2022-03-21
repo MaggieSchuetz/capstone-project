@@ -27,7 +27,9 @@ function JournalEntry({
           </li>
         ))}
       </Ul>
-      <Gallery galleryContent={filteredGallery} title={item.title} />
+      {filteredGallery && (
+        <Gallery galleryContent={filteredGallery} title={item.title} />
+      )}
       <IconButton
         type="button"
         alt="delete"

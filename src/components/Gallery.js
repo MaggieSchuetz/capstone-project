@@ -2,20 +2,32 @@ import React from 'react';
 import styled from 'styled-components';
 
 function Gallery({ galleryContent }) {
-  if (!galleryContent || galleryContent.length === 0) {
-    return <p>You haven't uploaded any images yet.</p>;
-  }
+  // if (!galleryContent || galleryContent.length === 0) {
+  //   return <p>No images available for this post</p>;
+  // }
   return (
-    <ListContainer>
+    <ImageContainer>
       {galleryContent.map((image, index) => (
-        <img width="100px" height="100px" alt="" key={index} src={image.url} />
+        <img alt="" key={index} src={image.url} />
       ))}
-    </ListContainer>
+    </ImageContainer>
   );
 }
 
-const ListContainer = styled.div`
-  padding-bottom: 60px;
+const ImageContainer = styled.div`
+  padding-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(20, auto);
+  grid-template-rows: 1;
+  gap: 10px;
+  overflow-x: auto;
+
+  > * {
+    margin: 20px none;
+    border-radius: 10px;
+    height: 200px;
+    width: 200px;
+  }
 `;
 
 export default Gallery;
