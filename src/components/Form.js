@@ -154,8 +154,10 @@ function Form({
   }, [entryEdit]);
 
   useEffect(() => {
-    if (images.length > 0 && dataUrls.length === images.length) {
-      setMessageImage('');
+    if (images.length > 0 && dataUrls.length !== images.length) {
+      setMessageImage("Don't forget to upload the images you selected!");
+    } else if (images.length > 0 && dataUrls.length === images.length) {
+      setMessageImage('Your images have been uploaded');
     }
   }, [dataUrls, images]);
 
@@ -207,6 +209,7 @@ function Form({
         </Button>
       </Container>
 
+      {messageImage && <P className="message">{messageImage}</P>}
       <Container>
         <Label htmlFor="text">Journal Entry:</Label>
         <Textarea
@@ -236,7 +239,6 @@ function Form({
       </Button>
       {messageTitle && <P className="message">{messageTitle}</P>}
       {message && <P className="message">{message}</P>}
-      {messageImage && <P className="message">{messageImage}</P>}
     </FormContainer>
   );
 }
