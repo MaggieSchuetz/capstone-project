@@ -253,7 +253,7 @@ const FormContainer = styled.form`
   background-color: snow;
   color: #333;
   border-radius: 15px;
-  padding: 40px 40px;
+  padding: 40px 60px;
   margin: 20px 20px 80px 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
