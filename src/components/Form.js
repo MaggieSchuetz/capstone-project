@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from './shared/Button';
 import axios from 'axios';
-
 function Form({
   handleAdd,
   entryEdit,
@@ -157,6 +156,7 @@ function Form({
   useEffect(() => {
     if (images.length > 0 && dataUrls.length === images.length) {
       setMessageImage('');
+      console.log(images);
     }
   }, [dataUrls, images]);
 
