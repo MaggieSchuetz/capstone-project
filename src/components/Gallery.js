@@ -25,7 +25,6 @@ const Img = styled.img`
   border-radius: 10px;
   height: 15em;
   width: auto;
-  position: relative;
 `;
 
 export default Gallery;

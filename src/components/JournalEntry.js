@@ -10,9 +10,8 @@ function JournalEntry({
   editJournalEntry,
   galleryContent,
 }) {
-  const title = item.title;
   const filteredGallery = galleryContent.filter(object =>
-    object.tags.join().includes(title)
+    object.tags.join().includes(item.title)
   );
   return (
     <Card>

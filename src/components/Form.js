@@ -19,7 +19,7 @@ function Form({
   const [images, setImages] = useState([]);
   const [dataUrls, setDataUrls] = useState([]);
   const [messageImage, setMessageImage] = useState('');
-  const thisDataUrl = dataUrls;
+  const currentDataUrls = [...dataUrls];
 
   const handleDateChange = e => {
     setDate(e.target.value);
@@ -59,9 +59,9 @@ function Form({
     axios.all(toUpload);
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleSubmit = event => {
+    event.preventDefault();
+    event.stopPropagation();
 
     const newEntry = {
       date: date,
@@ -71,7 +71,7 @@ function Form({
     };
     if (entryEdit.edit === true) {
       updateContent(entryEdit.item.id, newEntry);
-      handlePhotoAdd(thisDataUrl);
+      handlePhotoAdd(currentDataUrls);
 
       setDate('');
       setTitle('');
@@ -86,7 +86,7 @@ function Form({
       setDataUrls([]);
     } else {
       handleAdd(newEntry);
-      handlePhotoAdd(thisDataUrl);
+      handlePhotoAdd(currentDataUrls);
       setDate('');
       setTitle('');
       setText('');
@@ -156,7 +156,6 @@ function Form({
   useEffect(() => {
     if (images.length > 0 && dataUrls.length === images.length) {
       setMessageImage('');
-      console.log(images);
     }
   }, [dataUrls, images]);
 
