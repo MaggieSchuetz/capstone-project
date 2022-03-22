@@ -1,7 +1,6 @@
 import React from 'react';
 import JournalEntry from './JournalEntry';
 import styled from 'styled-components';
-import Gallery from './Gallery';
 
 function EntryList({
   content,

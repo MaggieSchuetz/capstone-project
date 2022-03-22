@@ -2,13 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 function Gallery({ galleryContent }) {
-  // if (!galleryContent || galleryContent.length === 0) {
-  //   return <p>No images available for this post</p>;
-  // }
   return (
     <ImageContainer>
       {galleryContent.map((image, index) => (
-        <img alt="" key={index} src={image.url} />
+        <Img alt="" key={index} src={image.url} />
       ))}
     </ImageContainer>
   );
@@ -21,14 +18,14 @@ const ImageContainer = styled.div`
   grid-template-rows: 1;
   gap: 10px;
   overflow-x: auto;
-  position: relative;
+`;
 
-  > * {
-    margin: 20px none;
-    border-radius: 10px;
-    height: 15em;
-    width: auto;
-  }
+const Img = styled.img`
+  margin: 20px none;
+  border-radius: 10px;
+  height: 15em;
+  width: auto;
+  position: relative;
 `;
 
 export default Gallery;

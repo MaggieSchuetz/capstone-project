@@ -1,6 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import EntryList from './EntryList';
 
+const galleryContent = [
+  {
+    url: 'https://res.cloudinary.com/maggie-schuetz/image/upload/v1647947854/On%20the%20road%20to%20Mandalay/hczgxom6jkvgfdnan6if.jpg',
+    tags: ['On the road to Mandalay'],
+  },
+];
+
 describe('EntryList', () => {
   it('maps over the content array and converts them into journal entries', () => {
     const content = [
@@ -30,7 +37,7 @@ describe('EntryList', () => {
       },
     ];
 
-    render(<EntryList content={content} />);
+    render(<EntryList content={content} galleryContent={galleryContent} />);
 
     const journalEntry = screen.getByText('08-11-2016');
     expect(journalEntry).toBeInTheDocument();
@@ -41,7 +48,7 @@ describe('EntryList_empty', () => {
   it('renders a message to the user if there are no journal entries yet', () => {
     const content = [];
 
-    render(<EntryList content={content} />);
+    render(<EntryList content={content} galleryContent={galleryContent} />);
 
     const message = screen.getByText("You don't have any journal entries yet.");
     expect(message).toBeInTheDocument();

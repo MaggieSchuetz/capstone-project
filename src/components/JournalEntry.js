@@ -11,7 +11,6 @@ function JournalEntry({
   galleryContent,
 }) {
   const title = item.title;
-  console.log(galleryContent);
   const filteredGallery = galleryContent.filter(object =>
     object.tags.join().includes(title)
   );
@@ -28,7 +27,11 @@ function JournalEntry({
         ))}
       </Ul>
       {filteredGallery && (
-        <Gallery galleryContent={filteredGallery} title={item.title} />
+        <Gallery
+          galleryContent={filteredGallery}
+          title={item.title}
+          aria-label="gallery"
+        />
       )}
       <IconButton
         type="button"

@@ -13,7 +13,7 @@ describe('Form', () => {
     const date = screen.getByLabelText('Date:', { exact: false });
     const title = screen.getByLabelText('Title:');
     const journalEntry = screen.getByLabelText('Journal Entry:');
-    const button = screen.getByRole('button');
+    const button = screen.getByText('Submit');
     const tags = screen.getByLabelText('Tags:');
 
     expect(date).toBeInTheDocument();
@@ -27,6 +27,7 @@ describe('Form', () => {
 describe('Form_functionality', () => {
   it('generates a new journal entry on submit', () => {
     const handleAdd = jest.fn();
+    const handlePhotoAdd = jest.fn();
     const entryEdit = {
       item: {},
       edit: false,
@@ -35,6 +36,7 @@ describe('Form_functionality', () => {
     render(
       <Form
         handleAdd={handleAdd}
+        handlePhotoAdd={handlePhotoAdd}
         entryEdit={entryEdit}
         setEntryEdit={setEntryEdit}
       />
@@ -43,7 +45,7 @@ describe('Form_functionality', () => {
     const date = screen.getByLabelText('Date:');
     const title = screen.getByLabelText('Title:');
     const journalEntry = screen.getByLabelText('Journal Entry:');
-    const button = screen.getByRole('button');
+    const button = screen.getByText('Submit');
 
     userEvent.type(date, '2015-03-12');
     userEvent.type(title, 'Trekking in Bukit Lawang');

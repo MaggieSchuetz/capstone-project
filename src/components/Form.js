@@ -20,9 +20,7 @@ function Form({
   const [images, setImages] = useState([]);
   const [dataUrls, setDataUrls] = useState([]);
   const [messageImage, setMessageImage] = useState('');
-  console.log(dataUrls);
   const thisDataUrl = dataUrls;
-  console.log(thisDataUrl);
 
   const handleDateChange = e => {
     setDate(e.target.value);
@@ -55,31 +53,16 @@ function Form({
           formData
         )
         .then(response => {
-          console.log(response.data);
           setDataUrls(prevDataUrls => [response.data, ...prevDataUrls]);
-
-          // onUpload(response.data.url);
         });
-      // .then(response => {
-      //   console.log(response);
-      //   const dataUrl = response.data.url;
-      //   console.log(dataUrl);
-      // });
     });
 
-    axios.all(toUpload).then(console.log('something'));
+    axios.all(toUpload);
   };
-
-  // const onUpload = ({ url }) => {
-  //   setDataUrl(url, ...dataUrl);
-  // };
 
   const handleSubmit = e => {
     e.preventDefault();
     e.stopPropagation();
-    // if (images.length !== 0) {
-    //   uploadImages(images);
-    // }
 
     const newEntry = {
       date: date,
@@ -218,6 +201,7 @@ function Form({
         <Button
           type="button"
           className="photoUpload"
+          aria-label="upload"
           onClick={() => uploadImages(images)}
         >
           Upload
@@ -248,7 +232,7 @@ function Form({
           onChange={handleTagChange}
         />
       </Container>
-      <Button type="submit" isDisabled={buttonDisabled}>
+      <Button type="submit" isDisabled={buttonDisabled} aria-label="submit">
         Submit
       </Button>
       {messageTitle && <P className="message">{messageTitle}</P>}
