@@ -1,10 +1,18 @@
 import React from 'react';
 import Card from './shared/Card';
+import Gallery from './Gallery';
 import styled from 'styled-components';
 import { FaTrashAlt as DeleteIcon, FaEdit as EditIcon } from 'react-icons/fa';
-// import Button from './shared/Button';
 
-function JournalEntry({ item, handleDelete, editJournalEntry }) {
+function JournalEntry({
+  item,
+  handleDelete,
+  editJournalEntry,
+  galleryContent,
+}) {
+  const filteredGallery = galleryContent.filter(object =>
+    object.tags.join().includes(item.title)
+  );
   return (
     <Card>
       <Date>{item.date}</Date>
@@ -17,6 +25,13 @@ function JournalEntry({ item, handleDelete, editJournalEntry }) {
           </li>
         ))}
       </Ul>
+      {filteredGallery && (
+        <Gallery
+          galleryContent={filteredGallery}
+          title={item.title}
+          aria-label="gallery"
+        />
+      )}
       <IconButton
         type="button"
         alt="delete"

@@ -7,8 +7,10 @@ import styled from 'styled-components';
 import Header from './components/Header';
 import EntryList from './components/EntryList';
 import JournalEntries from './data/JournalEntries';
+import GalleryEntries from './data/GalleryEntries';
 import Form from './components/Form';
 import SearchForm from './components/SearchForm';
+import Gallery from './components/Gallery';
 import NavBar from './components/shared/NavBar';
 
 function App() {
@@ -21,12 +23,14 @@ function App() {
   const addJournalEntry = newEntry => {
     newEntry.id = uuidv4();
     setEntryContent([newEntry, ...entryContent]);
-    // setEntryEdit({
-    //   item: {},
-    //   edit: true,
-    // });
     navigate('/journalentries');
   };
+  const [galleryContent, setGalleryContent] = useState(GalleryEntries);
+  const handlePhotoAdd = newGallery => {
+    newGallery.id = uuidv4();
+    setGalleryContent([...newGallery, ...galleryContent]);
+  };
+
   const deleteEntry = id => {
     if (window.confirm('Are you sure you want to delete this journal entry?')) {
       setEntryContent(entryContent.filter(item => item.id !== id));
@@ -49,7 +53,6 @@ function App() {
         item.id === id ? { ...item, ...updItem } : item
       )
     );
-
     navigate('/journalentries');
   };
 
@@ -68,6 +71,7 @@ function App() {
                 entryEdit={entryEdit}
                 updateContent={updateContent}
                 setEntryEdit={setEntryEdit}
+                handlePhotoAdd={handlePhotoAdd}
               />
             </>
           }
@@ -81,6 +85,7 @@ function App() {
                 content={entryContent}
                 handleDelete={deleteEntry}
                 editJournalEntry={editJournalEntry}
+                galleryContent={galleryContent}
               />
             </>
           }
@@ -94,7 +99,17 @@ function App() {
                 content={entryContent}
                 handleDelete={deleteEntry}
                 editJournalEntry={editJournalEntry}
+                galleryContent={galleryContent}
               />
+            </>
+          }
+        />
+        <Route
+          exact
+          path="/gallery"
+          element={
+            <>
+              <Gallery galleryContent={galleryContent} />
             </>
           }
         />

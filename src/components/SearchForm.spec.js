@@ -29,9 +29,16 @@ const content = [
   },
 ];
 
+const filteredGallery = [
+  {
+    url: 'https://res.cloudinary.com/maggie-schuetz/image/upload/v1647947854/On%20the%20road%20to%20Mandalay/hczgxom6jkvgfdnan6if.jpg',
+    tags: ['On the road to Mandalay'],
+  },
+];
+
 describe('SearchForm', () => {
   it('renders the search form', () => {
-    render(<SearchForm content={content} />);
+    render(<SearchForm content={content} galleryContent={filteredGallery} />);
     const searchField = screen.getByLabelText('Search Tags:');
 
     expect(searchField).toBeInTheDocument();
@@ -41,7 +48,13 @@ describe('SearchForm', () => {
 describe('SearchForm_match', () => {
   it('renders journal entries with tags that match the search', () => {
     const onChange = jest.fn();
-    render(<SearchForm content={content} onChange={onChange} />);
+    render(
+      <SearchForm
+        content={content}
+        onChange={onChange}
+        galleryContent={filteredGallery}
+      />
+    );
     const searchField = screen.getByLabelText('Search Tags:');
     userEvent.type(searchField, 'tag1');
 
@@ -52,7 +65,7 @@ describe('SearchForm_match', () => {
 
 describe('SearchForm_noMatch', () => {
   it('renders a message that no tags match the search', () => {
-    render(<SearchForm content={content} />);
+    render(<SearchForm content={content} galleryContent={filteredGallery} />);
     const searchField = screen.getByLabelText('Search Tags:');
     userEvent.type(searchField, 'asdfgh');
     const message = screen.getByText(

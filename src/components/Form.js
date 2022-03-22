@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from './shared/Button';
-
-function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
+import axios from 'axios';
+function Form({
+  handleAdd,
+  entryEdit,
+  setEntryEdit,
+  updateContent,
+  handlePhotoAdd,
+}) {
   const [date, setDate] = useState('');
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
@@ -10,6 +16,10 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
   const [messageTitle, setMessageTitle] = useState('');
   const [message, setMessage] = useState('Please fill out all fields!');
   const [tags, setTags] = useState([]);
+  const [images, setImages] = useState([]);
+  const [dataUrls, setDataUrls] = useState([]);
+  const [messageImage, setMessageImage] = useState('');
+  const currentDataUrls = [...dataUrls];
 
   const handleDateChange = e => {
     setDate(e.target.value);
@@ -27,8 +37,31 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
     setTags(e.target.value.toLowerCase().split(','));
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const uploadImages = images => {
+    setMessageImage('Please wait until all photos have been uploaded!');
+    const toUpload = images.map(image => {
+      const formData = new FormData();
+      formData.append('file', image);
+      formData.append('upload_preset', 'rupkxbut');
+      formData.append('tags', title);
+      formData.append('folder', title);
+      formData.append('title', title);
+      return axios
+        .post(
+          'https://api.cloudinary.com/v1_1/maggie-schuetz/image/upload',
+          formData
+        )
+        .then(response => {
+          setDataUrls(prevDataUrls => [response.data, ...prevDataUrls]);
+        });
+    });
+
+    axios.all(toUpload);
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    event.stopPropagation();
 
     const newEntry = {
       date: date,
@@ -38,6 +71,8 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
     };
     if (entryEdit.edit === true) {
       updateContent(entryEdit.item.id, newEntry);
+      handlePhotoAdd(currentDataUrls);
+
       setDate('');
       setTitle('');
       setText('');
@@ -46,8 +81,12 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
       setEntryEdit({
         edit: false,
       });
+      setMessageImage('');
+      setImages([]);
+      setDataUrls([]);
     } else {
       handleAdd(newEntry);
+      handlePhotoAdd(currentDataUrls);
       setDate('');
       setTitle('');
       setText('');
@@ -56,6 +95,9 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
       setEntryEdit({
         edit: false,
       });
+      setMessageImage('');
+      setImages([]);
+      setDataUrls([]);
     }
   };
 
@@ -106,8 +148,18 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
       setTags(entryEdit.item.tags);
       setButtonDisabled(false);
       setMessage('');
+      setMessageImage('');
+      setDataUrls([]);
     }
   }, [entryEdit]);
+
+  useEffect(() => {
+    if (images.length > 0 && dataUrls.length !== images.length) {
+      setMessageImage("Don't forget to upload the images you selected!");
+    } else if (images.length > 0 && dataUrls.length === images.length) {
+      setMessageImage('Your images have been uploaded');
+    }
+  }, [dataUrls, images]);
 
   return (
     <FormContainer onSubmit={handleSubmit}>
@@ -135,6 +187,29 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
           onChange={handleTitleChange}
         />
       </Container>
+      <Container className="photoUpload">
+        <Label htmlFor="photoUpload">Upload some Photos:</Label>
+        <Input
+          id="photoUpload"
+          name="photoUpload"
+          className="photoUpload"
+          type="file"
+          multiple
+          onChange={e => {
+            setImages([...e.target.files]);
+          }}
+        />{' '}
+        <Button
+          type="button"
+          className="photoUpload"
+          aria-label="upload"
+          onClick={() => uploadImages(images)}
+        >
+          Upload
+        </Button>
+      </Container>
+
+      {messageImage && <P className="message">{messageImage}</P>}
       <Container>
         <Label htmlFor="text">Journal Entry:</Label>
         <Textarea
@@ -159,7 +234,7 @@ function Form({ handleAdd, entryEdit, setEntryEdit, updateContent }) {
           onChange={handleTagChange}
         />
       </Container>
-      <Button type="submit" isDisabled={buttonDisabled}>
+      <Button type="submit" isDisabled={buttonDisabled} aria-label="submit">
         Submit
       </Button>
       {messageTitle && <P className="message">{messageTitle}</P>}
@@ -180,7 +255,7 @@ const FormContainer = styled.form`
   background-color: snow;
   color: #333;
   border-radius: 15px;
-  padding: 40px 40px;
+  padding: 40px 60px;
   margin: 20px 20px 80px 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;

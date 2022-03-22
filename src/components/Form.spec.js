@@ -12,14 +12,18 @@ describe('Form', () => {
 
     const date = screen.getByLabelText('Date:', { exact: false });
     const title = screen.getByLabelText('Title:');
+    const uploadButton = screen.getByText('Upload');
+    const photoUpload = screen.getByLabelText('Upload some Photos:');
     const journalEntry = screen.getByLabelText('Journal Entry:');
-    const button = screen.getByRole('button');
     const tags = screen.getByLabelText('Tags:');
+    const submitButton = screen.getByText('Submit');
 
     expect(date).toBeInTheDocument();
     expect(title).toBeInTheDocument();
+    expect(photoUpload).toBeInTheDocument();
+    expect(uploadButton).toBeInTheDocument();
     expect(journalEntry).toBeInTheDocument();
-    expect(button).toBeInTheDocument();
+    expect(submitButton).toBeInTheDocument();
     expect(tags).toBeInTheDocument();
   });
 });
@@ -27,6 +31,7 @@ describe('Form', () => {
 describe('Form_functionality', () => {
   it('generates a new journal entry on submit', () => {
     const handleAdd = jest.fn();
+    const handlePhotoAdd = jest.fn();
     const entryEdit = {
       item: {},
       edit: false,
@@ -35,6 +40,7 @@ describe('Form_functionality', () => {
     render(
       <Form
         handleAdd={handleAdd}
+        handlePhotoAdd={handlePhotoAdd}
         entryEdit={entryEdit}
         setEntryEdit={setEntryEdit}
       />
@@ -43,7 +49,7 @@ describe('Form_functionality', () => {
     const date = screen.getByLabelText('Date:');
     const title = screen.getByLabelText('Title:');
     const journalEntry = screen.getByLabelText('Journal Entry:');
-    const button = screen.getByRole('button');
+    const submitButton = screen.getByText('Submit');
 
     userEvent.type(date, '2015-03-12');
     userEvent.type(title, 'Trekking in Bukit Lawang');
@@ -51,7 +57,7 @@ describe('Form_functionality', () => {
       journalEntry,
       "After a restless night (due to the paper-thin mattress that seemed to be crawling  with bugs), it was, for once, not difficult to get out of  bed early. We drenched ourselves in DEET and double-checked whether we had everything we'd need for three days in the jungle. After about an hour, we saw a baby orangutan swinging high above our heads! It was an amazing experience."
     );
-    userEvent.click(button);
+    userEvent.click(submitButton);
 
     expect(handleAdd).toHaveBeenCalledWith({
       date: '2015-03-12',

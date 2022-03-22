@@ -9,9 +9,21 @@ const item = {
   text: 'Journal Entry',
   tags: ['tag1', 'tag2'],
 };
+
+const filteredGallery = [
+  {
+    url: 'https://res.cloudinary.com/maggie-schuetz/image/upload/v1647947854/On%20the%20road%20to%20Mandalay/hczgxom6jkvgfdnan6if.jpg',
+    tags: ['On the road to Mandalay'],
+  },
+];
+
 describe('JournalEntry', () => {
   it('renders a default JournalEntry from an item that contains date, title and text', () => {
-    render(<JournalEntry item={item}>{item.text}</JournalEntry>);
+    render(
+      <JournalEntry item={item} galleryContent={filteredGallery}>
+        {item.text}
+      </JournalEntry>
+    );
 
     const card = screen.getByText('Journal Entry');
     expect(card).toBeInTheDocument();
@@ -20,7 +32,11 @@ describe('JournalEntry', () => {
 
 describe('JournalEntry_deleteButton', () => {
   it('renders a card with a delete button', () => {
-    render(<JournalEntry item={item}>{item.text}</JournalEntry>);
+    render(
+      <JournalEntry item={item} galleryContent={filteredGallery}>
+        {item.text}
+      </JournalEntry>
+    );
     const deleteButton = screen.getByLabelText('deleteJournalEntry');
 
     expect(deleteButton).toBeInTheDocument();
@@ -31,7 +47,11 @@ describe('JournalEntry_delete', () => {
   it('deletes an item when deleteButton is clicked', () => {
     const handleDelete = jest.fn();
     render(
-      <JournalEntry handleDelete={handleDelete} item={item}>
+      <JournalEntry
+        handleDelete={handleDelete}
+        item={item}
+        galleryContent={filteredGallery}
+      >
         {item.text}
       </JournalEntry>
     );
@@ -45,7 +65,11 @@ describe('JournalEntry_delete', () => {
 
 describe('JournalEntry_editButton', () => {
   it('renders a card with a edit button', () => {
-    render(<JournalEntry item={item}>{item.text}</JournalEntry>);
+    render(
+      <JournalEntry item={item} galleryContent={filteredGallery}>
+        {item.text}
+      </JournalEntry>
+    );
     const editButton = screen.getByLabelText('editJournalEntry');
 
     expect(editButton).toBeInTheDocument();
@@ -56,7 +80,11 @@ describe('JournalEntry_edit', () => {
   it('edits an item when editButton is clicked', () => {
     const editJournalEntry = jest.fn();
     render(
-      <JournalEntry editJournalEntry={editJournalEntry} item={item}>
+      <JournalEntry
+        editJournalEntry={editJournalEntry}
+        item={item}
+        galleryContent={filteredGallery}
+      >
         {item.text}
       </JournalEntry>
     );
@@ -70,7 +98,11 @@ describe('JournalEntry_edit', () => {
 
 describe('JournalEntry_tags', () => {
   it('renders tags in the journal entry', () => {
-    render(<JournalEntry item={item}>{item.text}</JournalEntry>);
+    render(
+      <JournalEntry item={item} galleryContent={filteredGallery}>
+        {item.text}
+      </JournalEntry>
+    );
     const tag = screen.getByText('tag1');
 
     expect(tag).toBeInTheDocument();

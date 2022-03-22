@@ -36,6 +36,15 @@ const StyledButton = styled.button`
     bottom: 0px;
     right: 50px;
   }
+
+  &.photoUpload {
+    width: 4em;
+    height: 2.5em;
+    position: absolute;
+    bottom: 0.6em;
+    right: 1em;
+    box-shadow: none;
+  }
 `;
 
 function Button({ children, type, isDisabled, className, onClick }) {

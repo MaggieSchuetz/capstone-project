@@ -2,7 +2,12 @@ import React from 'react';
 import JournalEntry from './JournalEntry';
 import styled from 'styled-components';
 
-function EntryList({ content, handleDelete, editJournalEntry }) {
+function EntryList({
+  content,
+  handleDelete,
+  editJournalEntry,
+  galleryContent,
+}) {
   if (!content || content.length === 0) {
     return <p>You don't have any journal entries yet.</p>;
   }
@@ -14,6 +19,7 @@ function EntryList({ content, handleDelete, editJournalEntry }) {
           item={item}
           handleDelete={handleDelete}
           editJournalEntry={editJournalEntry}
+          galleryContent={galleryContent}
         />
       ))}
     </ListContainer>
