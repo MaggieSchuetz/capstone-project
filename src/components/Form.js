@@ -19,6 +19,7 @@ function Form({
   const [tags, setTags] = useState([]);
   const [images, setImages] = useState([]);
   const [dataUrls, setDataUrls] = useState([]);
+  const [messageImage, setMessageImage] = useState('');
   console.log(dataUrls);
   const thisDataUrl = dataUrls;
   console.log(thisDataUrl);
@@ -40,7 +41,7 @@ function Form({
   };
 
   const uploadImages = images => {
-    console.log('upload', images);
+    setMessageImage('Please wait until all photos have been uploaded!');
     const toUpload = images.map(image => {
       const formData = new FormData();
       formData.append('file', image);
@@ -56,6 +57,7 @@ function Form({
         .then(response => {
           console.log(response.data);
           setDataUrls(prevDataUrls => [response.data, ...prevDataUrls]);
+
           // onUpload(response.data.url);
         });
       // .then(response => {
@@ -97,6 +99,9 @@ function Form({
       setEntryEdit({
         edit: false,
       });
+      setMessageImage('');
+      setImages([]);
+      setDataUrls([]);
     } else {
       handleAdd(newEntry);
       handlePhotoAdd(thisDataUrl);
@@ -108,6 +113,9 @@ function Form({
       setEntryEdit({
         edit: false,
       });
+      setMessageImage('');
+      setImages([]);
+      setDataUrls([]);
     }
   };
 
@@ -158,8 +166,16 @@ function Form({
       setTags(entryEdit.item.tags);
       setButtonDisabled(false);
       setMessage('');
+      setMessageImage('');
+      setDataUrls([]);
     }
   }, [entryEdit]);
+
+  useEffect(() => {
+    if (images.length > 0 && dataUrls.length === images.length) {
+      setMessageImage('');
+    }
+  }, [dataUrls, images]);
 
   return (
     <FormContainer onSubmit={handleSubmit}>
@@ -187,6 +203,27 @@ function Form({
           onChange={handleTitleChange}
         />
       </Container>
+      <Container className="photoUpload">
+        <Label htmlFor="photoUpload">Upload some Photos:</Label>
+        <Input
+          id="photoUpload"
+          name="photoUpload"
+          className="photoUpload"
+          type="file"
+          multiple
+          onChange={e => {
+            setImages([...e.target.files]);
+          }}
+        />{' '}
+        <Button
+          type="button"
+          className="photoUpload"
+          onClick={() => uploadImages(images)}
+        >
+          Upload
+        </Button>
+      </Container>
+
       <Container>
         <Label htmlFor="text">Journal Entry:</Label>
         <Textarea
@@ -211,26 +248,12 @@ function Form({
           onChange={handleTagChange}
         />
       </Container>
-      <Container>
-        <Label htmlFor="photoUpload">Upload a Photo:</Label>
-        <Input
-          id="photoUpload"
-          name="photoUpload"
-          type="file"
-          multiple
-          onChange={e => {
-            setImages([...e.target.files]);
-          }}
-        />
-      </Container>
-      <Button type="button" onClick={() => uploadImages(images)}>
-        Upload
-      </Button>
       <Button type="submit" isDisabled={buttonDisabled}>
         Submit
       </Button>
       {messageTitle && <P className="message">{messageTitle}</P>}
       {message && <P className="message">{message}</P>}
+      {messageImage && <P className="message">{messageImage}</P>}
     </FormContainer>
   );
 }

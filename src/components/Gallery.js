@@ -21,12 +21,13 @@ const ImageContainer = styled.div`
   grid-template-rows: 1;
   gap: 10px;
   overflow-x: auto;
+  position: relative;
 
   > * {
     margin: 20px none;
     border-radius: 10px;
-    height: 200px;
-    width: 200px;
+    height: 15em;
+    width: auto;
   }
 `;
 
