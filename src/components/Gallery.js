@@ -27,11 +27,4 @@ const GalleryContainer = styled.div`
   overflow-x: auto;
 `;
 
-const Img = styled.img`
-  margin: 20px none;
-  border-radius: 10px;
-  height: 15em;
-  width: auto;
-`;
-
 export default Gallery;
