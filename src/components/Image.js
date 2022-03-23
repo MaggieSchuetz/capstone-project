@@ -30,6 +30,11 @@ const Img = styled.img`
   border-radius: 10px;
   height: 15em;
   width: auto;
+
+  &.large {
+    z-index: 10;
+    height: 100%;
+  }
 `;
 
 const IconButton = styled.button`
@@ -44,7 +49,7 @@ const IconButton = styled.button`
   right: 0.5rem;
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
 `;
 
 export default Gallery;
