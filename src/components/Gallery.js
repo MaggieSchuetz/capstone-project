@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import styled from 'styled-components';
 import Image from './Image.js';
 
@@ -18,19 +19,17 @@ function Gallery({ galleryContent, deleteImage }) {
   };
   console.log(buttonState);
   return (
-    <GalleryWrap>
-      <GalleryContainer className={`${galleryState}`}>
-        {galleryContent.map((image, index) => (
-          <Image
-            alt=""
-            key={index}
-            src={image.url}
-            galleryContent={galleryContent}
-            deleteImage={deleteImage}
-            className={`${galleryState}`}
-          />
-        ))}
-      </GalleryContainer>{' '}
+    <GalleryContainer className={`${galleryState}`}>
+      {galleryContent.map((image, index) => (
+        <Image
+          alt=""
+          key={index}
+          src={image.url}
+          galleryContent={galleryContent}
+          deleteImage={deleteImage}
+          className={`${galleryState}`}
+        />
+      ))}{' '}
       <IconButton
         type="button"
         alt="expand"
@@ -40,10 +39,14 @@ function Gallery({ galleryContent, deleteImage }) {
           expandGallery();
         }}
       >
-        {buttonState === 'expanded' && <Shrink size={30} alt="expandGallery" />}
-        {buttonState === 'normal' && <Expand size={30} alt="expandGallery" />}
+        {buttonState === 'expanded' && (
+          <Shrink size={30} alt="expandGallery" className={`${buttonState}`} />
+        )}
+        {buttonState === 'normal' && (
+          <Expand size={30} alt="expandGallery" className={`${buttonState}`} />
+        )}
       </IconButton>
-    </GalleryWrap>
+    </GalleryContainer>
   );
 }
 
@@ -54,11 +57,14 @@ const GalleryContainer = styled.div`
   grid-template-rows: 1;
   gap: 10px;
   overflow-x: auto;
-
+  position: relative;
   &.large {
+    width: 90vw;
     position: absolute;
-    z-index: 10;
-    height: 100vh;
+    &.large {
+      z-index: 10;
+      height: 100vh;
+    }
   }
 `;
 
@@ -79,6 +85,10 @@ const IconButton = styled.button`
   position: absolute;
   bottom: 9em;
   left: 1em;
+
+  &.expanded {
+    position: fixed;
+  }
 `;
 
 export default Gallery;
