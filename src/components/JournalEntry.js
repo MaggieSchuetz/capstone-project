@@ -9,6 +9,7 @@ function JournalEntry({
   handleDelete,
   editJournalEntry,
   galleryContent,
+  deleteImage,
 }) {
   const filteredGallery = galleryContent.filter(object =>
     object.tags.join().includes(item.title)
@@ -30,6 +31,7 @@ function JournalEntry({
           galleryContent={filteredGallery}
           title={item.title}
           aria-label="gallery"
+          deleteImage={deleteImage}
         />
       )}
       <IconButton

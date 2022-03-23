@@ -7,6 +7,7 @@ function EntryList({
   handleDelete,
   editJournalEntry,
   galleryContent,
+  deleteImage,
 }) {
   if (!content || content.length === 0) {
     return <p>You don't have any journal entries yet.</p>;
@@ -20,6 +21,7 @@ function EntryList({
           handleDelete={handleDelete}
           editJournalEntry={editJournalEntry}
           galleryContent={galleryContent}
+          deleteImage={deleteImage}
         />
       ))}
     </ListContainer>
