@@ -22,8 +22,8 @@ function Image({ src, deleteImage, className }) {
 }
 
 const ImgContainer = styled.div`
+  position: relative;
   &.large {
-    height: 20em;
   }
 `;
 
@@ -34,7 +34,7 @@ const Img = styled.img`
   width: auto;
 
   &.large {
-    height: 20em;
+    height: 30em;
   }
 `;
 

@@ -58,13 +58,16 @@ const GalleryContainer = styled.div`
   gap: 10px;
   overflow-x: auto;
   position: relative;
+
+  &.normal {
+    position: relative;
+  }
   &.large {
     width: 90vw;
     position: absolute;
-    &.large {
-      z-index: 10;
-      height: 100vh;
-    }
+    z-index: 7;
+    height: 100vh;
+    backdrop-filter: blur(10px);
   }
 `;
 
