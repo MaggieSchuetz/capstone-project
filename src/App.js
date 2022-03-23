@@ -37,6 +37,12 @@ function App() {
     }
   };
 
+  const deleteImage = url => {
+    if (window.confirm('Are you sure you want to delete this image?')) {
+      setGalleryContent(galleryContent.filter(image => image.url !== url));
+    }
+  };
+
   const navigate = useNavigate();
 
   const editJournalEntry = item => {
@@ -86,6 +92,7 @@ function App() {
                 handleDelete={deleteEntry}
                 editJournalEntry={editJournalEntry}
                 galleryContent={galleryContent}
+                deleteImage={deleteImage}
               />
             </>
           }
