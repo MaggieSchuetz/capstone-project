@@ -14,6 +14,7 @@ function JournalEntry({
   const filteredGallery = galleryContent.filter(object =>
     object.tags.join().includes(item.title)
   );
+  console.log(filteredGallery);
   return (
     <Card>
       <Date>{item.date}</Date>
@@ -28,7 +29,7 @@ function JournalEntry({
       </Ul>
       {filteredGallery.length !== 0 && (
         <Gallery
-          galleryContent={filteredGallery}
+          filteredGallery={filteredGallery}
           title={item.title}
           aria-label="gallery"
           deleteImage={deleteImage}

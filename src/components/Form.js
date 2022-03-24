@@ -187,6 +187,7 @@ function Form({
           onChange={handleTitleChange}
         />
       </Container>
+      {messageTitle && <P className="message">{messageTitle}</P>}
       <Container className="photoUpload">
         <Label htmlFor="photoUpload">Upload some Photos:</Label>
         <Input
@@ -237,7 +238,7 @@ function Form({
       <Button type="submit" isDisabled={buttonDisabled} aria-label="submit">
         Submit
       </Button>
-      {messageTitle && <P className="message">{messageTitle}</P>}
+
       {message && <P className="message">{message}</P>}
     </FormContainer>
   );
