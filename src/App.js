@@ -6,8 +6,6 @@ import styled from 'styled-components';
 
 import Header from './components/Header';
 import EntryList from './components/EntryList';
-import JournalEntries from './data/JournalEntries';
-import GalleryEntries from './data/GalleryEntries';
 import Form from './components/Form';
 import SearchForm from './components/SearchForm';
 import Gallery from './components/Gallery';

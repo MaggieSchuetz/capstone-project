@@ -14,7 +14,6 @@ function JournalEntry({
   const filteredGallery = galleryContent.filter(object =>
     object.tags.join().includes(item.title)
   );
-  console.log(filteredGallery);
   return (
     <Card>
       <Date>{item.date}</Date>

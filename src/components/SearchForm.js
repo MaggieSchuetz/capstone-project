@@ -16,7 +16,6 @@ function SearchForm({
 
   const handleTagChange = e => {
     setSearch(e.target.value);
-    console.log(content, filteredContent, galleryContent, search);
   };
 
   const handleSubmit = e => {

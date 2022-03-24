@@ -34,7 +34,7 @@ function Form({
   };
 
   const handleTagChange = e => {
-    setTags(e.target.value.toLowerCase().split(','));
+    setTags(e.target.value.split(','));
   };
 
   const uploadImages = images => {
