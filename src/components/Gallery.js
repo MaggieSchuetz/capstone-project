@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 import Image from './Image.js';
@@ -64,11 +64,6 @@ const GalleryContainer = styled.div`
     width: 100vw;
     left: -3em;
   }
-  /* position: absolute; 
-    top: -10em;
-    z-index: 7;
-    backdrop-filter: blur(10px);
-  } */
 `;
 
 const GalleryWrap = styled.section`
@@ -88,11 +83,7 @@ const IconButton = styled.button`
   position: absolute;
   top: 1em;
   left: 1em;
-
-  /* &.expanded {
-    position: sticky;
-    z-index: 10;
-  } */
+  z-index: 7;
 `;
 
 export default Gallery;

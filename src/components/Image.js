@@ -52,7 +52,7 @@ const IconButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10;
+  z-index: 6;
 `;
 
 export default Image;
