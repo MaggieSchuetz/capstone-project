@@ -8,6 +8,7 @@ function Form({
   setEntryEdit,
   updateContent,
   handlePhotoAdd,
+  entryContent,
 }) {
   const [date, setDate] = useState('');
   const [title, setTitle] = useState('');
@@ -28,6 +29,10 @@ function Form({
   const handleTitleChange = e => {
     setTitle(e.target.value);
   };
+
+  const sameTitle = entryContent.filter(object =>
+    object.title.toLowerCase().includes(title.toLowerCase())
+  );
 
   const handleTextChange = e => {
     setText(e.target.value);
@@ -102,7 +107,10 @@ function Form({
   };
 
   function enableButton() {
-    if (
+    if (title.length >= 3 && sameTitle.length !== 0) {
+      setMessageTitle('Make sure to give each entry a different title');
+      setButtonDisabled(true);
+    } else if (
       (title.length === 80 && date === '') ||
       (title.length === 80 && text === '')
     ) {

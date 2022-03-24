@@ -98,6 +98,7 @@ function App() {
                 updateContent={updateContent}
                 setEntryEdit={setEntryEdit}
                 handlePhotoAdd={handlePhotoAdd}
+                entryContent={entryContent}
               />
             </>
           }
