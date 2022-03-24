@@ -39,20 +39,19 @@ function SearchForm({
         </Container>
         <p>Start typing to search for tags</p>
       </FormContainer>
-      {filteredContent.length !== content.length &&
-        filteredContent.length !== 0 && (
-          <ListContainer>
-            {filteredContent.map(item => (
-              <JournalEntry
-                key={item.id}
-                item={item}
-                handleDelete={handleDelete}
-                editJournalEntry={editJournalEntry}
-                galleryContent={galleryContent}
-              />
-            ))}
-          </ListContainer>
-        )}
+      {search.length !== 0 && (
+        <ListContainer>
+          {filteredContent.map(item => (
+            <JournalEntry
+              key={item.id}
+              item={item}
+              handleDelete={handleDelete}
+              editJournalEntry={editJournalEntry}
+              galleryContent={galleryContent}
+            />
+          ))}
+        </ListContainer>
+      )}
       {filteredContent.length === 0 && search.length !== 0 && (
         <p>Sorry, there are no tags that match your search.</p>
       )}
