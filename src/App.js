@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
@@ -19,13 +19,13 @@ function App() {
     edit: false,
   });
 
-  const [entryContent, setEntryContent] = useState(JournalEntries);
+  const [entryContent, setEntryContent] = useState([]);
   const addJournalEntry = newEntry => {
     newEntry.id = uuidv4();
     setEntryContent([newEntry, ...entryContent]);
     navigate('/journalentries');
   };
-  const [galleryContent, setGalleryContent] = useState(GalleryEntries);
+  const [galleryContent, setGalleryContent] = useState([]);
   const handlePhotoAdd = newGallery => {
     newGallery.id = uuidv4();
     setGalleryContent([...newGallery, ...galleryContent]);
@@ -61,6 +61,28 @@ function App() {
     );
     navigate('/journalentries');
   };
+
+  useEffect(() => {
+    const entryContent = JSON.parse(localStorage.getItem('entryContent'));
+    if (entryContent) {
+      setEntryContent(entryContent);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('entryContent', JSON.stringify(entryContent));
+  }, [entryContent]);
+
+  useEffect(() => {
+    const galleryContent = JSON.parse(localStorage.getItem('galleryContent'));
+    if (galleryContent) {
+      setGalleryContent(galleryContent);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('galleryContent', JSON.stringify(galleryContent));
+  }, [galleryContent]);
 
   return (
     <AppContainer>
