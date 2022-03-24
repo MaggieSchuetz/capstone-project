@@ -17,19 +17,20 @@ function Gallery({ galleryContent, deleteImage }) {
       ? setGalleryState('large')
       : setGalleryState('normal');
   };
-  console.log(buttonState);
   return (
-    <GalleryContainer className={`${galleryState}`}>
-      {galleryContent.map((image, index) => (
-        <Image
-          alt=""
-          key={index}
-          src={image.url}
-          galleryContent={galleryContent}
-          deleteImage={deleteImage}
-          className={`${galleryState}`}
-        />
-      ))}{' '}
+    <GalleryWrap>
+      <GalleryContainer className={`${galleryState}`}>
+        {galleryContent.map((image, index) => (
+          <Image
+            alt=""
+            key={index}
+            src={image.url}
+            galleryContent={galleryContent}
+            deleteImage={deleteImage}
+            className={`${galleryState}`}
+          />
+        ))}{' '}
+      </GalleryContainer>
       <IconButton
         type="button"
         alt="expand"
@@ -46,7 +47,7 @@ function Gallery({ galleryContent, deleteImage }) {
           <Expand size={30} alt="expandGallery" className={`${buttonState}`} />
         )}
       </IconButton>
-    </GalleryContainer>
+    </GalleryWrap>
   );
 }
 
@@ -59,16 +60,15 @@ const GalleryContainer = styled.div`
   overflow-x: auto;
   position: relative;
 
-  &.normal {
-    position: relative;
-  }
   &.large {
-    width: 90vw;
-    position: absolute;
-    z-index: 7;
-    height: 100vh;
-    backdrop-filter: blur(10px);
+    width: 100vw;
+    left: -3em;
   }
+  /* position: absolute; 
+    top: -10em;
+    z-index: 7;
+    backdrop-filter: blur(10px);
+  } */
 `;
 
 const GalleryWrap = styled.section`
@@ -86,12 +86,13 @@ const IconButton = styled.button`
   border: solid 2px darkslategray;
   border-radius: 50%;
   position: absolute;
-  bottom: 9em;
+  top: 1em;
   left: 1em;
 
-  &.expanded {
-    position: fixed;
-  }
+  /* &.expanded {
+    position: sticky;
+    z-index: 10;
+  } */
 `;
 
 export default Gallery;

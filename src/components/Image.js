@@ -24,6 +24,7 @@ function Image({ src, deleteImage, className }) {
 const ImgContainer = styled.div`
   position: relative;
   &.large {
+    height: 30em;
   }
 `;
 
