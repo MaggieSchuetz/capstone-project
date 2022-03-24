@@ -26,7 +26,7 @@ function JournalEntry({
           </li>
         ))}
       </Ul>
-      {filteredGallery && (
+      {filteredGallery.length !== 0 && (
         <Gallery
           galleryContent={filteredGallery}
           title={item.title}

@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaTimes as Delete } from 'react-icons/fa';
 
-function Gallery({ src, deleteImage }) {
+function Image({ src, deleteImage, className }) {
   return (
-    <ImgContainer>
-      <Img alt="" src={src} />
+    <ImgContainer className={`${className}`}>
+      <Img alt="" src={src} className={`${className}`} />
       <IconButton
         type="button"
         alt="deletePhoto"
@@ -23,6 +23,9 @@ function Gallery({ src, deleteImage }) {
 
 const ImgContainer = styled.div`
   position: relative;
+  &.large {
+    height: 30em;
+  }
 `;
 
 const Img = styled.img`
@@ -30,6 +33,10 @@ const Img = styled.img`
   border-radius: 10px;
   height: 15em;
   width: auto;
+
+  &.large {
+    height: 30em;
+  }
 `;
 
 const IconButton = styled.button`
@@ -44,7 +51,8 @@ const IconButton = styled.button`
   right: 0.5rem;
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
+  z-index: 6;
 `;
 
-export default Gallery;
+export default Image;
