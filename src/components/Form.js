@@ -8,6 +8,7 @@ function Form({
   setEntryEdit,
   updateContent,
   handlePhotoAdd,
+  entryContent,
 }) {
   const [date, setDate] = useState('');
   const [title, setTitle] = useState('');
@@ -29,12 +30,16 @@ function Form({
     setTitle(e.target.value);
   };
 
+  const sameTitle = entryContent.filter(object =>
+    object.title.toLowerCase().includes(title.toLowerCase())
+  );
+
   const handleTextChange = e => {
     setText(e.target.value);
   };
 
   const handleTagChange = e => {
-    setTags(e.target.value.toLowerCase().split(','));
+    setTags(e.target.value.split(','));
   };
 
   const uploadImages = images => {
@@ -103,6 +108,13 @@ function Form({
 
   function enableButton() {
     if (
+      entryEdit.edit === false &&
+      title.length >= 3 &&
+      sameTitle.length !== 0
+    ) {
+      setMessageTitle('Make sure to give each entry a different title');
+      setButtonDisabled(true);
+    } else if (
       (title.length === 80 && date === '') ||
       (title.length === 80 && text === '')
     ) {
@@ -160,7 +172,7 @@ function Form({
       setMessageImage('Your images have been uploaded');
     }
   }, [dataUrls, images]);
-
+  console.log(entryEdit.edit);
   return (
     <FormContainer onSubmit={handleSubmit}>
       <Container>
@@ -187,6 +199,7 @@ function Form({
           onChange={handleTitleChange}
         />
       </Container>
+      {messageTitle && <P className="message">{messageTitle}</P>}
       <Container className="photoUpload">
         <Label htmlFor="photoUpload">Upload some Photos:</Label>
         <Input
@@ -237,7 +250,7 @@ function Form({
       <Button type="submit" isDisabled={buttonDisabled} aria-label="submit">
         Submit
       </Button>
-      {messageTitle && <P className="message">{messageTitle}</P>}
+
       {message && <P className="message">{message}</P>}
     </FormContainer>
   );

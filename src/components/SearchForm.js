@@ -39,7 +39,7 @@ function SearchForm({
         </Container>
         <p>Start typing to search for tags</p>
       </FormContainer>
-      {filteredContent.length !== content.length && (
+      {search.length !== 0 && (
         <ListContainer>
           {filteredContent.map(item => (
             <JournalEntry
@@ -52,7 +52,7 @@ function SearchForm({
           ))}
         </ListContainer>
       )}
-      {filteredContent.length === 0 && (
+      {filteredContent.length === 0 && search.length !== 0 && (
         <p>Sorry, there are no tags that match your search.</p>
       )}
     </>

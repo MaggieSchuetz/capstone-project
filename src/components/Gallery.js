@@ -4,7 +4,7 @@ import Image from './Image.js';
 
 import { BiExpand as Expand, BiCollapse as Shrink } from 'react-icons/bi';
 
-function Gallery({ galleryContent, deleteImage }) {
+function Gallery({ filteredGallery, deleteImage }) {
   const [buttonState, setButtonState] = useState('normal');
   const [galleryState, setGalleryState] = useState('normal');
   const expandGallery = () => {
@@ -15,16 +15,18 @@ function Gallery({ galleryContent, deleteImage }) {
     galleryState === 'normal'
       ? setGalleryState('large')
       : setGalleryState('normal');
+
+    console.log(filteredGallery);
   };
   return (
     <GalleryWrap>
       <GalleryContainer className={`${galleryState}`}>
-        {galleryContent.map((image, index) => (
+        {filteredGallery.map((image, index) => (
           <Image
             alt=""
             key={index}
             src={image.url}
-            galleryContent={galleryContent}
+            filteredGallery={filteredGallery}
             deleteImage={deleteImage}
             className={`${galleryState}`}
           />

@@ -28,7 +28,7 @@ function JournalEntry({
       </Ul>
       {filteredGallery.length !== 0 && (
         <Gallery
-          galleryContent={filteredGallery}
+          filteredGallery={filteredGallery}
           title={item.title}
           aria-label="gallery"
           deleteImage={deleteImage}
