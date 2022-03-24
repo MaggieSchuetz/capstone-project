@@ -107,7 +107,11 @@ function Form({
   };
 
   function enableButton() {
-    if (title.length >= 3 && sameTitle.length !== 0) {
+    if (
+      entryEdit.edit === false &&
+      title.length >= 3 &&
+      sameTitle.length !== 0
+    ) {
       setMessageTitle('Make sure to give each entry a different title');
       setButtonDisabled(true);
     } else if (
@@ -168,7 +172,7 @@ function Form({
       setMessageImage('Your images have been uploaded');
     }
   }, [dataUrls, images]);
-
+  console.log(entryEdit.edit);
   return (
     <FormContainer onSubmit={handleSubmit}>
       <Container>
