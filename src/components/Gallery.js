@@ -15,8 +15,6 @@ function Gallery({ filteredGallery, deleteImage }) {
     galleryState === 'normal'
       ? setGalleryState('large')
       : setGalleryState('normal');
-
-    console.log(filteredGallery);
   };
   return (
     <GalleryWrap>
