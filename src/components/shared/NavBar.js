@@ -18,6 +18,7 @@ const StyledNavBar = styled.nav`
   font-family: 'Fredericka the Great', Verdana, Arial, Helvetica, sans-serif,
     bold;
   font-size: 25pt;
+  z-index: 12;
 `;
 
 const StyledNavLink = styled(NavLink)`

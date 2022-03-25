@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { MdOutlineFileUpload as Upload } from 'react-icons/md';
 import styled from 'styled-components';
 import Button from './shared/Button';
 import axios from 'axios';
@@ -217,7 +218,7 @@ function Form({
           aria-label="upload"
           onClick={() => uploadImages(images)}
         >
-          Upload
+          <Upload alt="Upload" size={20} />
         </Button>
       </Container>
 
@@ -268,7 +269,7 @@ const FormContainer = styled.form`
   color: #333;
   border-radius: 15px;
   padding: 40px 60px;
-  margin: 20px 20px 80px 20px;
+  margin: 20px 20px 100px 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
 
@@ -293,7 +294,7 @@ const Input = styled.input`
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 
   &:focus {
-    outline: 0.2px lightgrey;
+    outline: none;
     box-shadow: 0 2px 4px 0 darkslategray, 0 3px 10px 0 cadetblue;
   }
 `;
@@ -310,7 +311,7 @@ const Textarea = styled.textarea`
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 
   &:focus {
-    outline: 0.2px lightgrey;
+    outline: none;
     box-shadow: 0 2px 4px 0 darkslategray, 0 3px 10px 0 cadetblue;
   }
 `;
