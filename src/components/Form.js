@@ -269,7 +269,7 @@ const FormContainer = styled.form`
   color: #333;
   border-radius: 15px;
   padding: 40px 60px;
-  margin: 20px 20px 100px 20px;
+  margin: 20px 20px 200px 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
 
