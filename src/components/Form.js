@@ -23,9 +23,6 @@ function Form({
   const [messageImage, setMessageImage] = useState('');
   const currentDataUrls = [...dataUrls];
 
-  const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
-  const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
-
   const handleDateChange = e => {
     setDate(e.target.value);
   };
@@ -51,13 +48,13 @@ function Form({
     const toUpload = images.map(image => {
       const formData = new FormData();
       formData.append('file', image);
-      formData.append('upload_preset', PRESET);
+      formData.append('upload_preset', 'rupkxbut');
       formData.append('tags', title);
       formData.append('folder', title);
       formData.append('title', title);
       return axios
         .post(
-          `https://api.cloudinary.com/v1_1/${CLOUDNAME}/image/upload`,
+          'https://api.cloudinary.com/v1_1/maggie-schuetz/image/upload',
           formData
         )
         .then(response => {
