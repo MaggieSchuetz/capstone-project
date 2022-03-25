@@ -172,7 +172,6 @@ function Form({
       setMessageImage('Your images have been uploaded');
     }
   }, [dataUrls, images]);
-  console.log(entryEdit.edit);
   return (
     <FormContainer onSubmit={handleSubmit}>
       <Container>

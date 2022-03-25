@@ -9,6 +9,13 @@ function EntryList({
   galleryContent,
   deleteImage,
 }) {
+  function sortByDates() {
+    content.forEach(item => {
+      item.formattedDate = new Date(item.date);
+      content.sort((a, b) => b.formattedDate - a.formattedDate);
+    });
+  }
+  sortByDates();
   if (!content || content.length === 0) {
     return <p>You don't have any journal entries yet.</p>;
   }
