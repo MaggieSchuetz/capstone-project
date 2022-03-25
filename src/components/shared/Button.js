@@ -38,10 +38,10 @@ const StyledButton = styled.button`
   }
 
   &.photoUpload {
-    width: 4em;
-    height: 2.5em;
+    width: fit-content;
+    height: fit-content;
     position: absolute;
-    bottom: 0.6em;
+    bottom: 1em;
     right: 1em;
     box-shadow: none;
   }
