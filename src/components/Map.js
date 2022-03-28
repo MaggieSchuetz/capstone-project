@@ -1,14 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { v4 as uuidv4 } from 'uuid';
 import { useState, useEffect } from 'react';
 import {
   MapContainer,
+  LayerGroup,
   Marker,
   Popup,
   TileLayer,
   useMapEvents,
 } from 'react-leaflet';
+import { Layer } from 'leaflet';
 
 function LocationMarker() {
   // const [position, setPosition] = useState(null);
@@ -26,12 +28,7 @@ function LocationMarker() {
     lat: 51.52540664057756,
     lng: -0.04617691040039063,
   });
-  const [allLocations, setAllLocations] = useState([
-    {
-      lat: 51.52540664057756,
-      lng: -0.04617691040039063,
-    },
-  ]);
+  const [allLocations, setAllLocations] = useState([]);
 
   const map = useMapEvents({
     click(e) {
@@ -46,27 +43,40 @@ function LocationMarker() {
     setAllLocations([position, ...allLocations]);
   }, [position]);
 
-  // map.on('click', function (e) {
-  //   var coord = e.latlng.toString().split(',');
-  //   var lat = coord[0].split('(');
-  //   var long = coord[1].split(')');
-  //   alert('you clicked the map at LAT: ' + lat[1] + ' and LONG:' + long[0]);
-  // });
-  return position === null ? null : (
-    <Marker position={position}>
-      <Popup>You are here</Popup>
-    </Marker>
+  return (
+    <>
+      {allLocations.map((location, index) => (
+        <Marker key={`${location.lat}${location.lng}`} position={location}>
+          <Popup>You are here</Popup>
+        </Marker>
+      ))}
+    </>
   );
 }
 
 function Map() {
   return (
-    <MapContainerContainer center={[51.505, -0.09]} zoom={13} id="map">
+    <MapContainerContainer
+      center={[51.505, -0.09]}
+      zoom={13}
+      id="map"
+      // allLocations={allLocations}
+    >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+
       <LocationMarker />
+      {/* {allLocations.map(location => (
+        <LayerGroup key={`${location.lat}${location.lng}`}>
+          {' '}
+          <LocationMarker
+            key={`${location.lat}${location.lng}`}
+            position={location}
+          />
+        </LayerGroup>
+      ))} */}
     </MapContainerContainer>
   );
 }
