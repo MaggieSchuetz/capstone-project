@@ -25,8 +25,8 @@ function LocationMarker() {
   // });
 
   const [position, setPosition] = useState({
-    lat: 51.52540664057756,
-    lng: -0.04617691040039063,
+    lat: 3.546144,
+    lng: 98.125154,
   });
   const [allLocations, setAllLocations] = useState([]);
 
@@ -57,8 +57,8 @@ function LocationMarker() {
 function Map() {
   return (
     <MapContainerContainer
-      center={[51.505, -0.09]}
-      zoom={13}
+      center={[3.546144, 98.125154]}
+      zoom={5}
       id="map"
       // allLocations={allLocations}
     >

@@ -1,8 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { AiOutlineRead, AiOutlineSearch } from 'react-icons/ai';
-import { IoAddCircleOutline } from 'react-icons/io5';
+import {
+  AiOutlineRead as Read,
+  AiOutlineSearch as Search,
+} from 'react-icons/ai';
+import { IoAddCircleOutline as Write } from 'react-icons/io5';
+import { FaMapMarkedAlt as Map } from 'react-icons/fa';
 import styled from 'styled-components';
 
 const StyledNavBar = styled.nav`
@@ -38,14 +42,17 @@ function NavBar({ setEntryEdit }) {
 
   return (
     <StyledNavBar>
+      <StyledNavLink to="/map" aria-label="searchTags">
+        <Map alt="Map" />
+      </StyledNavLink>
       <StyledNavLink to="/searchtags" aria-label="searchTags">
-        <AiOutlineSearch alt="Search by tags" />
+        <Search alt="Search by tags" />
       </StyledNavLink>
       <StyledNavLink to="/journalentries" aria-label="readJournal">
-        <AiOutlineRead alt="Read Journal" />
+        <Read alt="Read Journal" />
       </StyledNavLink>
       <StyledNavLink to="/newentry" aria-label="newEntry">
-        <IoAddCircleOutline alt="New Entry" onClick={handleClick} />
+        <Write alt="New Entry" onClick={handleClick} />
       </StyledNavLink>
     </StyledNavBar>
   );
