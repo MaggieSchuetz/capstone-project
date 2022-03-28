@@ -5,7 +5,6 @@ import { FaTimes as Delete, FaCheck as Create } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import {
   MapContainer,
-  LayerGroup,
   Marker,
   Popup,
   TileLayer,
@@ -44,9 +43,16 @@ function LocationMarker(content) {
     setAllLocations([position, ...allLocations]);
   }, [position]);
 
+  const deleteLocation = position => {
+    console.log(allLocations, position);
+    setAllLocations(
+      allLocations.filter(location => location.lat !== position.lat)
+    );
+  };
+
   return (
     <>
-      {allLocations.map((location, index) => (
+      {allLocations.map(location => (
         <Marker
           key={`${location.lat}${location.lng}`}
           position={location}
@@ -60,26 +66,13 @@ function LocationMarker(content) {
                 alt="deleteLocation"
                 className="deleteLocation"
                 aria-label="deleteLocation"
-                // onClick={() => {
-                //   deleteImage(src);
-                // }}
+                onClick={() => deleteLocation(position)}
               >
                 <Delete size={20} alt="delete" />
               </IconButton>
-              {/* <IconButton
-                type="button"
-                alt="createLocation"
-                className="createLocation yes"
-                aria-label="createLocation" */}
-              {/* // onClick={() => {
-                //   deleteImage(src);
-                // }}
-              > */}
               <Link to="/newEntry" aria-label="searchTags">
                 <Create size={20} alt="create" />
               </Link>
-
-              {/* // </IconButton> */}
             </ButtonContainer>
           </Popup>
         </Marker>
@@ -128,19 +121,12 @@ const IconButton = styled.button`
   height: 1.6rem;
   width: 1.6rem;
   color: palevioletred;
-  background-color: snow;
-  border: 2px solid palevioletred;
-  border-radius: 50%;
-
+  background-color: inherit;
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 6;
-
-  &.yes {
-    border-color: cadetblue;
-    color: cadetblue;
-  }
 `;
 
 const ButtonContainer = styled.div`
