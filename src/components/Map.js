@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FaTimes as Delete, FaCheck as Create } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import {
   MapContainer,
   Marker,
@@ -33,6 +34,7 @@ function LocationMarker(content) {
   const map = useMapEvents({
     click(e) {
       setPosition(e.latlng);
+      position.id = uuidv4();
       console.log(position);
       console.log(allLocations);
       // map.flyTo(e.latlng, map.getZoom());
@@ -46,7 +48,7 @@ function LocationMarker(content) {
   const deleteLocation = position => {
     console.log(allLocations, position);
     setAllLocations(
-      allLocations.filter(location => location.lat !== position.lat)
+      allLocations.filter(location => location.id !== position.id)
     );
   };
 
