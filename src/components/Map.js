@@ -45,21 +45,15 @@ function LocationMarker(content) {
     setAllLocations([position, ...allLocations]);
   }, [position]);
 
-  const deleteLocation = position => {
+  const deleteLocation = id => {
     console.log(allLocations, position);
-    setAllLocations(
-      allLocations.filter(location => location.id !== position.id)
-    );
+    setAllLocations(allLocations.filter(location => location.id !== id));
   };
 
   return (
     <>
       {allLocations.map(location => (
-        <Marker
-          key={`${location.lat}${location.lng}`}
-          position={location}
-          content={content}
-        >
+        <Marker key={`${location.id}`} position={location} content={content}>
           <Popup>
             Add a new entry here?
             <ButtonContainer>
@@ -68,7 +62,7 @@ function LocationMarker(content) {
                 alt="deleteLocation"
                 className="deleteLocation"
                 aria-label="deleteLocation"
-                onClick={() => deleteLocation(position)}
+                onClick={() => deleteLocation(location.id)}
               >
                 <Delete size={20} alt="delete" />
               </IconButton>
