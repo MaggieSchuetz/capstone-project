@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   MapContainer,
   Marker,
@@ -22,13 +22,29 @@ function LocationMarker() {
   //   },
   // });
 
-  const [position, setPosition] = useState(null);
+  const [position, setPosition] = useState({
+    lat: 51.52540664057756,
+    lng: -0.04617691040039063,
+  });
+  const [allLocations, setAllLocations] = useState([
+    {
+      lat: 51.52540664057756,
+      lng: -0.04617691040039063,
+    },
+  ]);
+
   const map = useMapEvents({
     click(e) {
       setPosition(e.latlng);
+      console.log(position);
+      console.log(allLocations);
       // map.flyTo(e.latlng, map.getZoom());
     },
   });
+
+  useEffect(() => {
+    setAllLocations([position, ...allLocations]);
+  }, [position]);
 
   // map.on('click', function (e) {
   //   var coord = e.latlng.toString().split(',');
