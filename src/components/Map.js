@@ -54,7 +54,7 @@ function LocationMarker(content) {
     <>
       {allLocations.map(location => (
         <Marker key={`${location.id}`} position={location} content={content}>
-          <Popup>
+          <StyledPopup>
             Add a new entry here?
             <ButtonContainer>
               <IconButton
@@ -66,11 +66,11 @@ function LocationMarker(content) {
               >
                 <Delete size={20} alt="delete" />
               </IconButton>
-              <Link to="/newEntry" aria-label="searchTags">
+              <StyledLink to="/newEntry" aria-label="searchTags">
                 <Create size={20} alt="create" />
-              </Link>
+              </StyledLink>
             </ButtonContainer>
-          </Popup>
+          </StyledPopup>
         </Marker>
       ))}
     </>
@@ -124,9 +124,19 @@ const IconButton = styled.button`
   align-items: center;
   z-index: 6;
 `;
-
+const StyledLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: inherit;
+  color: darkslategray;
+`;
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-around;
   margin: 1em;
+`;
+
+const StyledPopup = styled(Popup)`
+  font-size: 12pt;
 `;
