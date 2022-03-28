@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { v4 as uuidv4 } from 'uuid';
+import { Link } from 'react-router-dom';
+import { FaTimes as Delete, FaCheck as Create } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import {
   MapContainer,
@@ -12,7 +13,7 @@ import {
 } from 'react-leaflet';
 import { Layer } from 'leaflet';
 
-function LocationMarker() {
+function LocationMarker(content) {
   // const [position, setPosition] = useState(null);
   // const map = useMapEvents({
   //   click(e) {
@@ -46,15 +47,48 @@ function LocationMarker() {
   return (
     <>
       {allLocations.map((location, index) => (
-        <Marker key={`${location.lat}${location.lng}`} position={location}>
-          <Popup>You are here</Popup>
+        <Marker
+          key={`${location.lat}${location.lng}`}
+          position={location}
+          content={content}
+        >
+          <Popup>
+            Add a new entry here?
+            <ButtonContainer>
+              <IconButton
+                type="button"
+                alt="deleteLocation"
+                className="deleteLocation"
+                aria-label="deleteLocation"
+                // onClick={() => {
+                //   deleteImage(src);
+                // }}
+              >
+                <Delete size={20} alt="delete" />
+              </IconButton>
+              {/* <IconButton
+                type="button"
+                alt="createLocation"
+                className="createLocation yes"
+                aria-label="createLocation" */}
+              {/* // onClick={() => {
+                //   deleteImage(src);
+                // }}
+              > */}
+              <Link to="/newEntry" aria-label="searchTags">
+                <Create size={20} alt="create" />
+              </Link>
+
+              {/* // </IconButton> */}
+            </ButtonContainer>
+          </Popup>
         </Marker>
       ))}
     </>
   );
 }
 
-function Map() {
+function Map(content) {
   return (
     <MapContainerContainer
       center={[3.546144, 98.125154]}
@@ -67,7 +101,7 @@ function Map() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      <LocationMarker />
+      <LocationMarker content={content} />
       {/* {allLocations.map(location => (
         <LayerGroup key={`${location.lat}${location.lng}`}>
           {' '}
@@ -88,4 +122,29 @@ const MapContainerContainer = styled(MapContainer)`
   margin: 2em;
   border-radius: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+`;
+
+const IconButton = styled.button`
+  height: 1.6rem;
+  width: 1.6rem;
+  color: palevioletred;
+  background-color: snow;
+  border: 2px solid palevioletred;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 6;
+
+  &.yes {
+    border-color: cadetblue;
+    color: cadetblue;
+  }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin: 1em;
 `;
