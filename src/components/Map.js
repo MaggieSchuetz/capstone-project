@@ -25,15 +25,14 @@ function LocationMarker({ content }) {
   //   },
   // });
 
-  const { grabItemPosition, saveAllLocations } = useContext(LocationContext);
+  const { grabItemPosition } = useContext(LocationContext);
 
   const [position, setPosition] = useState({});
   const [allLocations, setAllLocations] = useState([]);
 
   const map = useMapEvents({
     click(e) {
-      setPosition(e.latlng);
-      position.id = uuidv4();
+      setPosition(e.latlng, position.id);
       console.log(position);
       console.log(allLocations);
 
@@ -42,8 +41,9 @@ function LocationMarker({ content }) {
   });
 
   useEffect(() => {
+    position.id = uuidv4();
     console.log(allLocations, position);
-    setAllLocations([position, ...allLocations]);
+    setAllLocations(prevAllLocations => [position, ...prevAllLocations]);
   }, [position]);
 
   const deleteLocation = id => {
