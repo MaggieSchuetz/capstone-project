@@ -26,6 +26,7 @@ function Form({
 
   const { activeItemLocation } = useContext(LocationContext);
   console.log(activeItemLocation);
+
   const handleDateChange = e => {
     setDate(e.target.value);
   };
@@ -77,6 +78,7 @@ function Form({
       title: title,
       text: text,
       tags: tags,
+      location: activeItemLocation,
     };
     if (entryEdit.edit === true) {
       updateContent(entryEdit.item.id, newEntry);

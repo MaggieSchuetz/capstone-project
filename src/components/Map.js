@@ -25,7 +25,7 @@ function LocationMarker({ content }) {
   //   },
   // });
 
-  const { grabItemPosition } = useContext(LocationContext);
+  const { grabItemPosition, activeItemPosition } = useContext(LocationContext);
 
   const [position, setPosition] = useState({});
   const [allLocations, setAllLocations] = useState([]);
@@ -51,10 +51,10 @@ function LocationMarker({ content }) {
     setAllLocations(allLocations.filter(location => location.id !== id));
   };
 
-  const setActiveLocation = id => {
-    const activeLocation = allLocations.filter(location => location.id === id);
-    grabItemPosition(activeLocation);
-  };
+  // const setActiveLocation = location => {
+  //   const activeLocation = allLocations.filter(location => location.id === id);
+  //   grabItemPosition(activeLocation);
+  // };
   useEffect(() => {
     const allLocations = JSON.parse(localStorage.getItem('allLocations'));
     if (allLocations) {
@@ -65,6 +65,17 @@ function LocationMarker({ content }) {
   useEffect(() => {
     localStorage.setItem('allLocations', JSON.stringify(allLocations));
   }, [allLocations]);
+
+  const [locationAttached, setLocationAttached] = useState(false);
+  // const locationWithItems = allLocations.filter(pin => pin.location.id.includes)
+  // const filteredGallery = galleryContent.filter(object =>
+  //   object.tags.join().includes(item.title)
+
+  // const contentWithLocation = content.content.filter(
+  //   (location, index) => location[indexcontent
+  // );
+
+  console.log(content.content.location);
 
   return (
     <>
@@ -84,8 +95,8 @@ function LocationMarker({ content }) {
               </IconButton>
               <StyledLink
                 to="/newEntry"
-                aria-label="searchTags"
-                onClick={() => setActiveLocation(location.id)}
+                aria-label="newLocation"
+                onClick={() => grabItemPosition(location)}
               >
                 <Create size={20} alt="create" />
               </StyledLink>

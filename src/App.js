@@ -44,7 +44,8 @@ function App() {
   };
 
   //** */
-
+  // const itemLocations = content.map(item => item.location);
+  // console.log(itemLocations);
   //** */
   const navigate = useNavigate();
 
