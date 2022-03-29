@@ -25,12 +25,9 @@ function LocationMarker({ content }) {
   //   },
   // });
 
-  const { grabItemPosition } = useContext(LocationContext);
+  const { grabItemPosition, saveAllLocations } = useContext(LocationContext);
 
-  const [position, setPosition] = useState({
-    lat: 3.546144,
-    lng: 98.125154,
-  });
+  const [position, setPosition] = useState({});
   const [allLocations, setAllLocations] = useState([]);
 
   const map = useMapEvents({
@@ -58,6 +55,16 @@ function LocationMarker({ content }) {
     const activeLocation = allLocations.filter(location => location.id === id);
     grabItemPosition(activeLocation);
   };
+  useEffect(() => {
+    const allLocations = JSON.parse(localStorage.getItem('allLocations'));
+    if (allLocations) {
+      setAllLocations(allLocations);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('allLocations', JSON.stringify(allLocations));
+  }, [allLocations]);
 
   return (
     <>

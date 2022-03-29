@@ -4,9 +4,13 @@ const LocationContext = createContext();
 
 export const LocationProvider = ({ children }) => {
   const [activeItemLocation, setActiveItemLocation] = useState();
-
+  const [globalAllLocations, setGlobalAllLocations] = useState([]);
   const grabItemPosition = location => {
     setActiveItemLocation(location);
+  };
+
+  const saveAllLocations = allLocations => {
+    setGlobalAllLocations(allLocations);
   };
 
   return (
