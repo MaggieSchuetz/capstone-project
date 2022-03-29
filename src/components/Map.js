@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FaTimes as Delete, FaCheck as Create } from 'react-icons/fa';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import LocationContext from '../context/LocationContext';
 import { v4 as uuidv4 } from 'uuid';
 import {
   MapContainer,
@@ -11,9 +12,8 @@ import {
   TileLayer,
   useMapEvents,
 } from 'react-leaflet';
-import { Layer } from 'leaflet';
 
-function LocationMarker(content) {
+function LocationMarker({ content }) {
   // const [position, setPosition] = useState(null);
   // const map = useMapEvents({
   //   click(e) {
@@ -24,6 +24,8 @@ function LocationMarker(content) {
   //     map.flyTo(e.latlng, map.getZoom());
   //   },
   // });
+
+  const { grabItemPosition } = useContext(LocationContext);
 
   const [position, setPosition] = useState({
     lat: 3.546144,
@@ -37,17 +39,24 @@ function LocationMarker(content) {
       position.id = uuidv4();
       console.log(position);
       console.log(allLocations);
+
       // map.flyTo(e.latlng, map.getZoom());
     },
   });
 
   useEffect(() => {
+    console.log(allLocations, position);
     setAllLocations([position, ...allLocations]);
   }, [position]);
 
   const deleteLocation = id => {
     console.log(allLocations, position);
     setAllLocations(allLocations.filter(location => location.id !== id));
+  };
+
+  const setActiveLocation = id => {
+    const activeLocation = allLocations.filter(location => location.id === id);
+    grabItemPosition(activeLocation);
   };
 
   return (
@@ -66,7 +75,11 @@ function LocationMarker(content) {
               >
                 <Delete size={20} alt="delete" />
               </IconButton>
-              <StyledLink to="/newEntry" aria-label="searchTags">
+              <StyledLink
+                to="/newEntry"
+                aria-label="searchTags"
+                onClick={() => setActiveLocation(location.id)}
+              >
                 <Create size={20} alt="create" />
               </StyledLink>
             </ButtonContainer>
@@ -79,27 +92,13 @@ function LocationMarker(content) {
 
 function Map(content) {
   return (
-    <MapContainerContainer
-      center={[3.546144, 98.125154]}
-      zoom={5}
-      id="map"
-      // allLocations={allLocations}
-    >
+    <MapContainerContainer center={[3.546144, 98.125154]} zoom={5} id="map">
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
       <LocationMarker content={content} />
-      {/* {allLocations.map(location => (
-        <LayerGroup key={`${location.lat}${location.lng}`}>
-          {' '}
-          <LocationMarker
-            key={`${location.lat}${location.lng}`}
-            position={location}
-          />
-        </LayerGroup>
-      ))} */}
     </MapContainerContainer>
   );
 }

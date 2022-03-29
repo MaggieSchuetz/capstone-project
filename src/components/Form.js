@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { MdOutlineFileUpload as Upload } from 'react-icons/md';
 import styled from 'styled-components';
 import Button from './shared/Button';
+import LocationContext from '../context/LocationContext';
 import axios from 'axios';
 function Form({
   handleAdd,
@@ -23,6 +24,8 @@ function Form({
   const [messageImage, setMessageImage] = useState('');
   const currentDataUrls = [...dataUrls];
 
+  const { activeItemLocation } = useContext(LocationContext);
+  console.log(activeItemLocation);
   const handleDateChange = e => {
     setDate(e.target.value);
   };

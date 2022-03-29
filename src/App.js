@@ -2,6 +2,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { useState, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router';
+import { LocationProvider } from './context/LocationContext';
+
 import styled from 'styled-components';
 
 import Header from './components/Header';
@@ -17,7 +19,6 @@ function App() {
     item: {},
     edit: false,
   });
-
   const [entryContent, setEntryContent] = useState([]);
   const addJournalEntry = newEntry => {
     newEntry.id = uuidv4();
@@ -42,6 +43,9 @@ function App() {
     }
   };
 
+  //** */
+
+  //** */
   const navigate = useNavigate();
 
   const editJournalEntry = item => {
@@ -84,81 +88,85 @@ function App() {
   }, [galleryContent]);
 
   return (
-    <AppContainer>
-      <Header text="Travel Log" />
-      <Routes>
-        <Route path="*" element={<Navigate to="/newEntry" replace />} />
-        <Route
-          exact
-          path="/newentry"
-          element={
-            <>
-              <Form
-                handleAdd={addJournalEntry}
-                entryEdit={entryEdit}
-                updateContent={updateContent}
-                setEntryEdit={setEntryEdit}
-                handlePhotoAdd={handlePhotoAdd}
-                entryContent={entryContent}
-              />
-            </>
-          }
-        />
-        <Route
-          exact
-          path="/journalEntries"
-          element={
-            <>
-              <EntryList
-                content={entryContent}
-                handleDelete={deleteEntry}
-                editJournalEntry={editJournalEntry}
-                galleryContent={galleryContent}
-                deleteImage={deleteImage}
-              />
-            </>
-          }
-        />
-        <Route
-          exact
-          path="/searchTags"
-          element={
-            <>
-              <SearchForm
-                content={entryContent}
-                handleDelete={deleteEntry}
-                editJournalEntry={editJournalEntry}
-                galleryContent={galleryContent}
-              />
-            </>
-          }
-        />
-        <Route
-          exact
-          path="/gallery"
-          element={
-            <>
-              <Gallery galleryContent={galleryContent} />
-            </>
-          }
-        />
-        <Route
-          exact
-          path="/map"
-          element={
-            <>
-              <Map
-                content={entryContent}
-                handleDelete={deleteEntry}
-                editJournalEntry={editJournalEntry}
-                galleryContent={galleryContent}
-              />
-            </>
-          }
-        />
-      </Routes>
-      <NavBar setEntryEdit={setEntryEdit} />
-    </AppContainer>
+    <LocationProvider>
+      <AppContainer>
+        <Header text="Travel Log" />
+
+        <Routes>
+          <Route path="*" element={<Navigate to="/newEntry" replace />} />
+          <Route
+            exact
+            path="/newentry"
+            element={
+              <>
+                <Form
+                  handleAdd={addJournalEntry}
+                  entryEdit={entryEdit}
+                  updateContent={updateContent}
+                  setEntryEdit={setEntryEdit}
+                  handlePhotoAdd={handlePhotoAdd}
+                  entryContent={entryContent}
+                />
+              </>
+            }
+          />
+          <Route
+            exact
+            path="/journalEntries"
+            element={
+              <>
+                <EntryList
+                  content={entryContent}
+                  handleDelete={deleteEntry}
+                  editJournalEntry={editJournalEntry}
+                  galleryContent={galleryContent}
+                  deleteImage={deleteImage}
+                />
+              </>
+            }
+          />
+          <Route
+            exact
+            path="/searchTags"
+            element={
+              <>
+                <SearchForm
+                  content={entryContent}
+                  handleDelete={deleteEntry}
+                  editJournalEntry={editJournalEntry}
+                  galleryContent={galleryContent}
+                />
+              </>
+            }
+          />
+          <Route
+            exact
+            path="/gallery"
+            element={
+              <>
+                <Gallery galleryContent={galleryContent} />
+              </>
+            }
+          />
+          <Route
+            exact
+            path="/map"
+            element={
+              <>
+                <Map
+                  content={entryContent}
+                  handleDelete={deleteEntry}
+                  editJournalEntry={editJournalEntry}
+                  galleryContent={galleryContent}
+                />
+              </>
+            }
+          />
+        </Routes>
+
+        <NavBar setEntryEdit={setEntryEdit} />
+      </AppContainer>{' '}
+    </LocationProvider>
   );
 }
 
