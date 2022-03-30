@@ -13,17 +13,23 @@ function SingleEntry({
   deleteImage,
 }) {
   const { activeItemLocation } = useContext(LocationContext);
+  const filteredContent = content.find(item =>
+    item.location.filter(location =>
+      location.id.includes(activeItemLocation[0].id)
+    )
+  );
 
-  function sortByDates() {
-    content.forEach(item => {
-      item.formattedDate = new Date(item.date);
-      content.sort((a, b) => b.formattedDate - a.formattedDate);
-    });
-  }
-  sortByDates();
-  if (!content || content.length === 0) {
-    return <p>You don't have any journal entries yet.</p>;
-  }
+  // .filter(item =>
+  //   item.location.includes(activeItemLocation[0].id)
+  // );
+  // const displayedItem = [filteredContent];
+  console.log(
+    activeItemLocation[0].id,
+    content[0].location[0].id,
+    filteredContent
+    // displayedItem
+  );
+
   return (
     <ListContainer>
       {content.map(item => (
