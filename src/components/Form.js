@@ -283,7 +283,7 @@ const FormContainer = styled.form`
 const Label = styled.label`
   color: darkslategray;
   text-align: left;
-  padding: 10px;
+  padding: 20px;
   position: absolute;
   top: -8px;
   left: 3px;
@@ -325,7 +325,7 @@ const Textarea = styled.textarea`
 
 const Container = styled.div`
   position: relative;
-  padding: 10px;
+  padding: 20px;
 `;
 
 export default Form;

@@ -1,6 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
+function Header({ text }) {
+  return (
+    <>
+      <StyledHeader>{text}</StyledHeader>
+    </>
+  );
+}
 const StyledHeader = styled.div`
   padding: 10px;
   margin: 0;
@@ -22,13 +29,4 @@ const StyledHeader = styled.div`
   text-shadow: 2px 2px 4px #000000;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
-
-function Header({ text }) {
-  return (
-    <>
-      <StyledHeader>{text}</StyledHeader>
-    </>
-  );
-}
-
 export default Header;

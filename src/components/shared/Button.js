@@ -41,8 +41,8 @@ const StyledButton = styled.button`
     width: fit-content;
     height: fit-content;
     position: absolute;
-    bottom: 1em;
-    right: 1em;
+    bottom: 1.7em;
+    right: 1.2em;
     box-shadow: none;
   }
 `;

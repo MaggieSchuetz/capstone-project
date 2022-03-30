@@ -95,7 +95,7 @@ function LocationMarker({ content }) {
                 aria-label="searchTags"
                 onClick={() => setActiveLocation(item.location[0].id)}
               >
-                <GoToEntry size={20} alt="goToEntry" />
+                <GoToEntry size={30} alt="goToEntry" />
               </StyledLink>
             </ButtonContainer>
           </StyledPopup>
@@ -122,7 +122,7 @@ function LocationMarker({ content }) {
                   aria-label="searchTags"
                   onClick={() => setActiveLocation(location.id)}
                 >
-                  <Create size={30} alt="create" />
+                  <Create size={20} alt="create" />
                 </StyledLink>
               </ButtonContainer>
             </StyledPopup>
@@ -150,7 +150,7 @@ function Map({ content }) {
 }
 export default Map;
 const MapContainerContainer = styled(MapContainer)`
-  height: 77vh;
+  height: 70vh;
   margin: 2em;
   border-radius: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
