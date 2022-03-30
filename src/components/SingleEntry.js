@@ -21,10 +21,6 @@ function SingleEntry({
     return item.location[0].id === activeItemLocation[0].id;
   });
 
-  console.log('activeItemLocation', activeItemLocation);
-  console.log('content', content);
-  console.log('filteredContent', filteredContent);
-
   return (
     <>
       <ErrorBoundary FallbackComponent={ErrorFallback}>

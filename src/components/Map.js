@@ -15,21 +15,8 @@ import {
 } from 'react-leaflet';
 
 function LocationMarker({ content }) {
-  // const [position, setPosition] = useState(null);
-  // const map = useMapEvents({
-  //   click(e) {
-  //     map.locate();
-  //   },
-  //   locationfound(e) {
-  //     setPosition(e.latlng);
-  //     map.flyTo(e.latlng, map.getZoom());
-  //   },
-  // });
-
   const { grabItemPosition } = useContext(LocationContext);
-
   const [position, setPosition] = useState(null);
-  // const [position, setPosition] = useState({});
   const [allLocations, setAllLocations] = useState([]);
   /* eslint-disable no-unused-vars */
   const map = useMapEvents({
@@ -40,11 +27,6 @@ function LocationMarker({ content }) {
       if (position !== null) {
         setPosition(e.latlng, position.id);
       }
-
-      console.log(position);
-      console.log(allLocations);
-
-      // map.flyTo(e.latlng, map.getZoom());
     },
   });
 
@@ -59,7 +41,6 @@ function LocationMarker({ content }) {
   }, [position]);
 
   const deleteLocation = id => {
-    console.log(allLocations, position);
     setAllLocations(allLocations.filter(location => location.id !== id));
     setPosition(null);
   };
@@ -97,18 +78,6 @@ function LocationMarker({ content }) {
     .map(entry => entry);
 
   const newPosition = [position];
-
-  console.log('test', test);
-
-  console.log(
-    content,
-    allLocations,
-    entriesWithoutLocation,
-    entriesWithLocation,
-
-    entriesWithLocationTitle
-  );
-  // console.log(content.content[0].location[0].id);
 
   return (
     <>
