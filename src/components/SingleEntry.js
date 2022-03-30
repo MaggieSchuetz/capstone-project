@@ -24,14 +24,18 @@ function SingleEntry({
 
   return (
     <ListContainer>
-      <JournalEntry
-        key={filteredContent.id}
-        item={filteredContent}
-        handleDelete={handleDelete}
-        editJournalEntry={editJournalEntry}
-        galleryContent={galleryContent}
-        deleteImage={deleteImage}
-      />
+      {filteredContent ? (
+        <JournalEntry
+          key={filteredContent.id}
+          item={filteredContent}
+          handleDelete={handleDelete}
+          editJournalEntry={editJournalEntry}
+          galleryContent={galleryContent}
+          deleteImage={deleteImage}
+        />
+      ) : (
+        <p>This entry has been deleted.</p>
+      )}
     </ListContainer>
   );
 }
