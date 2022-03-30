@@ -7,6 +7,10 @@ export const LocationProvider = ({ children }) => {
   const grabItemPosition = location => {
     setActiveItemLocation(location);
   };
+  // const [firstLocation, setFirstLocation] = useState();
+  // const activeFirstMarker = location => {
+  //   setFirstLocation(location);
+  // };
 
   return (
     <LocationContext.Provider value={{ activeItemLocation, grabItemPosition }}>

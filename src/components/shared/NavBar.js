@@ -1,6 +1,6 @@
-import React from 'react';
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-
+import LocationContext from '../../context/LocationContext';
 import {
   AiOutlineRead as Read,
   AiOutlineSearch as Search,
@@ -38,7 +38,10 @@ function NavBar({ setEntryEdit }) {
     setEntryEdit({
       edit: false,
     });
+    grabItemPosition();
   };
+
+  const { grabItemPosition } = useContext(LocationContext);
 
   return (
     <StyledNavBar>

@@ -12,6 +12,7 @@ import Form from './components/Form';
 import SearchForm from './components/SearchForm';
 import Gallery from './components/Gallery';
 import Map from './components/Map';
+import SingleEntry from './components/SingleEntry';
 import NavBar from './components/shared/NavBar';
 
 function App() {
@@ -155,6 +156,20 @@ function App() {
             element={
               <>
                 <Map
+                  content={entryContent}
+                  handleDelete={deleteEntry}
+                  editJournalEntry={editJournalEntry}
+                  galleryContent={galleryContent}
+                />
+              </>
+            }
+          />
+          <Route
+            exact
+            path="/viewEntry"
+            element={
+              <>
+                <SingleEntry
                   content={entryContent}
                   handleDelete={deleteEntry}
                   editJournalEntry={editJournalEntry}
