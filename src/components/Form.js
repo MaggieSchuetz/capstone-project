@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { MdOutlineFileUpload as Upload } from 'react-icons/md';
 import styled from 'styled-components';
 import Button from './shared/Button';
+import LocationContext from '../context/LocationContext';
 import axios from 'axios';
 function Form({
   handleAdd,
@@ -22,6 +23,10 @@ function Form({
   const [dataUrls, setDataUrls] = useState([]);
   const [messageImage, setMessageImage] = useState('');
   const currentDataUrls = [...dataUrls];
+
+  const { activeItemLocation } = useContext(LocationContext);
+  /* eslint-disable no-unused-vars */
+  const [location, setLocation] = useState();
 
   const handleDateChange = e => {
     setDate(e.target.value);
@@ -74,6 +79,7 @@ function Form({
       title: title,
       text: text,
       tags: tags,
+      location: activeItemLocation,
     };
     if (entryEdit.edit === true) {
       updateContent(entryEdit.item.id, newEntry);
@@ -159,11 +165,12 @@ function Form({
       setTitle(entryEdit.item.title);
       setText(entryEdit.item.text);
       setTags(entryEdit.item.tags);
+      setLocation(activeItemLocation);
       setButtonDisabled(false);
       setMessage('');
       setMessageImage('');
       setDataUrls([]);
-    }
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entryEdit]);
 
   useEffect(() => {
