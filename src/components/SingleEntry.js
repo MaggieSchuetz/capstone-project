@@ -2,7 +2,8 @@ import React from 'react';
 import JournalEntry from './JournalEntry';
 import styled from 'styled-components';
 import { useContext } from 'react';
-
+import { TiArrowBack as Return } from 'react-icons/ti';
+import { Link } from 'react-router-dom';
 import LocationContext from '../context/LocationContext';
 
 function SingleEntry({
@@ -36,12 +37,19 @@ function SingleEntry({
       ) : (
         <p>This entry has been deleted.</p>
       )}
+      <StyledLink to="/map" aria-label="returnToMap">
+        <Return size={40} />
+      </StyledLink>
     </ListContainer>
   );
 }
 
 const ListContainer = styled.div`
   padding-bottom: 60px;
+`;
+
+const StyledLink = styled(Link)`
+  color: darkslategray;
 `;
 
 export default SingleEntry;

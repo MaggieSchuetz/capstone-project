@@ -1,12 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import {
-  FaTimes as Delete,
-  FaCheck as Create,
-  FaLongArrowAltRight as GoToEntry,
-} from 'react-icons/fa';
-
+import { FaTimes as Delete, FaCheck as Create } from 'react-icons/fa';
+import { TiArrowForward as GoToEntry } from 'react-icons/ti';
 import { useState, useEffect, useContext } from 'react';
 import LocationContext from '../context/LocationContext';
 import { v4 as uuidv4 } from 'uuid';
@@ -123,7 +119,7 @@ function LocationMarker({ content }) {
           title={item.title}
         >
           <StyledPopup>
-            {`View journal entry "${item.title}"`}
+            {`Read about "${item.title}"`}
             <ButtonContainer>
               <StyledLink
                 to="/viewEntry"
@@ -157,7 +153,7 @@ function LocationMarker({ content }) {
                   aria-label="searchTags"
                   onClick={() => setActiveLocation(location.id)}
                 >
-                  <Create size={20} alt="create" />
+                  <Create size={30} alt="create" />
                 </StyledLink>
               </ButtonContainer>
             </StyledPopup>
