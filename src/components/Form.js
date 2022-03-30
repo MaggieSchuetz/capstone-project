@@ -25,7 +25,8 @@ function Form({
   const currentDataUrls = [...dataUrls];
 
   const { activeItemLocation } = useContext(LocationContext);
-  console.log(activeItemLocation);
+  /* eslint-disable no-unused-vars */
+  const [location, setLocation] = useState();
 
   const handleDateChange = e => {
     setDate(e.target.value);
@@ -164,11 +165,12 @@ function Form({
       setTitle(entryEdit.item.title);
       setText(entryEdit.item.text);
       setTags(entryEdit.item.tags);
+      setLocation(activeItemLocation);
       setButtonDisabled(false);
       setMessage('');
       setMessageImage('');
       setDataUrls([]);
-    }
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entryEdit]);
 
   useEffect(() => {

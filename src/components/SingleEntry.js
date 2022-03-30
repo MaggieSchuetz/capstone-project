@@ -13,35 +13,25 @@ function SingleEntry({
   deleteImage,
 }) {
   const { activeItemLocation } = useContext(LocationContext);
-  const filteredContent = content.find(item =>
-    item.location.filter(location =>
-      location.id.includes(activeItemLocation[0].id)
-    )
-  );
 
-  // .filter(item =>
-  //   item.location.includes(activeItemLocation[0].id)
-  // );
-  // const displayedItem = [filteredContent];
-  console.log(
-    activeItemLocation[0].id,
-    content[0].location[0].id,
-    filteredContent
-    // displayedItem
-  );
+  const filteredContent = content.find(item => {
+    return item.location[0].id === activeItemLocation[0].id;
+  });
+
+  console.log('activeItemLocation', activeItemLocation);
+  console.log('content', content);
+  console.log('filteredContent', filteredContent);
 
   return (
     <ListContainer>
-      {content.map(item => (
-        <JournalEntry
-          key={item.id}
-          item={item}
-          handleDelete={handleDelete}
-          editJournalEntry={editJournalEntry}
-          galleryContent={galleryContent}
-          deleteImage={deleteImage}
-        />
-      ))}
+      <JournalEntry
+        key={filteredContent.id}
+        item={filteredContent}
+        handleDelete={handleDelete}
+        editJournalEntry={editJournalEntry}
+        galleryContent={galleryContent}
+        deleteImage={deleteImage}
+      />
     </ListContainer>
   );
 }

@@ -83,30 +83,32 @@ function LocationMarker({ content }) {
     localStorage.setItem('allLocations', JSON.stringify(allLocations));
   }, [allLocations]);
 
-  const entriesWithLocation = content.content
+  const entriesWithLocation = content
     .filter(entry => entry.location !== undefined)
     .map(entry => entry.location[0]);
 
-  const entriesWithLocationTitle = content.content
+  const entriesWithLocationTitle = content
     .filter(entry => entry.location !== undefined)
     .map(entry => entry.title);
 
-  const entriesWithoutLocation = content.content
+  const entriesWithoutLocation = content
     .filter(entry => entry.location === undefined)
     .map(entry => entry.location);
 
-  // const locationsWithEntries = allLocations.filter(location =>
-  //   location.id.includes(entriesWithLocation)
-  // );
+  const test = allLocations.filter(location =>
+    location.id.includes(entriesWithLocation)
+  );
 
   const newPosition = [position];
+
+  console.log('test', test);
 
   console.log(
     content,
     allLocations,
     entriesWithoutLocation,
     entriesWithLocation,
-    // locationsWithEntries,
+
     entriesWithLocationTitle
   );
   // console.log(content.content[0].location[0].id);
@@ -160,7 +162,7 @@ function LocationMarker({ content }) {
   );
 }
 
-function Map(content) {
+function Map({ content }) {
   return (
     <MapContainerContainer
       center={[4.477856485570586, 109.86328125000001]}
