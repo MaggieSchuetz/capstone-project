@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { useContext } from 'react';
 import { TiArrowBack as Return } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorFallback from './ErrorFallback.js';
 import LocationContext from '../context/LocationContext';
 
 function SingleEntry({
@@ -24,23 +26,27 @@ function SingleEntry({
   console.log('filteredContent', filteredContent);
 
   return (
-    <ListContainer>
-      {filteredContent ? (
-        <JournalEntry
-          key={filteredContent.id}
-          item={filteredContent}
-          handleDelete={handleDelete}
-          editJournalEntry={editJournalEntry}
-          galleryContent={galleryContent}
-          deleteImage={deleteImage}
-        />
-      ) : (
-        <p>This entry has been deleted.</p>
-      )}
-      <StyledLink to="/map" aria-label="returnToMap">
-        <Return size={40} />
-      </StyledLink>
-    </ListContainer>
+    <>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <ListContainer>
+          {filteredContent ? (
+            <JournalEntry
+              key={filteredContent.id}
+              item={filteredContent}
+              handleDelete={handleDelete}
+              editJournalEntry={editJournalEntry}
+              galleryContent={galleryContent}
+              deleteImage={deleteImage}
+            />
+          ) : (
+            <p>This entry has been deleted.</p>
+          )}
+          <StyledLink to="/map" aria-label="returnToMap">
+            <Return size={40} />
+          </StyledLink>
+        </ListContainer>
+      </ErrorBoundary>
+    </>
   );
 }
 
