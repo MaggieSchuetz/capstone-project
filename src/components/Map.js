@@ -56,9 +56,10 @@ function LocationMarker({ content }) {
     if (position !== null) {
       position.id = uuidv4();
       setAllLocations([position, ...allLocations]);
+    } else if (position === null) {
+      setAllLocations(allLocations);
     }
-
-    console.log(allLocations, position); // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [position]);
 
   const deleteLocation = id => {
@@ -95,9 +96,9 @@ function LocationMarker({ content }) {
     .filter(entry => entry.location === undefined)
     .map(entry => entry.location);
 
-  const test = allLocations.filter(location =>
-    location.id.includes(entriesWithLocation)
-  );
+  const test = content
+    .filter(entry => entry.location !== undefined)
+    .map(entry => entry);
 
   const newPosition = [position];
 
@@ -115,15 +116,19 @@ function LocationMarker({ content }) {
 
   return (
     <>
-      {entriesWithLocation.map(location => (
-        <Marker key={`${location.id}`} position={location} content={content}>
+      {test.map(item => (
+        <Marker
+          key={`${item.location[0].id}`}
+          position={item.location[0]}
+          title={item.title}
+        >
           <StyledPopup>
-            View this entry
+            {`View journal entry "${item.title}"`}
             <ButtonContainer>
               <StyledLink
                 to="/viewEntry"
                 aria-label="searchTags"
-                onClick={() => setActiveLocation(location.id)}
+                onClick={() => setActiveLocation(item.location[0].id)}
               >
                 <GoToEntry size={20} alt="goToEntry" />
               </StyledLink>
