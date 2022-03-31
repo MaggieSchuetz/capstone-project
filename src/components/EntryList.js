@@ -1,6 +1,7 @@
 import React from 'react';
 import JournalEntry from './JournalEntry';
 import styled from 'styled-components';
+
 import { motion } from 'framer-motion';
 
 function EntryList({
@@ -21,18 +22,24 @@ function EntryList({
     return <p>You don't have any journal entries yet.</p>;
   }
   return (
-    <ListContainer>
-      {content.map(item => (
-        <JournalEntry
-          key={item.id}
-          item={item}
-          handleDelete={handleDelete}
-          editJournalEntry={editJournalEntry}
-          galleryContent={galleryContent}
-          deleteImage={deleteImage}
-        />
-      ))}
-    </ListContainer>
+    <motion.div
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      exit={{ scale: 0 }}
+    >
+      <ListContainer>
+        {content.map(item => (
+          <JournalEntry
+            key={item.id}
+            item={item}
+            handleDelete={handleDelete}
+            editJournalEntry={editJournalEntry}
+            galleryContent={galleryContent}
+            deleteImage={deleteImage}
+          />
+        ))}
+      </ListContainer>
+    </motion.div>
   );
 }
 
