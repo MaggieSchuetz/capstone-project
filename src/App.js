@@ -94,7 +94,7 @@ function App() {
           <Header text="Travel Log" />
 
           <Routes>
-            <Route path="*" element={<Navigate to="/newEntry" replace />} />
+            <Route path="*" element={<Navigate to="/map" replace />} />
             <Route
               exact
               path="/newentry"
