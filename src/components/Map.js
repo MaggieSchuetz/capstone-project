@@ -141,7 +141,7 @@ function Map({ content }) {
       exit={{ scale: 0 }}
     >
       <MapContainerContainer
-        center={[4.477856485570586, 109.86328125000001]}
+        center={[13.477856485570586, 108.86328125000001]}
         zoom={4}
         id="map"
       >
