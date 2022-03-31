@@ -142,7 +142,7 @@ function Map({ content }) {
     >
       <MapContainerContainer
         center={[4.477856485570586, 109.86328125000001]}
-        zoom={5}
+        zoom={4}
         id="map"
       >
         <TileLayer

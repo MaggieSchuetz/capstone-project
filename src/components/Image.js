@@ -45,7 +45,7 @@ const IconButton = styled.button`
   width: 1.6rem;
   color: palevioletred;
   background-color: snow;
-  border: 2px solid palevioletred;
+  border: 2px solid darkslategray;
   border-radius: 50%;
   position: absolute;
   top: 0.5rem;
