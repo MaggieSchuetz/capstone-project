@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { FaTimes as Delete, FaCheck as Create } from 'react-icons/fa';
 import { TiArrowForward as GoToEntry } from 'react-icons/ti';
 import { useState, useEffect, useContext } from 'react';
@@ -134,18 +135,24 @@ function LocationMarker({ content }) {
 
 function Map({ content }) {
   return (
-    <MapContainerContainer
-      center={[4.477856485570586, 109.86328125000001]}
-      zoom={5}
-      id="map"
+    <motion.div
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      exit={{ scale: 0 }}
     >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+      <MapContainerContainer
+        center={[4.477856485570586, 109.86328125000001]}
+        zoom={5}
+        id="map"
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
 
-      <LocationMarker content={content} />
-    </MapContainerContainer>
+        <LocationMarker content={content} />
+      </MapContainerContainer>
+    </motion.div>
   );
 }
 export default Map;
@@ -180,4 +187,5 @@ const ButtonContainer = styled.div`
 `;
 const StyledPopup = styled(Popup)`
   font-size: 12pt;
+  text-align: center;
 `;

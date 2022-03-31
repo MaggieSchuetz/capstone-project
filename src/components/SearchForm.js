@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import JournalEntry from './JournalEntry';
 
 function SearchForm({
@@ -23,7 +24,11 @@ function SearchForm({
   };
 
   return (
-    <>
+    <motion.div
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      exit={{ scale: 0 }}
+    >
       <FormContainer onSubmit={handleSubmit}>
         <Container>
           <Label htmlFor="search">Search Tags:</Label>
@@ -55,7 +60,7 @@ function SearchForm({
       {filteredContent.length === 0 && search.length !== 0 && (
         <p>Sorry, there are no tags that match your search.</p>
       )}
-    </>
+    </motion.div>
   );
 }
 

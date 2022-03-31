@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { TiArrowBack as Return } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
+import { motion } from 'framer-motion';
 import ErrorFallback from './ErrorFallback.js';
 import LocationContext from '../context/LocationContext';
 
@@ -22,7 +23,11 @@ function SingleEntry({
   });
 
   return (
-    <>
+    <motion.div
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      exit={{ scale: 0 }}
+    >
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <ListContainer>
           {filteredContent ? (
@@ -42,7 +47,7 @@ function SingleEntry({
           </StyledLink>
         </ListContainer>
       </ErrorBoundary>
-    </>
+    </motion.div>
   );
 }
 
