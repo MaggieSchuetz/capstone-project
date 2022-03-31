@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { MdOutlineFileUpload as Upload } from 'react-icons/md';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import Button from './shared/Button';
 import LocationContext from '../context/LocationContext';
 import axios from 'axios';
@@ -26,7 +27,7 @@ function Form({
 
   const { activeItemLocation } = useContext(LocationContext);
   /* eslint-disable no-unused-vars */
-  const [location, setLocation] = useState();
+  const [location, setLocation] = useState('empty');
 
   const handleDateChange = e => {
     setDate(e.target.value);
@@ -181,85 +182,92 @@ function Form({
     }
   }, [dataUrls, images]);
   return (
-    <FormContainer onSubmit={handleSubmit}>
-      <Container>
-        <Label htmlFor="date">Date:</Label>
-        <Input
-          id="date"
-          name="date"
-          type="date"
-          required
-          onChange={handleDateChange}
-          value={date}
-        />
-      </Container>
-      <Container>
-        <Label htmlFor="title">Title:</Label>
-        <Input
-          id="title"
-          name="title"
-          type="text"
-          placeholder="Title"
-          value={title}
-          maxLength="80"
-          required
-          onChange={handleTitleChange}
-        />
-      </Container>
-      {messageTitle && <P className="message">{messageTitle}</P>}
-      <Container className="photoUpload">
-        <Label htmlFor="photoUpload">Upload some Photos:</Label>
-        <Input
-          id="photoUpload"
-          name="photoUpload"
-          className="photoUpload"
-          type="file"
-          multiple
-          onChange={e => {
-            setImages([...e.target.files]);
-          }}
-        />{' '}
-        <Button
-          type="button"
-          className="photoUpload"
-          aria-label="upload"
-          onClick={() => uploadImages(images)}
-        >
-          <Upload alt="Upload" size={20} />
+    <motion.div
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      exit={{ scale: 0 }}
+    >
+      <FormContainer onSubmit={handleSubmit}>
+        <Container>
+          <Label htmlFor="date">Date:</Label>
+          <Input
+            id="date"
+            name="date"
+            type="date"
+            required
+            onChange={handleDateChange}
+            value={date}
+          />
+        </Container>
+        <Container>
+          <Label htmlFor="title">Title:</Label>
+          <Input
+            id="title"
+            name="title"
+            type="text"
+            placeholder="Title"
+            value={title}
+            maxLength="80"
+            required
+            onChange={handleTitleChange}
+          />
+        </Container>
+        {messageTitle && <P className="message">{messageTitle}</P>}
+        <Container className="photoUpload">
+          <Label htmlFor="photoUpload">Upload some Photos:</Label>
+          <Input
+            id="photoUpload"
+            name="photoUpload"
+            className="photoUpload"
+            type="file"
+            multiple
+            onChange={e => {
+              setImages([...e.target.files]);
+            }}
+          />{' '}
+          <Button
+            type="button"
+            className="photoUpload"
+            aria-label="upload"
+            onClick={() => uploadImages(images)}
+          >
+            <Upload alt="Upload" size={20} />
+          </Button>
+        </Container>
+
+        {messageImage && <P className="message">{messageImage}</P>}
+        <Container>
+          <Label htmlFor="text">Journal Entry:</Label>
+          <Textarea
+            id="text"
+            name="text"
+            type="text"
+            placeholder="Write about your adventure!"
+            value={text}
+            required
+            onChange={handleTextChange}
+          />
+        </Container>
+        <Container>
+          <Label htmlFor="tags">Tags:</Label>
+          <Input
+            id="tags"
+            name="tags"
+            type="text"
+            placeholder="e.g. jungle, monkeys,..."
+            value={tags}
+            maxLength="40"
+            onChange={handleTagChange}
+          />
+        </Container>
+
+        <Button type="submit" isDisabled={buttonDisabled} aria-label="submit">
+          Submit
         </Button>
-      </Container>
 
-      {messageImage && <P className="message">{messageImage}</P>}
-      <Container>
-        <Label htmlFor="text">Journal Entry:</Label>
-        <Textarea
-          id="text"
-          name="text"
-          type="text"
-          placeholder="Write about your adventure!"
-          value={text}
-          required
-          onChange={handleTextChange}
-        />
-      </Container>
-      <Container>
-        <Label htmlFor="tags">Tags:</Label>
-        <Input
-          id="tags"
-          name="tags"
-          type="text"
-          placeholder="e.g. jungle, monkeys,..."
-          value={tags}
-          maxLength="40"
-          onChange={handleTagChange}
-        />
-      </Container>
-      <Button type="submit" isDisabled={buttonDisabled} aria-label="submit">
-        Submit
-      </Button>
-
-      {message && <P className="message">{message}</P>}
-    </FormContainer>
+        {message && <P className="message">{message}</P>}
+      </FormContainer>
+    </motion.div>
   );
 }
 
@@ -283,7 +291,7 @@ const FormContainer = styled.form`
 const Label = styled.label`
   color: darkslategray;
   text-align: left;
-  padding: 10px;
+  padding: 20px;
   position: absolute;
   top: -8px;
   left: 3px;
@@ -325,7 +333,7 @@ const Textarea = styled.textarea`
 
 const Container = styled.div`
   position: relative;
-  padding: 10px;
+  padding: 20px;
 `;
 
 export default Form;

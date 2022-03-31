@@ -1,6 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
+function Button({ children, type, isDisabled, className, onClick }) {
+  return (
+    <StyledButton
+      type={type}
+      disabled={isDisabled}
+      className={className}
+      onClick={onClick}
+    >
+      {children}
+    </StyledButton>
+  );
+}
 const StyledButton = styled.button`
   background-color: palevioletred;
   border: 0;
@@ -41,23 +53,9 @@ const StyledButton = styled.button`
     width: fit-content;
     height: fit-content;
     position: absolute;
-    bottom: 1em;
-    right: 1em;
+    bottom: 1.7em;
+    right: 1.2em;
     box-shadow: none;
   }
 `;
-
-function Button({ children, type, isDisabled, className, onClick }) {
-  return (
-    <StyledButton
-      type={type}
-      disabled={isDisabled}
-      className={className}
-      onClick={onClick}
-    >
-      {children}
-    </StyledButton>
-  );
-}
-
 export default Button;

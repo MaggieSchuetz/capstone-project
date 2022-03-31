@@ -1,71 +1,33 @@
-# Getting Started with Create React App
+# Capstone Project: CREEPY(pen)NE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Travel Log is an app that makes journaling on the go simple! Whether you're on top of a mountain or riding a crowded bus in Thailand - you can't always carry your laptop with you to record your travel adventures. With this app on your phone, you can easily store all the important stuff right on your device! Click on the map to mark the location of your journal entry, then create a new entry from there. You can also create an entry without a location if locations aren't your thing. Additionally, you can upload images that will be displayed alongside your journal entry. Entries are listed anti-chronologically, but if you need to find a specific one fast, you can search entries by tags - or on the map. That way, when a fellow traveler asks you the name of the place where you saw orangutans in the wild, you don't have to sing the entire jungle-trek song in your head in order to remember the name of the town. With the click of a button, you can edit or delete entire entries or just single photos. In short, Travel Log provides an easy and convenient way to store your memories, leaving you more time for adventures!
 
-## Available Scripts
+## Demo (still in progress):
 
-In the project directory, you can run:
+You can find the hosted version on Vercel: [Travel Log](https://capstone-project-maggieschuetz.vercel.app/newEntry)
+**Important:** This demo is optimized for mobile screen.
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React
+- React Router
+- React Testing Library
+- React Leaflet
+- React Context
+- HTML
+- Storybook
+- styled-components
+- localStorage
+- npm
+- Vercel
+- Axios
+- Framer Motion
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Project Setup
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# capstone-project
+- Clone this repository
+- Install all dependencies with `$ npm install`
+- Run app in dev mode with `$ npm run dev`
+- Server: [http://localhost:3000/](http://localhost:3000/)
+- Run tests via `$ npm run test`
+- Run Storybook with `$ npm run storybook`

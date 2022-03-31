@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { FaTimes as Delete, FaCheck as Create } from 'react-icons/fa';
 import { TiArrowForward as GoToEntry } from 'react-icons/ti';
 import { useState, useEffect, useContext } from 'react';
@@ -95,7 +96,7 @@ function LocationMarker({ content }) {
                 aria-label="searchTags"
                 onClick={() => setActiveLocation(item.location[0].id)}
               >
-                <GoToEntry size={20} alt="goToEntry" />
+                <GoToEntry size={30} alt="goToEntry" />
               </StyledLink>
             </ButtonContainer>
           </StyledPopup>
@@ -122,7 +123,7 @@ function LocationMarker({ content }) {
                   aria-label="searchTags"
                   onClick={() => setActiveLocation(location.id)}
                 >
-                  <Create size={30} alt="create" />
+                  <Create size={20} alt="create" />
                 </StyledLink>
               </ButtonContainer>
             </StyledPopup>
@@ -134,23 +135,29 @@ function LocationMarker({ content }) {
 
 function Map({ content }) {
   return (
-    <MapContainerContainer
-      center={[4.477856485570586, 109.86328125000001]}
-      zoom={5}
-      id="map"
+    <motion.div
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      exit={{ scale: 0 }}
     >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+      <MapContainerContainer
+        center={[13.477856485570586, 108.86328125000001]}
+        zoom={4}
+        id="map"
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
 
-      <LocationMarker content={content} />
-    </MapContainerContainer>
+        <LocationMarker content={content} />
+      </MapContainerContainer>
+    </motion.div>
   );
 }
 export default Map;
 const MapContainerContainer = styled(MapContainer)`
-  height: 77vh;
+  height: 70vh;
   margin: 2em;
   border-radius: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -180,4 +187,5 @@ const ButtonContainer = styled.div`
 `;
 const StyledPopup = styled(Popup)`
   font-size: 12pt;
+  text-align: center;
 `;

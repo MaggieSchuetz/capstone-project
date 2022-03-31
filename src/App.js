@@ -6,6 +6,7 @@ import { LocationProvider } from './context/LocationContext';
 
 import styled from 'styled-components';
 
+import ErrorFallback from './components/ErrorFallback.js';
 import Header from './components/Header';
 import EntryList from './components/EntryList';
 import Form from './components/Form';
@@ -14,6 +15,7 @@ import Gallery from './components/Gallery';
 import Map from './components/Map';
 import SingleEntry from './components/SingleEntry';
 import NavBar from './components/shared/NavBar';
+import { ErrorBoundary } from 'react-error-boundary';
 
 function App() {
   const [entryEdit, setEntryEdit] = useState({
@@ -86,99 +88,101 @@ function App() {
   }, [galleryContent]);
 
   return (
-    <LocationProvider>
-      <AppContainer>
-        <Header text="Travel Log" />
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <LocationProvider>
+        <AppContainer>
+          <Header text="Travel Log" />
 
-        <Routes>
-          <Route path="*" element={<Navigate to="/newEntry" replace />} />
-          <Route
-            exact
-            path="/newentry"
-            element={
-              <>
-                <Form
-                  handleAdd={addJournalEntry}
-                  entryEdit={entryEdit}
-                  updateContent={updateContent}
-                  setEntryEdit={setEntryEdit}
-                  handlePhotoAdd={handlePhotoAdd}
-                  entryContent={entryContent}
-                />
-              </>
-            }
-          />
-          <Route
-            exact
-            path="/journalEntries"
-            element={
-              <>
-                <EntryList
-                  content={entryContent}
-                  handleDelete={deleteEntry}
-                  editJournalEntry={editJournalEntry}
-                  galleryContent={galleryContent}
-                  deleteImage={deleteImage}
-                />
-              </>
-            }
-          />
-          <Route
-            exact
-            path="/searchTags"
-            element={
-              <>
-                <SearchForm
-                  content={entryContent}
-                  handleDelete={deleteEntry}
-                  editJournalEntry={editJournalEntry}
-                  galleryContent={galleryContent}
-                />
-              </>
-            }
-          />
-          <Route
-            exact
-            path="/gallery"
-            element={
-              <>
-                <Gallery galleryContent={galleryContent} />
-              </>
-            }
-          />
-          <Route
-            exact
-            path="/map"
-            element={
-              <>
-                <Map
-                  content={entryContent}
-                  handleDelete={deleteEntry}
-                  editJournalEntry={editJournalEntry}
-                  galleryContent={galleryContent}
-                />
-              </>
-            }
-          />
-          <Route
-            exact
-            path="/viewEntry"
-            element={
-              <>
-                <SingleEntry
-                  content={entryContent}
-                  handleDelete={deleteEntry}
-                  editJournalEntry={editJournalEntry}
-                  galleryContent={galleryContent}
-                />
-              </>
-            }
-          />
-        </Routes>
+          <Routes>
+            <Route path="*" element={<Navigate to="/map" replace />} />
+            <Route
+              exact
+              path="/newentry"
+              element={
+                <>
+                  <Form
+                    handleAdd={addJournalEntry}
+                    entryEdit={entryEdit}
+                    updateContent={updateContent}
+                    setEntryEdit={setEntryEdit}
+                    handlePhotoAdd={handlePhotoAdd}
+                    entryContent={entryContent}
+                  />
+                </>
+              }
+            />
+            <Route
+              exact
+              path="/journalEntries"
+              element={
+                <>
+                  <EntryList
+                    content={entryContent}
+                    handleDelete={deleteEntry}
+                    editJournalEntry={editJournalEntry}
+                    galleryContent={galleryContent}
+                    deleteImage={deleteImage}
+                  />
+                </>
+              }
+            />
+            <Route
+              exact
+              path="/searchTags"
+              element={
+                <>
+                  <SearchForm
+                    content={entryContent}
+                    handleDelete={deleteEntry}
+                    editJournalEntry={editJournalEntry}
+                    galleryContent={galleryContent}
+                  />
+                </>
+              }
+            />
+            <Route
+              exact
+              path="/gallery"
+              element={
+                <>
+                  <Gallery galleryContent={galleryContent} />
+                </>
+              }
+            />
+            <Route
+              exact
+              path="/map"
+              element={
+                <>
+                  <Map
+                    content={entryContent}
+                    handleDelete={deleteEntry}
+                    editJournalEntry={editJournalEntry}
+                    galleryContent={galleryContent}
+                  />
+                </>
+              }
+            />
+            <Route
+              exact
+              path="/viewEntry"
+              element={
+                <>
+                  <SingleEntry
+                    content={entryContent}
+                    handleDelete={deleteEntry}
+                    editJournalEntry={editJournalEntry}
+                    galleryContent={galleryContent}
+                  />
+                </>
+              }
+            />
+          </Routes>
 
-        <NavBar setEntryEdit={setEntryEdit} />
-      </AppContainer>{' '}
-    </LocationProvider>
+          <NavBar setEntryEdit={setEntryEdit} />
+        </AppContainer>{' '}
+      </LocationProvider>
+    </ErrorBoundary>
   );
 }
 
