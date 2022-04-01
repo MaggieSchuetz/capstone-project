@@ -1,6 +1,7 @@
-import React from 'react';
+import { useContext } from 'react';
 import Card from './shared/Card';
 import Gallery from './Gallery';
+import LocationContext from '../context/LocationContext';
 import styled from 'styled-components';
 import { FaTrashAlt as DeleteIcon, FaEdit as EditIcon } from 'react-icons/fa';
 
@@ -14,6 +15,7 @@ function JournalEntry({
   const filteredGallery = galleryContent.filter(object =>
     object.tags.join().includes(item.title)
   );
+  const { grabItemPosition } = useContext(LocationContext);
   return (
     <Card>
       <Date>{item.date}</Date>
@@ -50,6 +52,7 @@ function JournalEntry({
         className="edit"
         aria-label="editJournalEntry"
         onClick={() => {
+          grabItemPosition(item.location);
           editJournalEntry(item);
         }}
       >

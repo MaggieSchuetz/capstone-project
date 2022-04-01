@@ -27,7 +27,9 @@ function Form({
 
   const { activeItemLocation } = useContext(LocationContext);
   /* eslint-disable no-unused-vars */
-  const [location, setLocation] = useState('empty');
+  const [location, setLocation] = useState();
+
+  console.log(activeItemLocation);
 
   const handleDateChange = e => {
     setDate(e.target.value);

@@ -53,6 +53,7 @@ function App() {
       item,
       edit: true,
     });
+
     navigate('/newentry');
   };
 
