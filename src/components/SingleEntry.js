@@ -18,7 +18,11 @@ function SingleEntry({
 }) {
   const { activeItemLocation } = useContext(LocationContext);
 
-  const filteredContent = content.find(item => {
+  const entriesWithLocation = content
+    .filter(entry => entry.location !== undefined)
+    .map(entry => entry);
+
+  const filteredContent = entriesWithLocation.find(item => {
     return item.location[0].id === activeItemLocation[0].id;
   });
 

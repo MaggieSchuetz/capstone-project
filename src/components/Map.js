@@ -79,7 +79,7 @@ function LocationMarker({ content }) {
     .map(entry => entry);
 
   const newPosition = [position];
-
+  console.log(entriesWithLocation);
   return (
     <>
       {test.map(item => (
