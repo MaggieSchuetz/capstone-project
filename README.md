@@ -11,6 +11,7 @@ You can find the hosted version on Vercel: [Travel Log](https://capstone-project
 
 - React
 - React Router
+- React Hooks
 - React Testing Library
 - React Leaflet
 - React Context
